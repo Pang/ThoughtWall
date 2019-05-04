@@ -1,0 +1,14 @@
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\bin\Debug\netcoreapp2.2\ThoughtWall.API.deps.json
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\bin\Debug\netcoreapp2.2\ThoughtWall.API.runtimeconfig.json
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\bin\Debug\netcoreapp2.2\ThoughtWall.API.runtimeconfig.dev.json
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\bin\Debug\netcoreapp2.2\ThoughtWall.API.dll
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\bin\Debug\netcoreapp2.2\ThoughtWall.API.pdb
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.csprojAssemblyReference.cache
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.csproj.CoreCompileInputs.cache
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.RazorAssemblyInfo.cache
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.RazorAssemblyInfo.cs
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.AssemblyInfoInputs.cache
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.AssemblyInfo.cs
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.RazorTargetAssemblyInfo.cache
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.dll
+D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp2.2\ThoughtWall.API.pdb
