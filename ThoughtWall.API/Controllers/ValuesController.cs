@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ThoughtWall.API.Data;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -10,11 +12,19 @@ namespace ThoughtWall.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly DataContext _context;
+
+        public ValuesController(DataContext context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<IActionResult> GetThreads()
         {
-            return new string[] { "value1", "value2" };
+            var threads = await _context.Threads.ToListAsync();
+            return Ok(threads);
         }
 
         // GET api/values/5
