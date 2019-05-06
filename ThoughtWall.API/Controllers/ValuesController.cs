@@ -23,7 +23,8 @@ namespace ThoughtWall.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetThreads()
         {
-            var threads = await _context.Threads.ToListAsync();
+            // Orders by most recent (using TimeStamp)
+            var threads = await _context.Threads.OrderByDescending(x => x.TimeStamp).ToListAsync();
             return Ok(threads);
         }
 
