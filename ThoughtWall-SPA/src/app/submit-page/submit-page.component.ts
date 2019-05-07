@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submit-page.component.css']
 })
 export class SubmitPageComponent implements OnInit {
+  threadPost: any = {};
 
   constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+
+  onSubmit() {
+    console.log('123');
+    console.log(this.threadPost.title);
   }
-
 }
