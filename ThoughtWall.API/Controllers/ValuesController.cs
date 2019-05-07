@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThoughtWall.API.Data;
+using ThoughtWall.API.Dtos;
+using ThoughtWall.API.Models;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -36,9 +38,18 @@ namespace ThoughtWall.API.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("submit")]
+        public async Task<IActionResult> PostThread(ThreadPostDto threadPostDto)
         {
+            var thread = new Thread 
+            {
+                Title = threadPostDto.Title,
+                Body = threadPostDto.Body
+            };
+
+            await _context.Threads.AddAsync(thread);
+            await _context.SaveChangesAsync();
+            return StatusCode(201);
         }
 
         // PUT api/values/5
