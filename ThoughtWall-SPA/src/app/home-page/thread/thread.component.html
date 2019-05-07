@@ -1,0 +1,9 @@
+<div id="threadOverview" *ngFor="let thread of threads">
+  <h2>{{ thread.title }}</h2>
+  <span>
+    {{ thread.timeStamp.slice(0, 10) }} | 
+    {{ thread.timeStamp.slice(11, 16) }}
+  </span>
+  <p>{{ thread.body }}</p>
+  
+</div>
