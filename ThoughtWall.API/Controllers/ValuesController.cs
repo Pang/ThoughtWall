@@ -41,10 +41,12 @@ namespace ThoughtWall.API.Controllers
         [HttpPost("submit")]
         public async Task<IActionResult> PostThread(ThreadPostDto threadPostDto)
         {
+            DateTime timeStamp = DateTime.Now;
             var thread = new Thread 
             {
                 Title = threadPostDto.Title,
-                Body = threadPostDto.Body
+                Body = threadPostDto.Body,
+                TimeStamp = timeStamp
             };
 
             await _context.Threads.AddAsync(thread);
