@@ -1,4 +1,5 @@
 #threadForm {
+    color: white;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -6,4 +7,8 @@
 input, textarea {
     font-size: 20px;
     width: 500px
+}
+
+h2 {
+    text-decoration: underline;
 }

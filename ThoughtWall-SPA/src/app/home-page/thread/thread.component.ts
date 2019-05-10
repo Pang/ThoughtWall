@@ -8,15 +8,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./thread.component.css']
 })
 export class ThreadComponent implements OnInit {
-  constructor(private http: HttpClient) { }
   threads = [];
+
+  constructor(private http: HttpClient) {
+    this.getThreads().subscribe(res => this.threads = res);
+  }
 
   getThreads(): Observable<[]> {
     return this.http.get<[]>('http://localhost:5000/api/values');
   }
 
   ngOnInit() {
-    this.getThreads().subscribe(res => this.threads = res);
   }
-
 }
