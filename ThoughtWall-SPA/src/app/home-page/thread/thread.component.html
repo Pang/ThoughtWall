@@ -4,5 +4,5 @@
     {{ thread.timeStamp.slice(0, 10) }} | 
     {{ thread.timeStamp.slice(11, 16) }}
   </span>
-  <p>{{ thread.body.slice(0, 200) }}<span id="etc">...</span></p>
+  <p>{{ thread.body.slice(0, 200) }}<span [ngStyle]="{'display' : thread.body.length <= 200 ? 'none' : 'inline'}">...</span></p>
 </div>
