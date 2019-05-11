@@ -21,3 +21,6 @@ h2 {
 .etc {
     display: none;
 }
+form {
+    text-align: center;
+}

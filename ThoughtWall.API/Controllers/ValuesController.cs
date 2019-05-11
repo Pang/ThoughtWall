@@ -26,8 +26,16 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> GetThreads()
         {
             // Orders by most recent (using TimeStamp)
-            var threads = await _context.Threads.OrderByDescending(x => x.TimeStamp).ToListAsync();
+            var threads = await _context.Threads.OrderByDescending(x => x.TimeStamp).Take(5).ToListAsync();
             return Ok(threads);
+        }
+
+        // GET Older Threads
+        [HttpGet("archives")]
+        public async Task<IActionResult> GetOldThreads(int skip)
+        {
+            var oldThreads = await _context.Threads.OrderByDescending(x => x.TimeStamp).Skip(skip).Take(5).ToListAsync();
+            return Ok(oldThreads);
         }
 
         // GET api/values/5
