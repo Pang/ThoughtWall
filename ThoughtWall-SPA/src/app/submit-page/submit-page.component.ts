@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-submit-page',
@@ -10,12 +11,15 @@ import { Router } from '@angular/router';
 export class SubmitPageComponent implements OnInit {
   threadPost: any = {};
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private newPost: DataService) {
+  
+  }
+
   ngOnInit() {}
 
   onSubmit() {
     this.http.post('http://localhost:5000/api/values/submit', this.threadPost).subscribe(
-      x => this.router.navigate(['']),
+      x => {this.router.navigate(['']), this.newPost.dataSource.next(true); },
       err => console.log(err));
   }
 }

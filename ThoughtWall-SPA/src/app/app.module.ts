@@ -9,6 +9,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ThreadComponent } from './home-page/thread/thread.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { DataService } from './services/data.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 
