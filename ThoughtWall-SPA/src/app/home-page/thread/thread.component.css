@@ -10,6 +10,16 @@
     margin-right: auto;
 }
 
+@keyframes newPostAnime {
+    from { top: -60px; }
+    to { top: 0px; }
+}
+.newPost:first-of-type {
+    border: 5px blue solid;
+    position: relative;
+    animation: newPostAnime 0.5s ease-in;
+}
+
 h2 {
     margin: 0px 0 0 0;
 }
@@ -24,3 +34,4 @@ h2 {
 form {
     text-align: center;
 }
+

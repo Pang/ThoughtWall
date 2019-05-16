@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  dataSource = new Subject<boolean>();
+  private newPostSource = new BehaviorSubject<boolean>(false);
+  newPost = this.newPostSource.asObservable();
 
   constructor() { }
 
+  checkNewPost(state: boolean) {
+    this.newPostSource.next(state);
+  }
 
 }

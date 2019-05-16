@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [DataService],

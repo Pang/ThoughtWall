@@ -12,14 +12,13 @@ export class SubmitPageComponent implements OnInit {
   threadPost: any = {};
 
   constructor(private http: HttpClient, private router: Router, private newPost: DataService) {
-  
   }
 
   ngOnInit() {}
 
   onSubmit() {
     this.http.post('http://localhost:5000/api/values/submit', this.threadPost).subscribe(
-      x => {this.router.navigate(['']), this.newPost.dataSource.next(true); },
+      x => {this.router.navigate(['']), this.newPost.checkNewPost(true); },
       err => console.log(err));
   }
 }

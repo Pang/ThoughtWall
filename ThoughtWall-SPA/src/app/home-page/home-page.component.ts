@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,15 +6,8 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  newThread = false;
-
-  constructor(private newPost: DataService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.newPost.dataSource.subscribe(x => {
-      if (x === true) {
-        console.log('It worked');
-      }
-    });
   }
 }
