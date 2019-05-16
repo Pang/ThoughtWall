@@ -11,10 +11,11 @@
 }
 
 @keyframes newPostAnime {
-    from { top: -60px; }
-    to { top: 0px; }
+    from { top: -60px; opacity: 0; }
+    to { top: 0px; opacity: 1;}
 }
 .newPost:first-of-type {
+    z-index: -999;
     border: 2px rgb(65, 140, 184) solid;
     position: relative;
     animation: newPostAnime 0.5s ease-in;

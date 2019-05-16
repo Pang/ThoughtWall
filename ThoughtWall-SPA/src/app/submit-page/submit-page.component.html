@@ -1,9 +1,9 @@
 <app-nav-bar></app-nav-bar>
-<form id="threadForm" #threadForm="ngForm" (ngSubmit)="onSubmit()">
-  <h2>Post something new!</h2>
-  <h4>Title:</h4>
-  <input [(ngModel)]="threadPost.title" name="title" type="text" />
-  <h4>Body:</h4>
-  <textarea [(ngModel)]="threadPost.body" name="body" row="4" style="height: 150px;"></textarea><br><br>
-  <button type="submit" style="height: 30px; width: 200px">Submit</button>
-</form>
+<div id="formBox">
+  <form id="threadForm" #threadForm="ngForm" (ngSubmit)="onSubmit()">
+    <h2>Post a thread!</h2>
+    <input [(ngModel)]="threadPost.title" name="title" type="text" placeholder="Title"/>
+    <textarea [(ngModel)]="threadPost.body" name="body" row="4" style="height: 150px;" placeholder="Body"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</div>

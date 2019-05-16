@@ -13,7 +13,7 @@ import { RouterLink, Router } from '@angular/router';
 export class ThreadComponent {
   threads = [];
   currentSkip = 0;
-  newThread: boolean;
+  newThread = false;
 
   getThreads(): Observable<[]> {
     return this.http.get<[]>('http://localhost:5000/api/values');

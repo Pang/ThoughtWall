@@ -1,14 +1,48 @@
 #threadForm {
+    background-color: rgb(32, 35, 46);
     color: white;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0 40px 0;
+    border-radius: 10px;
+    position: relative;
+    top: 50px;
 }
 
-input, textarea {
+input, textarea, button {
     font-size: 20px;
-    width: 500px
+    width: 500px;
+    color: white;
+    background-color: rgb(61, 65, 85);
+    border: none;
+    margin-top: 20px;
+    padding: 5px;
+
+}
+
+button {  
+    background-color: rgb(77, 143, 75);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {  
+    background-color: rgb(93, 173, 90);
 }
 
 h2 {
     text-decoration: underline;
+    margin-top: 10px;
+}
+
+#formBox {
+    align-content: center;
 }
