@@ -3,11 +3,11 @@ h1 {
     font-size: 45px;
     margin: 0 0 0 10px;
     display: inline-block;
+    color: rgb(233, 233, 233);
 }
 
 #header {
     background-color: rgb(32, 35, 46);
-    color: rgb(233, 233, 233);
     width: 100%;
 }
 
@@ -25,13 +25,6 @@ h1 {
     display: inline-block;
 }
 
-a { 
-    font-size: 25px;
-    color: rgb(201, 201, 201);
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-a:hover { 
-    color: rgb(135, 193, 231);
+svg:hover > .icon {
+    fill: rgb(80, 141, 156);
 }
