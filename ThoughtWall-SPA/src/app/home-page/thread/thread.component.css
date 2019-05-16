@@ -15,7 +15,7 @@
     to { top: 0px; }
 }
 .newPost:first-of-type {
-    border: 5px blue solid;
+    border: 2px rgb(65, 140, 184) solid;
     position: relative;
     animation: newPostAnime 0.5s ease-in;
 }

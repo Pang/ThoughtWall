@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-thread',
@@ -9,10 +10,10 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./thread.component.css'],
 })
 
-export class ThreadComponent implements OnInit {
+export class ThreadComponent {
   threads = [];
   currentSkip = 0;
-  newThread = false;
+  newThread: boolean;
 
   getThreads(): Observable<[]> {
     return this.http.get<[]>('http://localhost:5000/api/values');
@@ -20,19 +21,15 @@ export class ThreadComponent implements OnInit {
 
   constructor(private http: HttpClient, private newPost: DataService) {
     this.getThreads().subscribe(res => this.threads = res);
-
     this.newPost.newPost.subscribe((x: boolean) => {
       if (x === true) {
         this.newThread = true;
+        setTimeout(() => {
+          this.newPost.checkNewPost(false);
+        },
+        500);
       }
     });
-
-    window.onbeforeunload = () => {
-      this.newThread = false;
-    }
-  }
-  ngOnInit() {
-    // this.newThread = false;
   }
 
   getOldThreads(): Observable<[]> {
