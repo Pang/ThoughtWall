@@ -10,6 +10,11 @@
     margin-right: auto;
 }
 
+#threadOverview:hover {
+    color: rgb(128, 163, 173);
+    cursor: pointer;
+}
+
 @keyframes newPostAnime {
     from { top: -60px; opacity: 0; }
     to { top: 0px; opacity: 1;}
