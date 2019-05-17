@@ -11,10 +11,12 @@ import { ThreadComponent } from './home-page/thread/thread.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DataService } from './services/data.service';
+import { ThreadPageComponent } from './thread-page/thread-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
-  { path: 'submit', component: SubmitPageComponent }
+  { path: 'submit', component: SubmitPageComponent },
+  { path: 'thread/:id', component: ThreadPageComponent }
 ];
 
 @NgModule({
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
     ThreadComponent,
     SubmitPageComponent,
     NavBarComponent,
+    ThreadPageComponent,
   ],
   imports: [
     BrowserModule,

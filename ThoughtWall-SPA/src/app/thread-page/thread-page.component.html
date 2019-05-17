@@ -1,0 +1,8 @@
+<div id="fullThread">
+  <h1>{{ thread.title }}</h1>
+  <span id="timeStamp">{{ thread.timeStamp | date:'longDate' }} | 
+    {{ thread.timeStamp | date:'shortTime' }}
+  </span>
+  <hr>
+  <p>{{ thread.body }}</p>
+</div>

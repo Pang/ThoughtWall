@@ -26,4 +26,8 @@ export class HttpApiService {
       x => {this.router.navigate(['']), this.newPost.checkNewPost(true); },
       err => console.log(err));
   }
+
+  getFullThread(id: string) {
+    return this.http.get(`http://localhost:5000/api/values/${id}`);
+  }
 }
