@@ -1,24 +1,18 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
+import { Component } from '@angular/core';
+import { HttpApiService } from '../services/http-api.service';
 
 @Component({
   selector: 'app-submit-page',
   templateUrl: './submit-page.component.html',
   styleUrls: ['./submit-page.component.css']
 })
-export class SubmitPageComponent implements OnInit {
+export class SubmitPageComponent {
   threadPost: any = {};
 
-  constructor(private http: HttpClient, private router: Router, private newPost: DataService) {
+  constructor(private httpApi: HttpApiService) {
   }
 
-  ngOnInit() {}
-
   onSubmit() {
-    this.http.post('http://localhost:5000/api/values/submit', this.threadPost).subscribe(
-      x => {this.router.navigate(['']), this.newPost.checkNewPost(true); },
-      err => console.log(err));
+    this.httpApi.onSubmit(this.threadPost);
   }
 }
