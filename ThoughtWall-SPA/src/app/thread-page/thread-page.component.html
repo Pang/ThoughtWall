@@ -1,8 +1,17 @@
-<div id="fullThread">
-  <h1>{{ thread.title }}</h1>
-  <span id="timeStamp">{{ thread.timeStamp | date:'longDate' }} | 
-    {{ thread.timeStamp | date:'shortTime' }}
-  </span>
-  <hr>
-  <p>{{ thread.body }}</p>
+<div id="page">
+  <div id="fullThread">
+    <h1>{{ thread.title }}</h1>
+    <span id="timeStamp">{{ thread.timeStamp | date:'longDate' }} | 
+      {{ thread.timeStamp | date:'shortTime' }}
+    </span>
+    <hr>
+    <p>{{ thread.body }}</p>
+  </div>
+  <form>
+    <textarea placeholder="What are your thoughts?"></textarea><br>
+    <button type="submit">Comment</button>
+  </form>
 </div>
+<section id="comments">
+  <app-comments></app-comments>
+</section>

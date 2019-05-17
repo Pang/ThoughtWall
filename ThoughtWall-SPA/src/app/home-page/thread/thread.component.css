@@ -11,8 +11,10 @@
 }
 
 #threadOverview:hover {
-    color: rgb(128, 163, 173);
     cursor: pointer;
+}
+#threadOverview:hover > h2 {
+    text-decoration: underline;
 }
 
 @keyframes newPostAnime {
@@ -31,6 +33,7 @@ h2 {
 }
 
 #timestamp {
+    color: rgb(128, 163, 173);
     font-size: 12px;
 }
 
