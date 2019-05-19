@@ -40,9 +40,11 @@ namespace ThoughtWall.API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<IActionResult> GetSpecificThread(string id)
         {
-            return "value";
+            var thread = await _context.Threads.Where(x => x.Id == Int32.Parse(id)).ToListAsync();
+
+            return Ok(thread);
         }
 
         // POST api/values
@@ -58,6 +60,22 @@ namespace ThoughtWall.API.Controllers
             };
 
             await _context.Threads.AddAsync(thread);
+            await _context.SaveChangesAsync();
+            return StatusCode(201);
+        }
+
+        [HttpPost("comment")]
+        public async Task<IActionResult> PostComment(CommentPostDto commentPostDto)
+        {
+            DateTime timeStamp = DateTime.Now;
+            var comment = new Comment
+            {
+                ThreadId = Int32.Parse(commentPostDto.ThreadId),
+                Body = commentPostDto.Body,
+                TimeStamp = timeStamp
+            };
+            
+            await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
             return StatusCode(201);
         }
