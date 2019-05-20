@@ -50,7 +50,9 @@ namespace ThoughtWall.API.Controllers
         [HttpGet("{id}/comments")]
         public async Task<IActionResult> GetComments(string id)
         {
-            var comments = await _context.Comments.Where(x => x.ThreadId == Int32.Parse(id)).OrderByDescending(x => x.TimeStamp).ToListAsync();
+            var comments = await _context.Comments.Where(x => x.ThreadId == Int32.Parse(id))
+                .OrderByDescending(x => x.TimeStamp)
+                .ToListAsync();
             return Ok(comments);
         }
 
@@ -69,6 +71,15 @@ namespace ThoughtWall.API.Controllers
             await _context.Threads.AddAsync(thread);
             await _context.SaveChangesAsync();
             return StatusCode(201);
+        }
+
+        [HttpGet("redirect")]
+        public async Task<IActionResult> Redirects(string title) 
+        {
+            var id = await _context.Threads.Where(x => x.Title == title)
+                .FirstAsync();
+                        
+            return Ok(id);
         }
 
         // POST api/values/comment

@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpApiService {
-  constructor(private http: HttpClient, private router: Router, private newPost: DataService ) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private apiUrl = 'http://localhost:5000/api/values';
 
@@ -22,11 +21,19 @@ export class HttpApiService {
     return this.http.get<[]>(this.apiUrl + '/archives', {params});
   }
 
+  redirectTo(title: string): Observable<{}> {
+    const params = new HttpParams().set('title', title.toString());
+    return this.http.get<{}>(this.apiUrl + '/redirect', {params});
+  }
+
   // Takes an object from the ngform input and posts to API
   postThread(threadPost: any) {
     this.http.post(this.apiUrl + '/submit', threadPost).subscribe(
-      x => {this.newPost.checkNewPost(true), this.router.navigate(['']); },
-      err => console.log(err));
+      x => this.redirectTo(threadPost.title).subscribe(
+        res => this.router.navigate([`/thread/${res['id']}`]),
+        err => console.log(err)
+      )
+    );
   }
 
   getFullThread(id: string) {
@@ -34,7 +41,7 @@ export class HttpApiService {
   }
 
   postComment(comment: any) {
-    this.http.post(this.apiUrl + '/comment', comment).subscribe( x => console.log(x));
+    this.http.post(this.apiUrl + '/comment', comment).subscribe();
   }
 
   getComments(id: string): Observable<[]> {

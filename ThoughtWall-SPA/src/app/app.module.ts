@@ -10,8 +10,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ThreadComponent } from './home-page/thread/thread.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { DataService } from './services/data.service';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
+import { HttpApiService } from './services/http-api.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -35,7 +35,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [DataService],
+  providers: [HttpApiService],
   bootstrap: [AppComponent]
 })
 
