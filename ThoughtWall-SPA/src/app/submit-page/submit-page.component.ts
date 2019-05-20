@@ -13,6 +13,6 @@ export class SubmitPageComponent {
   }
 
   onSubmit() {
-    this.httpApi.onSubmit(this.threadPost);
+    this.httpApi.postThread(this.threadPost);
   }
 }

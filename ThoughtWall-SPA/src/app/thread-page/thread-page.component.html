@@ -1,17 +1,24 @@
 <div id="page">
   <div id="fullThread">
     <h1>{{ thread.title }}</h1>
-    <span id="timeStamp">{{ thread.timeStamp | date:'longDate' }} | 
+    <span class="timeStamp">{{ thread.timeStamp | date:'longDate' }} | 
       {{ thread.timeStamp | date:'shortTime' }}
     </span>
     <hr>
     <p>{{ thread.body }}</p>
   </div>
-  <form>
-    <textarea placeholder="What are your thoughts?"></textarea><br>
+
+  <form #commentForm="ngForm" (ngSubmit)="postComment()">
+    <textarea [(ngModel)]="comment.body" name="body" placeholder="What are your thoughts?"></textarea><br>
     <button type="submit">Comment</button>
   </form>
+
+  <div class="comments" *ngFor="let post of comments">
+      <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
+        {{ post.timeStamp | date:'longDate' }} | 
+        {{ post.timeStamp | date:'shortTime' }}
+      </span>
+      <ng-template class="timeStamp" #justNow>Just now</ng-template>
+    <p>{{ post.body }}</p>
+  </div>
 </div>
-<section id="comments">
-  <app-comments></app-comments>
-</section>

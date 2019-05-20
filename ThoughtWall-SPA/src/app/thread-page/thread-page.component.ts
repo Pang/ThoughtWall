@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpApiService } from '../services/http-api.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-thread-page',
@@ -9,13 +9,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ThreadPageComponent {
   thread = {};
+  comments = [];
+  comment = {
+    ThreadId : '',
+    Body: ''
+  };
 
   constructor(private route: ActivatedRoute, private httpApi: HttpApiService) {
-    this.httpApi.getFullThread(this.route.snapshot.paramMap.get('id')).subscribe(res => {
-      this.thread = res[0];
-      console.log(this.thread);
-    });
+    this.comment.ThreadId = this.route.snapshot.paramMap.get('id');
+    this.httpApi.getFullThread(this.comment.ThreadId).subscribe(res => this.thread = res[0]);
+    this.httpApi.getComments(this.comment.ThreadId).subscribe(res => this.comments = res );
   }
 
+  postComment() {
+    this.httpApi.postComment(this.comment);
+    this.comments.unshift(this.comment);
+  }
 
 }
