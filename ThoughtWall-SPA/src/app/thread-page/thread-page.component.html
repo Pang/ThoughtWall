@@ -9,9 +9,11 @@
   </div>
 
   <form #commentForm="ngForm" (ngSubmit)="postComment()">
-    <textarea [(ngModel)]="comment.body" name="body" placeholder="What are your thoughts?"></textarea><br>
+    <textarea [(ngModel)]="comment.body" name="body" 
+    placeholder="What are your thoughts?"></textarea><br>
     <button type="submit">Comment</button>
   </form>
+  <button (click)="resetForm()"></button>
 
   <div class="comments" *ngFor="let post of comments">
       <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
