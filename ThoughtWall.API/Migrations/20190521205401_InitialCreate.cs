@@ -28,25 +28,25 @@ namespace ThoughtWall.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    threadId = table.Column<int>(nullable: true),
-                    body = table.Column<string>(nullable: true),
+                    ThreadId = table.Column<int>(nullable: false),
+                    Body = table.Column<string>(nullable: true),
                     TimeStamp = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Threads_threadId",
-                        column: x => x.threadId,
+                        name: "FK_Comments_Threads_ThreadId",
+                        column: x => x.ThreadId,
                         principalTable: "Threads",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_threadId",
+                name: "IX_Comments_ThreadId",
                 table: "Comments",
-                column: "threadId");
+                column: "ThreadId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

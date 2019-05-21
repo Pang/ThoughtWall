@@ -1,11 +1,15 @@
-<div id="threadOverview" *ngFor="let thread of threads" [ngClass]="{'newPost' : newThread === true }"
+<div id="threadOverview" *ngFor="let thread of threads" 
+[ngClass]="{'newPost' : newThread === true }"
 [routerLink]="['thread', thread.id]">
-    <span id="timestamp">
-      {{ thread.timeStamp | date:'longDate' }} | 
-      {{ thread.timeStamp | date:'shortTime' }}
-    </span>
+  <span id="timestamp">
+    {{ thread.timeStamp | date:'longDate' }} | 
+    {{ thread.timeStamp | date:'shortTime' }} | 
+    {{ thread.comments.length }} comment(s)
+  </span>
   <h2>{{ thread.title }}</h2> 
-  <p>{{ thread.body | slice:0:200 }}<span [ngStyle]="{'display' : thread.body.length <= 200 ? 'none' : 'inline'}">...</span></p>
+  <p>{{ thread.body | slice:0:200 }}
+    <span [ngStyle]="{'display' : thread.body.length <= 200 ? 'none' : 'inline'}">...</span>
+  </p>
 </div>
 <form #loadMore="ngForm">
   <button type="button" (click)="clickBtn()">Load More</button>

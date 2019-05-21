@@ -9,8 +9,8 @@ using ThoughtWall.API.Data;
 namespace ThoughtWall.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190519122052_addedThreadIdIntInCommentsModel")]
-    partial class addedThreadIdIntInCommentsModel
+    [Migration("20190521205401_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -26,7 +26,8 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> GetThreads()
         {
             // Orders by most recent (using TimeStamp)
-            var threads = await _context.Threads.OrderByDescending(x => x.TimeStamp)
+            var threads = await _context.Threads.Include(x => x.Comments)
+                .OrderByDescending(x => x.TimeStamp)
                 .Take(5)
                 .ToListAsync();
             return Ok(threads);
@@ -78,6 +79,7 @@ namespace ThoughtWall.API.Controllers
             return StatusCode(201);
         }
 
+        // Is called after posting a new thread
         [HttpGet("redirect")]
         public async Task<IActionResult> Redirects(string title) 
         {
