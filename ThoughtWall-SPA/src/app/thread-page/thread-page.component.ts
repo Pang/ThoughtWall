@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpApiService } from '../services/http-api.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./thread-page.component.css']
 })
 export class ThreadPageComponent {
-  // @ViewChild('commentForm') commentForm: NgForm;
   thread = {};
   comments = [];
   comment = {
