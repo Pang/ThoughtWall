@@ -25,11 +25,16 @@ export class ThreadPageComponent {
   }
 
   postComment() {
-    this.comments.unshift({
-      body: this.comment.body, threadId: this.comment.threadId
-    });
-    this.httpApi.postComment(this.comment).subscribe(res => res, err => this.errorMsg = err.error.errors.Body[0]);
-    this.comment.body =  '';
+    if (this.comment.body.length < 255 && this.comment.body.length > 3) {
+      this.comments.unshift({
+        body: this.comment.body,
+        threadId: this.comment.threadId
+      });
+    }
+    this.httpApi.postComment(this.comment).subscribe(
+      res => {this.errorMsg = '', this.comment.body = ''},
+      err => this.errorMsg = err.error.errors.Body[0]
+    );
   }
 
 }
