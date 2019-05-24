@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class HttpApiService {
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   private apiUrl = 'http://localhost:5000/api/values';
 
@@ -28,12 +28,7 @@ export class HttpApiService {
 
   // Takes an object from the ngform input and posts to API
   postThread(threadPost: any) {
-    this.http.post(this.apiUrl + '/submit', threadPost).subscribe(
-      x => this.redirectTo(threadPost.title).subscribe(
-        res => this.router.navigate([`/thread/${res['id']}`]),
-        err => console.log(err)
-      )
-    );
+    return this.http.post(this.apiUrl + '/submit', threadPost);
   }
 
   getFullThread(id: string) {

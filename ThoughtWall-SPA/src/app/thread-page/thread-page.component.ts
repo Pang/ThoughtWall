@@ -32,7 +32,7 @@ export class ThreadPageComponent {
       });
     }
     this.httpApi.postComment(this.comment).subscribe(
-      res => {this.errorMsg = '', this.comment.body = ''},
+      res => {this.errorMsg = '', this.comment.body = ''; },
       err => this.errorMsg = err.error.errors.Body[0]
     );
   }
