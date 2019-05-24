@@ -41,7 +41,7 @@ export class HttpApiService {
   }
 
   postComment(comment: any) {
-    this.http.post(this.apiUrl + '/comment', comment).subscribe();
+    return this.http.post(this.apiUrl + '/comment', comment);
   }
 
   getComments(id: string): Observable<[]> {

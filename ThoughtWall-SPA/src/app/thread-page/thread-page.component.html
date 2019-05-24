@@ -13,6 +13,8 @@
     placeholder="What are your thoughts?"></textarea><br>
     <button type="submit">Comment</button>
   </form>
+  
+  <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>
 
   <div class="comments" *ngFor="let post of comments">
       <span *ngIf="post.timeStamp; else justNow" class="timeStamp">

@@ -14,6 +14,7 @@ export class ThreadPageComponent {
     threadId : '',
     body: ''
   };
+  errorMsg: string;
 
   constructor(private route: ActivatedRoute, private httpApi: HttpApiService) {
     this.comment.threadId = this.route.snapshot.paramMap.get('id');
@@ -27,7 +28,7 @@ export class ThreadPageComponent {
     this.comments.unshift({
       body: this.comment.body, threadId: this.comment.threadId
     });
-    this.httpApi.postComment(this.comment);
+    this.httpApi.postComment(this.comment).subscribe(res => res, err => this.errorMsg = err.error.errors.Body[0]);
     this.comment.body =  '';
   }
 
