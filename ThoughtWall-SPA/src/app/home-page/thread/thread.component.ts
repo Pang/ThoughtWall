@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpApiService } from 'src/app/services/http-api.service';
 
 @Component({
@@ -8,16 +8,7 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 })
 
 export class ThreadComponent {
-  threads = [];
-  currentSkip = 0;
+  @Input() threads: [];
 
-  constructor( private httpApi: HttpApiService) {
-    this.httpApi.getThreads().subscribe(res => this.threads = res);
-  }
-
-  clickBtn() {
-    this.httpApi.getOldThreads(this.threads.length).subscribe(res => {
-      this.threads = this.threads.concat(res);
-    });
-  }
+  constructor(private httpApi: HttpApiService) {}
 }

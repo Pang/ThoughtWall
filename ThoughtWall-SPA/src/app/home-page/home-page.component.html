@@ -1,1 +1,5 @@
-<app-thread></app-thread>
+<app-thread [threads]="threads"></app-thread>
+
+<form #loadMore="ngForm">
+    <button type="button" (click)="clickBtn()">Load More</button>
+</form> 

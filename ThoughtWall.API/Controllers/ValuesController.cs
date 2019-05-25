@@ -26,7 +26,8 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> GetThreads()
         {
             // Orders by most recent (using TimeStamp)
-            var threads = await _context.Threads.Include(x => x.Comments)
+            var threads = await _context.Threads
+                .Include(x => x.Comments)
                 .OrderByDescending(x => x.TimeStamp)
                 .Take(5)
                 .ToListAsync();
@@ -37,8 +38,12 @@ namespace ThoughtWall.API.Controllers
         [HttpGet("archives")]
         public async Task<IActionResult> GetOldThreads(int skip)
         {
-            var oldThreads = await _context.Threads.OrderByDescending(x => x.TimeStamp)
-                .Skip(skip).Take(5).ToListAsync();
+            var oldThreads = await _context.Threads
+                .Include(x => x.Comments)
+                .OrderByDescending(x => x.TimeStamp)
+                .Skip(skip)
+                .Take(5)
+                .ToListAsync();
             return Ok(oldThreads);
         }
 
@@ -46,7 +51,8 @@ namespace ThoughtWall.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSpecificThread(string id)
         {
-            var thread = await _context.Threads.Where(x => x.Id == Int32.Parse(id))
+            var thread = await _context.Threads
+                .Where(x => x.Id == Int32.Parse(id))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
             return Ok(thread);
@@ -56,7 +62,8 @@ namespace ThoughtWall.API.Controllers
         [HttpGet("{id}/comments")]
         public async Task<IActionResult> GetComments(string id)
         {
-            var comments = await _context.Comments.Where(x => x.ThreadId == Int32.Parse(id))
+            var comments = await _context.Comments
+                .Where(x => x.ThreadId == Int32.Parse(id))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
             return Ok(comments);
@@ -83,7 +90,8 @@ namespace ThoughtWall.API.Controllers
         [HttpGet("redirect")]
         public async Task<IActionResult> Redirects(string title) 
         {
-            var id = await _context.Threads.Where(x => x.Title == title)
+            var id = await _context.Threads
+                .Where(x => x.Title == title)
                 .FirstAsync();
                         
             return Ok(id);
