@@ -91,6 +91,7 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> Redirects(string title) 
         {
             var id = await _context.Threads
+                .OrderByDescending(x => x.TimeStamp)
                 .Where(x => x.Title == title)
                 .FirstAsync();
                         
