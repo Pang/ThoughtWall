@@ -8,6 +8,7 @@
   </span>
   <h2>{{ thread.title }}</h2> 
   <p>{{ thread.body | slice:0:200 }}
-    <span [ngStyle]="{'display' : thread.body.length <= 200 ? 'none' : 'inline'}">...</span>
+    <span [ngStyle]="{'display' : thread.body.length <= 200 
+    ? 'none' : 'inline'}">...</span>
   </p>
 </div>

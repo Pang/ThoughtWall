@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { HttpApiService } from 'src/app/services/http-api.service';
 
 @Component({
   selector: 'app-thread',
@@ -10,5 +9,6 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 export class ThreadComponent {
   @Input() threads: [];
 
-  constructor(private httpApi: HttpApiService) {}
+  constructor() {}
+
 }

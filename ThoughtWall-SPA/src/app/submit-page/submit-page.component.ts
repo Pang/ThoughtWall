@@ -16,15 +16,16 @@ export class SubmitPageComponent {
 
   onSubmit() {
     this.errorMsg = [];
-    this.httpApi.postThread(this.threadPost).subscribe(x => {
-      this.httpApi.redirectTo(this.threadPost.title).subscribe(
+    this.httpApi.postThread(this.threadPost).subscribe(
+      success => {
+        this.httpApi.redirectTo(this.threadPost.title).subscribe(
         res => this.router.navigate([`/thread/${res['id']}`]));
       },
-      err => {
-        for(const error of err.error.errors.Title) {
+      fail => {
+        for (const error of fail.error.errors.Title) {
           this.errorMsg.push(error);
         }
-        for(const error of err.error.errors.Body) {
+        for (const error of fail.error.errors.Body) {
           this.errorMsg.push(error);
         }
       }

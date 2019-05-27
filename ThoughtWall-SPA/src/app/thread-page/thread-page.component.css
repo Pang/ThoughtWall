@@ -39,7 +39,7 @@ textarea {
 }
 
 #errorMsg {
-    background-color: red;
+    background-color: rgb(255, 31, 31);
     color: black;
     font-weight: bold;
 }
