@@ -20,11 +20,28 @@ h1 {
     flex-wrap: nowrap;
 }
 
-#links {
+.links {
     margin-left: auto;
     display: inline-block;
 }
 
 svg:hover > .icon {
     fill: rgb(128, 163, 173);
+}
+
+input[type="text"] {
+    flex-grow: 2;
+    height: 25px;
+    width: 300px;
+    vertical-align: 75%;
+    border-radius: 5px;
+    border: rgb(182, 182, 182) 1px solid;
+    padding: 5px;
+    font-size: 16px;
+    background-color: rgb(50, 60, 85);
+    color: white;
+}
+
+input[type="text"]::placeholder {
+    color: rgb(182, 182, 182);
 }
