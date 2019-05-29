@@ -51,7 +51,8 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> GetSearchedThreads(string keyword)
         {
             var matches = await _context.Threads
-                .Where(x => x.Title == keyword)
+                .Include(x => x.Comments)
+                .Where(x => x.Title.ToLower().Contains(keyword.ToLower()))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
             return Ok(matches);
