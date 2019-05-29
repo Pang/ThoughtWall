@@ -47,6 +47,16 @@ namespace ThoughtWall.API.Controllers
             return Ok(oldThreads);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> GetSearchedThreads(string keyword)
+        {
+            var matches = await _context.Threads
+                .Where(x => x.Title == keyword)
+                .OrderByDescending(x => x.TimeStamp)
+                .ToListAsync();
+            return Ok(matches);
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSpecificThread(string id)

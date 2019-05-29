@@ -11,6 +11,7 @@ export class HttpApiService {
 
   private apiUrl = 'http://localhost:5000/api/values';
 
+  // Home page, most recent threads
   getThreads(): Observable<[]> {
     return this.http.get<[]>(this.apiUrl);
   }
@@ -19,6 +20,12 @@ export class HttpApiService {
   getOldThreads(currentSkip: number): Observable<[]> {
     const params = new HttpParams().set('skip', currentSkip.toString());
     return this.http.get<[]>(this.apiUrl + '/archives', {params});
+  }
+
+  // get searched threads
+  getSearchedThreads(keyword: string): Observable<[]> {
+    const params = new HttpParams().set('keyword', keyword);
+    return this.http.get<[]>(this.apiUrl + '/search', {params});
   }
 
   redirectTo(title: string): Observable<{}> {

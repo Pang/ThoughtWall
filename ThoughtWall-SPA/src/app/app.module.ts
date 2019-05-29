@@ -12,11 +12,13 @@ import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { HttpApiService } from './services/http-api.service';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: 'submit', component: SubmitPageComponent },
-  { path: 'thread/:id', component: ThreadPageComponent }
+  { path: 'thread/:id', component: ThreadPageComponent },
+  { path: 'search/:kw', component: SearchPageComponent }
 ];
 
 @NgModule({
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
     SubmitPageComponent,
     NavBarComponent,
     ThreadPageComponent,
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
