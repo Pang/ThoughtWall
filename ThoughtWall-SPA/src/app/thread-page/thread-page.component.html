@@ -16,7 +16,9 @@
   
   <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>
 
-  <div class="comments" *ngFor="let post of comments">
+  <app-comment [comments]="comments"></app-comment>
+
+  <!-- <div class="comments" *ngFor="let post of comments">
       <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
         {{ post.timeStamp | date:'longDate' }} | 
         {{ post.timeStamp | date:'shortTime' }}
@@ -25,5 +27,6 @@
         <span class="timeStamp">Just now</span>
       </ng-template>
     <p>{{ post.body }}</p>
-  </div>
+  </div> -->
+
 </div>

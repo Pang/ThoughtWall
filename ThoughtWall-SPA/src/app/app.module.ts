@@ -13,6 +13,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { HttpApiService } from './services/http-api.service';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { CommentComponent } from './thread-page/comment/comment.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
     NavBarComponent,
     ThreadPageComponent,
     SearchPageComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

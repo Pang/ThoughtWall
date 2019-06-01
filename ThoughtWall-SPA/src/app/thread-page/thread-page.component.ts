@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./thread-page.component.css']
 })
 export class ThreadPageComponent {
-  thread = {};
   comments = [];
+  thread = {};
   comment = {
     threadId : '',
     body: ''
