@@ -16,8 +16,8 @@ export class HttpApiService {
   }
 
   // Uses length of current array of Threads to skip
-  getOldThreads(currentSkip: number): Observable<[]> {
-    const params = new HttpParams().set('skip', currentSkip.toString());
+  getOldThreads(take: number): Observable<[]> {
+    const params = new HttpParams().set('take', take.toString());
     return this.http.get<[]>(this.apiUrl + '/archives', {params});
   }
 

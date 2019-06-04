@@ -15,7 +15,7 @@ export class HomePageComponent {
   }
 
   clickBtn() {
-    this.httpApi.getOldThreads(this.threads.length)
-      .subscribe(res => this.threads = this.threads.concat(res));
+    this.httpApi.getOldThreads(this.threads.length + 5)
+      .subscribe(res => this.threads = res);
   }
 }
