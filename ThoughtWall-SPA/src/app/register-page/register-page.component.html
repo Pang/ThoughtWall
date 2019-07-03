@@ -1,0 +1,9 @@
+<div id="formBox">
+  <form id="registerForm" #registerForm="ngForm" (ngSubmit)="register()">
+    <h2>Register</h2>
+    <label>Username</label><br>
+    <input [(ngModel)]="register.username" name="username" type="text"><br>
+    <label>Password</label><br>
+    <input [(ngModel)]="register.password" name="password" type="text"><br>
+  </form>
+</div>

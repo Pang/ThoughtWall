@@ -36,12 +36,13 @@ namespace ThoughtWall.API.Controllers
 
         // GET Older Threads
         [HttpGet("archives")]
-        public async Task<IActionResult> GetOldThreads(int take)
+        public async Task<IActionResult> GetOldThreads(int skip)
         {
             var oldThreads = await _context.Threads
                 .Include(x => x.Comments)
                 .OrderByDescending(x => x.TimeStamp)
-                .Take(take)
+                .Skip(skip)
+                .Take(5)
                 .ToListAsync();
             return Ok(oldThreads);
         }

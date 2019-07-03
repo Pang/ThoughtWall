@@ -14,12 +14,14 @@ import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { HttpApiService } from './services/http-api.service';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { CommentComponent } from './thread-page/comment/comment.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: 'submit', component: SubmitPageComponent },
   { path: 'thread/:id', component: ThreadPageComponent },
-  { path: 'search/:kw', component: SearchPageComponent }
+  { path: 'search/:kw', component: SearchPageComponent },
+  { path: 'register', component: RegisterPageComponent }
 ];
 
 @NgModule({
@@ -32,6 +34,7 @@ const appRoutes: Routes = [
     ThreadPageComponent,
     SearchPageComponent,
     CommentComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,
