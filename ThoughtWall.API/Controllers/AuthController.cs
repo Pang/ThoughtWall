@@ -12,20 +12,10 @@ namespace ThoughtWall.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly DataContext _context;
-        private readonly AuthRepository _repo;
-
-        public AuthController(DataContext context)
+        private readonly IAuthRepository _repo;
+        public AuthController(IAuthRepository repo)
         {
-            _context = context;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> getData()
-        {
-            var users = await _context.Users
-                .ToListAsync();
-            return Ok(users);
+            _repo = repo;
         }
 
         [HttpPost("register")]

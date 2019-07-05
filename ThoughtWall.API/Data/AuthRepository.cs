@@ -5,7 +5,7 @@ using ThoughtWall.API.Models;
 
 namespace ThoughtWall.API.Data
 {
-    public class AuthRepository
+    public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
         public AuthRepository(DataContext context)
