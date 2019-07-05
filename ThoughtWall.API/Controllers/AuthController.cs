@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using ThoughtWall.API.Data;
 using ThoughtWall.API.Dtos;
 using ThoughtWall.API.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -18,7 +20,15 @@ namespace ThoughtWall.API.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpGet]
+        public async Task<IActionResult> getData()
+        {
+            var users = await _context.Users
+                .ToListAsync();
+            return Ok(users);
+        }
+
+        [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegister)
         {
             userRegister.Username = userRegister.Username.ToLower();
