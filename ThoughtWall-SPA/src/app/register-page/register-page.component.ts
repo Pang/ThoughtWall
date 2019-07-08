@@ -14,9 +14,8 @@ export class RegisterPageComponent {
   private apiUrl = 'http://localhost:5000/api/auth';
   constructor(private http: HttpClient) {}
 
-  registerUser(userToRegister: any) {
+  registerUser() {
     this.errorMsg = [];
-    console.log('test');
     return this.http.post(this.apiUrl + '/register', this.register).subscribe(
       res => console.log('success'),
       fail => {
@@ -25,11 +24,13 @@ export class RegisterPageComponent {
     );
   }
 
-  loginUser(userToLogin: any) {
+  loginUser() {
     this.errorMsg = [];
-    console.log('test');
     return this.http.post(this.apiUrl + '/login', this.login).subscribe(
-      res => console.log('success'),
+      res => {
+        localStorage.setItem('token', res['token']),
+        console.log(res);
+      },
       fail => {
         console.log(fail);
       }
