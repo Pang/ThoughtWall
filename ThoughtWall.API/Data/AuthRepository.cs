@@ -13,7 +13,7 @@ namespace ThoughtWall.API.Data
             _context = context;
         }
 
-        public async Task<User> Login(User username, string password)
+        public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username.ToString());
 
