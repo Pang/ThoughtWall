@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterPageComponent {
   register: any = {};
+  login: any = {};
   errorMsg = [];
 
   private apiUrl = 'http://localhost:5000/api/auth';
@@ -17,6 +18,17 @@ export class RegisterPageComponent {
     this.errorMsg = [];
     console.log('test');
     return this.http.post(this.apiUrl + '/register', this.register).subscribe(
+      res => console.log('success'),
+      fail => {
+        console.log(fail);
+      }
+    );
+  }
+
+  loginUser(userToLogin: any) {
+    this.errorMsg = [];
+    console.log('test');
+    return this.http.post(this.apiUrl + '/login', this.login).subscribe(
       res => console.log('success'),
       fail => {
         console.log(fail);
