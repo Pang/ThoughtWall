@@ -51,17 +51,21 @@ namespace ThoughtWall.API.Controllers
 
             if (userFromRepo == null) return Unauthorized();
 
+            // JWT: Part of Payload
+            // Uses claims as reference, instead of making calls to the database
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
+            // JWT: Part of Signature
             var key = new SymmetricSecurityKey(Encoding.UTF8
                 .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
+            // Aggregating the JWT payload and signature
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
@@ -69,8 +73,8 @@ namespace ThoughtWall.API.Controllers
                 SigningCredentials = creds
             };
 
+            // Creating a token with the data from tokenDescriptor
             var tokenHandler = new JwtSecurityTokenHandler();
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return Ok(new {token = tokenHandler.WriteToken(token)});

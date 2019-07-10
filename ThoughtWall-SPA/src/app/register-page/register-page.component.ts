@@ -31,9 +31,7 @@ export class RegisterPageComponent {
         localStorage.setItem('token', res['token']),
         console.log(res);
       },
-      fail => {
-        console.log(fail);
-      }
+      fail => console.log(fail)
     );
   }
 }
