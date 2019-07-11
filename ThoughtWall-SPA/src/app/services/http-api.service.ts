@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,9 @@ export class HttpApiService {
 
   // Home page, most recent threads
   getThreads(): Observable<[]> {
-    return this.http.get<[]>(this.apiUrl);
+    console.log(localStorage.getItem('token'));
+    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get<[]>(this.apiUrl, {headers : header});
   }
 
   // Uses length of current array of Threads to skip
