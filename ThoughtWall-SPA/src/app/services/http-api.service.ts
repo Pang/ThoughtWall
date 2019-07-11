@@ -12,9 +12,7 @@ export class HttpApiService {
 
   // Home page, most recent threads
   getThreads(): Observable<[]> {
-    console.log(localStorage.getItem('token'));
-    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<[]>(this.apiUrl, {headers : header});
+    return this.http.get<[]>(this.apiUrl);
   }
 
   // Uses length of current array of Threads to skip
@@ -36,7 +34,8 @@ export class HttpApiService {
 
   // Takes an object from the ngform input and posts to API
   postThread(threadPost: any) {
-    return this.http.post(this.apiUrl + '/submit', threadPost);
+    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(this.apiUrl + '/submit', threadPost, { headers: header});
   }
 
   getFullThread(id: string) {

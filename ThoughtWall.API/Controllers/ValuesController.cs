@@ -24,6 +24,7 @@ namespace ThoughtWall.API.Controllers
         }
 
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetThreads()
         {
@@ -37,6 +38,7 @@ namespace ThoughtWall.API.Controllers
         }
 
         // GET Older Threads
+        [AllowAnonymous]
         [HttpGet("archives")]
         public async Task<IActionResult> GetOldThreads(int skip)
         {
@@ -49,6 +51,7 @@ namespace ThoughtWall.API.Controllers
             return Ok(oldThreads);
         }
 
+        [AllowAnonymous]
         [HttpGet("search")]
         public async Task<IActionResult> GetSearchedThreads(string keyword)
         {
@@ -61,6 +64,7 @@ namespace ThoughtWall.API.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSpecificThread(string id)
         {
@@ -72,6 +76,7 @@ namespace ThoughtWall.API.Controllers
         }
 
         // GET api/values/5/comments
+        [AllowAnonymous]
         [HttpGet("{id}/comments")]
         public async Task<IActionResult> GetComments(string id)
         {

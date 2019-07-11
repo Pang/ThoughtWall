@@ -22,11 +22,15 @@ export class SubmitPageComponent {
         res => this.router.navigate([`/thread/${res['id']}`]));
       },
       fail => {
-        for (const error of fail.error.errors.Title) {
-          this.errorMsg.push(error);
-        }
-        for (const error of fail.error.errors.Body) {
-          this.errorMsg.push(error);
+        if (fail.status === 401) {
+          this.errorMsg.push('You are not logged in.');
+        } else {
+          for (const error of fail.error.errors.Title) {
+            this.errorMsg.push(error);
+          }
+          for (const error of fail.error.errors.Body) {
+            this.errorMsg.push(error);
+          }
         }
       }
     );
