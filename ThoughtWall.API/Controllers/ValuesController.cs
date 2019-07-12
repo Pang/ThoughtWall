@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,7 @@ namespace ThoughtWall.API.Controllers
         {
             var matches = await _context.Threads
                 .Include(x => x.Comments)
+                .Include(x => x.Username)
                 .Where(x => x.Title.ToLower().Contains(keyword.ToLower()))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
@@ -94,6 +96,8 @@ namespace ThoughtWall.API.Controllers
             DateTime timeStamp = DateTime.Now;
             var thread = new Thread 
             {
+                Username = User.FindFirst(ClaimTypes.Name).Value,
+                UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
                 Title = threadPostDto.Title,
                 Body = threadPostDto.Body,
                 TimeStamp = timeStamp
@@ -105,6 +109,7 @@ namespace ThoughtWall.API.Controllers
         }
 
         // Is called after posting a new thread
+        [AllowAnonymous]
         [HttpGet("redirect")]
         public async Task<IActionResult> Redirects(string title) 
         {

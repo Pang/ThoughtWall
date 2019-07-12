@@ -5,6 +5,10 @@ namespace ThoughtWall.API.Dtos
     public class ThreadPostDto
     {
         [Required]
+        public int UserId { get; set; }
+        [Required]
+        public string Username { get; set; }
+        [Required]
         [StringLength(50, MinimumLength = 4, ErrorMessage = "Your title must be between 4 to 50 characters")]
         public string Title { get; set; }
         

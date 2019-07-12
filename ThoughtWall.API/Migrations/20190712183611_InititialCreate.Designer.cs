@@ -9,8 +9,8 @@ using ThoughtWall.API.Data;
 namespace ThoughtWall.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190703211323_AddedUserEntity")]
-    partial class AddedUserEntity
+    [Migration("20190712183611_InititialCreate")]
+    partial class InititialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,9 +29,13 @@ namespace ThoughtWall.API.Migrations
 
                     b.Property<DateTime>("TimeStamp");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ThreadId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -47,7 +51,11 @@ namespace ThoughtWall.API.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Threads");
                 });
@@ -73,6 +81,19 @@ namespace ThoughtWall.API.Migrations
                     b.HasOne("ThoughtWall.API.Models.Thread", "Thread")
                         .WithMany("Comments")
                         .HasForeignKey("ThreadId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ThoughtWall.API.Models.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ThoughtWall.API.Models.Thread", b =>
+                {
+                    b.HasOne("ThoughtWall.API.Models.User", "User")
+                        .WithMany("Threads")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
