@@ -5,7 +5,7 @@ namespace ThoughtWall.API.Models
     public class Comment
     {
         public int Id { get; set; }
-        public User Username { get; set; }
+        public string Username { get; set; }
         public int UserId { get; set; }
         public Thread Thread { get; set; }
         public int ThreadId { get; set; }

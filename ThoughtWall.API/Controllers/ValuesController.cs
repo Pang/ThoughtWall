@@ -128,6 +128,8 @@ namespace ThoughtWall.API.Controllers
             DateTime timeStamp = DateTime.Now;
             var comment = new Comment
             {
+                Username = User.FindFirst(ClaimTypes.Name).Value,
+                UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
                 ThreadId = Int32.Parse(commentPostDto.ThreadId),
                 Body = commentPostDto.Body,
                 TimeStamp = timeStamp
