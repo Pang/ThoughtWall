@@ -1,7 +1,9 @@
 <div id="page">
   <div id="fullThread">
     <h1>{{ thread.title }}</h1>
-    <span class="timeStamp">{{ thread.timeStamp | date:'longDate' }} | 
+    <span class="timeStamp">
+      {{ thread.username | titlecase }} |        
+      {{ thread.timeStamp | date:'longDate' }}. 
       {{ thread.timeStamp | date:'shortTime' }}
     </span>
     <hr>

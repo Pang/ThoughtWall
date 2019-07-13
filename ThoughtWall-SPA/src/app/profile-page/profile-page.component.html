@@ -1,4 +1,4 @@
-<div *ngIf="!loggedIn">
+<div *ngIf="!loggedIn()">
   <div id="formBox">
     <form id="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
       <h2>Login</h2>
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div *ngIf="loggedIn">
+<div *ngIf="loggedIn()">
   <p>
     <span id="logoutBtn" (click)="logout()">Logout?</span>
   </p>
