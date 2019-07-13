@@ -16,3 +16,9 @@
     top: 50px;
     margin-bottom: 50px;
 }
+
+p {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(255, 133, 133);
+}

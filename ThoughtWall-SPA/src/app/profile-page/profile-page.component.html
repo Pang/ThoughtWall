@@ -1,0 +1,29 @@
+<div *ngIf="!loggedIn">
+  <div id="formBox">
+    <form id="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
+      <h2>Login</h2>
+      <label>Username</label><br>
+      <input [(ngModel)]="login.Username" name="username" type="text"><br>
+      <label>Password</label><br>
+      <input [(ngModel)]="login.Password" name="password" type="text"><br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <div id="formBox">
+    <form id="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
+      <h2><i>Register</i></h2>
+      <label>Username</label><br>
+      <input [(ngModel)]="register.Username" name="username" type="text"><br>
+      <label>Password</label><br>
+      <input [(ngModel)]="register.Password" name="password" type="text"><br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="loggedIn">
+  <p>
+    <span id="logoutBtn" (click)="logout()">Logout?</span>
+  </p>
+</div>

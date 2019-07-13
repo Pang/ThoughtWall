@@ -10,5 +10,4 @@ export class ThreadComponent {
   @Input() threads: [];
 
   constructor() {}
-
 }

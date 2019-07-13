@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LoggedInService } from '../services/logged-in.service';
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+  selector: 'app-profile-page',
+  templateUrl: './profile-page.component.html',
+  styleUrls: ['./profile-page.component.css']
 })
-export class RegisterPageComponent {
+export class ProfilePageComponent {
   register: any = {};
   login: any = {};
   errorMsg = [];
+  loggedIn: boolean;
 
   private apiUrl = 'http://localhost:5000/api/auth';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loggedInService: LoggedInService) {
+    this.loggedIn = loggedInService.loggedIn();
+  }
 
   registerUser() {
     this.errorMsg = [];
@@ -33,5 +37,10 @@ export class RegisterPageComponent {
       },
       fail => console.log(fail)
     );
+  }
+
+  logout() {
+    console.log("YO");
+    localStorage.removeItem('token');
   }
 }
