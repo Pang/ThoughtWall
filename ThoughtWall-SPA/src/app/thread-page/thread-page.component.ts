@@ -37,4 +37,9 @@ export class ThreadPageComponent {
     );
   }
 
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
 }

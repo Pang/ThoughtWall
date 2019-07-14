@@ -35,7 +35,7 @@ export class HttpApiService {
   // Takes an object from the ngform input and posts to API
   postThread(threadPost: any) {
     const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(this.apiUrl + '/submit', threadPost, { headers: header});
+    return this.http.post(this.apiUrl + '/submit', threadPost, { headers: header });
   }
 
   getFullThread(id: string) {
@@ -43,7 +43,8 @@ export class HttpApiService {
   }
 
   postComment(comment: any) {
-    return this.http.post(this.apiUrl + '/comment', comment);
+    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(this.apiUrl + '/comment', comment, { headers : header });
   }
 
   getComments(id: string): Observable<[]> {

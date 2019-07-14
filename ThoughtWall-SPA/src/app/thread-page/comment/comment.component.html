@@ -1,4 +1,5 @@
 <div class="comments" *ngFor="let post of comments">
+  <span style="color: white">{{ post.username | titlecase }} </span> <br> 
   <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
     {{ post.timeStamp | date:'longDate' }} | 
     {{ post.timeStamp | date:'shortTime' }}

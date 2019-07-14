@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -12,7 +13,7 @@ export class ProfilePageComponent {
   errorMsg = [];
 
   private apiUrl = 'http://localhost:5000/api/auth';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   registerUser() {
     this.errorMsg = [];
@@ -29,7 +30,7 @@ export class ProfilePageComponent {
     return this.http.post(this.apiUrl + '/login', this.login).subscribe(
       res => {
         localStorage.setItem('token', res['token']),
-        console.log(res);
+        this.router.navigate(['/']);
       },
       fail => console.log(fail)
     );
