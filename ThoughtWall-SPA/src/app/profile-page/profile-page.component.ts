@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-profile-page',
@@ -8,12 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent {
+  helper = new JwtHelperService();
+  decodedToken = {};
   register: any = {};
   login: any = {};
   errorMsg = [];
 
   private apiUrl = 'http://localhost:5000/api/auth';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    console.log(this.decodedToken)
+  }
 
   registerUser() {
     this.errorMsg = [];

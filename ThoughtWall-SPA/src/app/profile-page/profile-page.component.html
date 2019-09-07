@@ -23,7 +23,14 @@
 </div>
 
 <div *ngIf="loggedIn()">
-  <p>
-    <span id="logoutBtn" (click)="logout()">Logout?</span>
-  </p>
+  <div id="profile">
+    <span id="logoutBtn" style="float: right;" (click)="logout()">Logout?</span>
+
+      <h1>{{ decodedToken.unique_name | titlecase }}</h1>
+      <h4><u>Threads</u></h4>
+      <p>Threads go here..</p>
+      <h4><u>Comments</u></h4>
+      <p>Comments go here...</p>
+
+  </div>
 </div>
