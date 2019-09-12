@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 export class HttpApiService {
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:5000/api/values';
+  private apiUrl = environment.apiUrl + '/values';
 
   // Home page, most recent threads
   getThreads(): Observable<[]> {
