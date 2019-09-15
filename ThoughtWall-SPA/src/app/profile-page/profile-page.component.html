@@ -29,10 +29,13 @@
       <h1>{{ decodedToken.unique_name | titlecase }}</h1>
       <h4><u>Threads</u></h4>
       <ul>
-        <li *ngFor="let thread of usersThreads">{{ thread.title }} - {{ thread.timeStamp | date: "dd/MM/yyyy" }}</li>
+        <li *ngFor="let thread of usersThreads"><b>{{ thread.title }}</b> ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
       </ul>
       <h4><u>Comments</u></h4>
-      <p>Comments go here...</p>
+      <ul>
+        <li *ngFor="let comment of usersComments"><b>[{{ comment.thread.title }}]</b>
+        <br> <i>"{{ comment.body }}"</i> - {{ comment.timeStamp | date: "dd/MM/yyyy" }}</li>
+      </ul>
 
   </div>
 </div>

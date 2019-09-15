@@ -16,6 +16,7 @@ export class ProfilePageComponent {
   login: any = {};
   errorMsg = [];
   usersThreads = [];
+  usersComments = [];
 
   private apiUrl = 'http://localhost:5000/api/auth';
   constructor(private http: HttpClient, private profileHttpService: ProfileHttpApiService, private router: Router) {
@@ -24,6 +25,10 @@ export class ProfilePageComponent {
     this.profileHttpService.getUsersThreads(this.decodedToken['nameid'])
       .subscribe(
         x => this.usersThreads = x
+      );
+    this.profileHttpService.getUsersComments(this.decodedToken['nameid'])
+      .subscribe(
+        x => this.usersComments = x
       );
   }
 

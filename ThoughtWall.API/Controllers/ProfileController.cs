@@ -19,7 +19,6 @@ namespace ThoughtWall.API.Controllers
             _context = context;
         }
 
-        [AllowAnonymous]
         [HttpGet("threads")]
         public async Task<IActionResult> GetUserThreads(int id)
         {
@@ -28,6 +27,17 @@ namespace ThoughtWall.API.Controllers
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
             return Ok(threads);
+        }
+
+        [HttpGet("comments")]
+        public async Task<IActionResult> GetUserComments(int id)
+        {
+            var comments = await _context.Comments
+                .Include(x => x.Thread)
+                .Where(x => x.UserId == id)
+                .OrderByDescending(x => x.TimeStamp)
+                .ToListAsync();
+            return Ok(comments);
         }
     }
 }
