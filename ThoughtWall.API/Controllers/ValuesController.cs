@@ -58,7 +58,6 @@ namespace ThoughtWall.API.Controllers
         {
             var matches = await _context.Threads
                 .Include(x => x.Comments)
-                .Include(x => x.Username)
                 .Where(x => x.Title.ToLower().Contains(keyword.ToLower()))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();

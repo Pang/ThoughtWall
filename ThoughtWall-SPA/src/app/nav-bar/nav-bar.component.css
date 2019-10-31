@@ -6,6 +6,11 @@ h1 {
     color: rgb(233, 233, 233);
 }
 
+#searchBar {
+    display: inline-block;
+    margin-right: 4px;
+}
+
 #header {
     background-color: rgb(32, 35, 46);
     width: 100%;

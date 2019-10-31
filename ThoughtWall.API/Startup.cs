@@ -32,10 +32,8 @@ namespace ThoughtWall.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson( options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            // services.AddMvc().AddNewtonsoftJson();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
-            // services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddScoped<IAuthRepository, AuthRepository>();
             // JWT: Server side authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -59,11 +57,7 @@ namespace ThoughtWall.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                // app.UseHsts();
-            }
+            
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
@@ -72,6 +66,8 @@ namespace ThoughtWall.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("values", "{controller=Values}");
+                endpoints.MapControllerRoute("auth", "{controller=Auth}");
+                endpoints.MapControllerRoute("profile", "{controller=Profile}");
             });
         }
     }

@@ -1,6 +1,6 @@
 <div id="threadOverview" *ngFor="let thread of threads" 
 [ngClass]="{'newPost' : newThread === true }"
-[routerLink]="['thread', thread.id]">
+[routerLink]="['/thread', thread.id]">
   <span id="timestamp">
     {{ thread.username | titlecase }} | 
     {{ thread.timeStamp | date:'longDate' }} -  
