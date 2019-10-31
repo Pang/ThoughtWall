@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpApiService } from '../services/http-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { HubConnectionBuilder } from '@aspnet/signalr';
@@ -8,7 +8,7 @@ import { HubConnectionBuilder } from '@aspnet/signalr';
   templateUrl: './thread-page.component.html',
   styleUrls: ['./thread-page.component.css']
 })
-export class ThreadPageComponent implements OnInit {
+export class ThreadPageComponent implements OnInit, OnDestroy {
   connection = new HubConnectionBuilder().withUrl('http://localhost:5000/postHub').build();
   comments = [];
   thread = {};
@@ -26,10 +26,10 @@ export class ThreadPageComponent implements OnInit {
         .subscribe(res => this.comments = res );
   }
   ngOnInit(){
-    this.connection.start().then(() => console.log("Connection made")).catch(err => console.log(err));
+    this.connection.start().then(x => this.connection.invoke("JoinThread", this.comment.threadId)).catch(err => console.log(err));
     this.connection.on("newComment", data => {
       this.httpApi.getLatestComments(this.comment.threadId).subscribe(res => {
-        console.log(res);
+        //console.log(res);
         if (res.threadId.toString() === this.route.snapshot.paramMap.get('id')) {
           this.comments.unshift(res);
         }
@@ -51,4 +51,8 @@ export class ThreadPageComponent implements OnInit {
     return !!token;
   }
 
+  ngOnDestroy() {
+    //this.connection.invoke("LeaveThread", this.comment.threadId);
+    this.connection.stop();
+  }
 }
