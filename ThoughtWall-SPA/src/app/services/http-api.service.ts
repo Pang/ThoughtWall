@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
+import { CommentModel } from '../models/commentModel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class HttpApiService {
   constructor(private http: HttpClient) { }
 
   private apiUrl = environment.apiUrl + '/values';
+
 
   // Home page, most recent threads
   getThreads(): Observable<[]> {
@@ -50,5 +52,9 @@ export class HttpApiService {
 
   getComments(id: string): Observable<[]> {
     return this.http.get<[]>(this.apiUrl + `/${id}/comments`);
+  }
+
+  getLatestComments(id: string) {
+    return this.http.get<CommentModel>(this.apiUrl + `/${id}/latestComment`);
   }
 }
