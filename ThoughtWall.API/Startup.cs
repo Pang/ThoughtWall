@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using ThoughtWall.API.Data;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ThoughtWall.API.Hubs;
 
 namespace ThoughtWall.API
 {
@@ -31,9 +32,10 @@ namespace ThoughtWall.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers().AddNewtonsoftJson( options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddCors();
+            services.AddSignalR();
             services.AddScoped<IAuthRepository, AuthRepository>();
             // JWT: Server side authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -53,12 +55,13 @@ namespace ThoughtWall.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+
+            app.UseCors(builder =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-            
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            });
 
             app.UseRouting();
             app.UseAuthentication();
@@ -68,7 +71,10 @@ namespace ThoughtWall.API
                 endpoints.MapControllerRoute("values", "{controller=Values}");
                 endpoints.MapControllerRoute("auth", "{controller=Auth}");
                 endpoints.MapControllerRoute("profile", "{controller=Profile}");
+
+                endpoints.MapHub<PostHub>("/postHub");
             });
+
         }
     }
 }

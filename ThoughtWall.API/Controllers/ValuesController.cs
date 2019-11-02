@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using ThoughtWall.API.Data;
 using ThoughtWall.API.Dtos;
 using ThoughtWall.API.Models;
+using ThoughtWall.API.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -18,10 +20,12 @@ namespace ThoughtWall.API.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IHubContext<PostHub> _hubContext;
 
-        public ValuesController(DataContext context)
+        public ValuesController(DataContext context, IHubContext<PostHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         // GET api/values
@@ -76,18 +80,6 @@ namespace ThoughtWall.API.Controllers
             return Ok(thread);
         }
 
-        // GET api/values/5/comments
-        [AllowAnonymous]
-        [HttpGet("{id}/comments")]
-        public async Task<IActionResult> GetComments(string id)
-        {
-            var comments = await _context.Comments
-                .Where(x => x.ThreadId == Int32.Parse(id))
-                .OrderByDescending(x => x.TimeStamp)
-                .ToListAsync();
-            return Ok(comments);
-        }
-
         // POST api/values/submit
         [HttpPost("submit")]
         public async Task<IActionResult> PostThread(ThreadPostDto threadPostDto)
@@ -104,6 +96,7 @@ namespace ThoughtWall.API.Controllers
 
             await _context.Threads.AddAsync(thread);
             await _context.SaveChangesAsync();
+
             return StatusCode(201);
         }
 
@@ -120,6 +113,28 @@ namespace ThoughtWall.API.Controllers
             return Ok(id);
         }
 
+        // GET api/values/5/comments
+        [AllowAnonymous]
+        [HttpGet("{id}/comments")]
+        public async Task<IActionResult> GetComments(string id)
+        {
+            var comments = await _context.Comments
+                .Where(x => x.ThreadId == Int32.Parse(id))
+                .OrderByDescending(x => x.TimeStamp)
+                .ToListAsync();
+            return Ok(comments);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/latestComment")]
+        public async Task<IActionResult> GetLatestComment(string id)
+        {
+            var comment = await _context.Comments
+                .Where(x => x.ThreadId == Int32.Parse(id))
+                .OrderByDescending(x => x.TimeStamp)
+                .FirstAsync();
+            return Ok(comment);
+        }
         // POST api/values/comment
         [HttpPost("comment")]
         public async Task<IActionResult> PostComment(CommentPostDto commentPostDto)
@@ -136,19 +151,8 @@ namespace ThoughtWall.API.Controllers
             
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.Group(comment.ThreadId.ToString()).SendAsync("newComment", comment);
             return StatusCode(201);
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
