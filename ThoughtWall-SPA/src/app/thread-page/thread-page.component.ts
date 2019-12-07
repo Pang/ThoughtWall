@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpApiService } from '../services/http-api.service';
+import { HttpApiService } from '../_services/http-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 

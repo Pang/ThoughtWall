@@ -1,28 +1,4 @@
-<div *ngIf="!loggedIn()">
-  <div id="formBox">
-    <form id="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
-      <h2>Login</h2>
-      <label>Username</label><br>
-      <input [(ngModel)]="login.Username" name="username" type="text"><br>
-      <label>Password</label><br>
-      <input [(ngModel)]="login.Password" name="password" type="text"><br>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-  
-  <div id="formBox">
-    <form id="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
-      <h2><i>Register</i></h2>
-      <label>Username</label><br>
-      <input [(ngModel)]="register.Username" name="username" type="text"><br>
-      <label>Password</label><br>
-      <input [(ngModel)]="register.Password" name="password" type="text"><br>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-</div>
-
-<div *ngIf="loggedIn()">
+<div>
   <div id="profile">
     <span id="logoutBtn" style="float: right;" (click)="logout()">Logout</span>
 
@@ -36,6 +12,5 @@
         <li *ngFor="let comment of usersComments"><b>[{{ comment.thread.title }}]</b>
         <br> <i>"{{ comment.body }}"</i> - {{ comment.timeStamp | date: "dd/MM/yyyy" }}</li>
       </ul>
-
   </div>
 </div>

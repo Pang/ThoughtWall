@@ -11,17 +11,20 @@ import { ThreadComponent } from './home-page/thread/thread.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
-import { HttpApiService } from './services/http-api.service';
+import { HttpApiService } from './_services/http-api.service';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { CommentComponent } from './thread-page/comment/comment.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: 'submit', component: SubmitPageComponent },
   { path: 'thread/:id', component: ThreadPageComponent },
   { path: 'search/:kw', component: SearchPageComponent },
-  { path: 'profile', component: ProfilePageComponent }
+  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterPageComponent },
 ];
 
 @NgModule({
@@ -35,6 +38,7 @@ const appRoutes: Routes = [
     SearchPageComponent,
     CommentComponent,
     ProfilePageComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,

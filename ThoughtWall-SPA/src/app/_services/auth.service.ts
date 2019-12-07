@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileHttpApiService {
+export class AuthService {
   constructor(private http: HttpClient) { }
 
   private apiUrl = environment.apiUrl + '/profile';
@@ -19,6 +19,11 @@ export class ProfileHttpApiService {
   getUsersComments(id: number): Observable<[]> {
     const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get<[]>(this.apiUrl + `/comments?id=${id}`, {headers: header});
+  }
+
+  loggedin() {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 
 }

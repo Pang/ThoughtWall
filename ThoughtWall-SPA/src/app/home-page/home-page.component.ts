@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpApiService } from 'src/app/services/http-api.service';
+import { HttpApiService } from 'src/app/_services/http-api.service';
 
 @Component({
   selector: 'app-home-page',

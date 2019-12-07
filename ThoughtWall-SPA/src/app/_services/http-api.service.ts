@@ -12,7 +12,6 @@ export class HttpApiService {
 
   private apiUrl = environment.apiUrl + '/values';
 
-
   // Home page, most recent threads
   getThreads(): Observable<[]> {
     return this.http.get<[]>(this.apiUrl);
