@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ using ThoughtWall.API.Dtos;
 using ThoughtWall.API.Models;
 using ThoughtWall.API.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using AutoMapper;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -21,17 +21,20 @@ namespace ThoughtWall.API.Controllers
     {
         private readonly DataContext _context;
         private readonly IHubContext<PostHub> _hubContext;
+        private readonly IMapper _mapper;
 
-        public ValuesController(DataContext context, IHubContext<PostHub> hubContext)
+        public ValuesController(DataContext context, IHubContext<PostHub> hubContext, IMapper mapper)
         {
             _context = context;
             _hubContext = hubContext;
+            _mapper = mapper;
         }
 
         // GET api/values
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetThreads()
+        [ProducesResponseType(typeof(ThreadsGetDto), 200)]
+        public async Task<ActionResult<ThreadsGetDto>> GetThreads()
         {
             // Orders by most recent (using TimeStamp)
             var threads = await _context.Threads
@@ -39,7 +42,8 @@ namespace ThoughtWall.API.Controllers
                 .OrderByDescending(x => x.TimeStamp)
                 .Take(5)
                 .ToListAsync();
-            return Ok(threads);
+            var mappedThreads = _mapper.Map<ThreadsGetDto[]>(threads);
+            return Ok(mappedThreads);
         }
 
         // GET Older Threads
@@ -85,31 +89,26 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> PostThread(ThreadPostDto threadPostDto)
         {
             DateTime timeStamp = DateTime.Now;
-            var thread = new Thread 
-            {
-                Username = User.FindFirst(ClaimTypes.Name).Value,
-                UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
-                Title = threadPostDto.Title,
-                Body = threadPostDto.Body,
-                TimeStamp = timeStamp
-            };
+            var newThread = _mapper.Map<Thread>(threadPostDto);
+            newThread.Username = User.FindFirst(ClaimTypes.Name).Value;
+            newThread.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            newThread.TimeStamp = timeStamp;
 
-            await _context.Threads.AddAsync(thread);
+            await _context.Threads.AddAsync(newThread);
             await _context.SaveChangesAsync();
-
             return StatusCode(201);
         }
 
         // Is called after posting a new thread
         [AllowAnonymous]
         [HttpGet("redirect")]
-        public async Task<IActionResult> Redirects(string title) 
+        public async Task<IActionResult> Redirects(string title)
         {
             var id = await _context.Threads
                 .OrderByDescending(x => x.TimeStamp)
                 .Where(x => x.Title == title)
                 .FirstAsync();
-                        
+
             return Ok(id);
         }
 
@@ -148,7 +147,7 @@ namespace ThoughtWall.API.Controllers
                 Body = commentPostDto.Body,
                 TimeStamp = timeStamp
             };
-            
+
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
             await _hubContext.Clients.Group(comment.ThreadId.ToString()).SendAsync("newComment", comment);
