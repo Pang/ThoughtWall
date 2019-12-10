@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpApiService } from '../_services/http-api.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
+import { HttpApiService } from '../_services/http-api.service';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 
 @Component({
@@ -13,7 +14,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   comments = [];
   thread = {};
   comment = {
-    threadId : '',
+    threadId: '',
     body: ''
   };
   errorMsg: string;
@@ -21,26 +22,25 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private httpApi: HttpApiService, ) {
     this.comment.threadId = this.route.snapshot.paramMap.get('id');
     this.httpApi.getFullThread(this.comment.threadId)
-        .subscribe(res => this.thread = res[0]);
+      .subscribe(res => this.thread = res);
     this.httpApi.getComments(this.comment.threadId)
-        .subscribe(res => this.comments = res );
+      .subscribe(res => this.comments = res);
   }
-  ngOnInit(){
+  ngOnInit() {
     this.connection.start().then(x => this.connection.invoke("JoinThread", this.comment.threadId)).catch(err => console.log(err));
     this.connection.on("newComment", data => {
       this.httpApi.getLatestComments(this.comment.threadId).subscribe(res => {
-        //console.log(res);
         if (res.threadId.toString() === this.route.snapshot.paramMap.get('id')) {
           this.comments.unshift(res);
         }
-      })
+      });
     });
   }
 
   postComment() {
     if (this.comment.body.length < 255 && this.comment.body.length > 3) {
       this.httpApi.postComment(this.comment).subscribe(
-        res => {this.errorMsg = '', this.comment.body = ''; },
+        res => { this.errorMsg = '', this.comment.body = ''; },
         err => this.errorMsg = err.error.errors.Body[0]
       );
     }

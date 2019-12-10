@@ -1,7 +1,7 @@
 
 .comments {
     max-width: 1000px;    
-    margin: 20px;
+    margin: 10px;
     margin-left: auto;
     margin-right: auto;
     background-color: rgb(32, 35, 46);
@@ -10,6 +10,6 @@
 }
 
 .timeStamp {
-    font-size: 12px;
+    font-size: 14px;
     color: rgb(128, 163, 173);
 }

@@ -33,16 +33,15 @@ namespace ThoughtWall.API.Controllers
         // GET api/values
         [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(typeof(ThreadsGetDto), 200)]
-        public async Task<ActionResult<ThreadsGetDto>> GetThreads()
+        public async Task<IActionResult> GetThreads()
         {
             // Orders by most recent (using TimeStamp)
             var threads = await _context.Threads
+                .Take(5)
                 .Include(x => x.Comments)
                 .OrderByDescending(x => x.TimeStamp)
-                .Take(5)
                 .ToListAsync();
-            var mappedThreads = _mapper.Map<ThreadsGetDto[]>(threads);
+            var mappedThreads = _mapper.Map<ThreadGetDto[]>(threads);
             return Ok(mappedThreads);
         }
 
@@ -57,7 +56,8 @@ namespace ThoughtWall.API.Controllers
                 .Skip(skip)
                 .Take(5)
                 .ToListAsync();
-            return Ok(oldThreads);
+            var mappedOldThreads = _mapper.Map<ThreadGetDto[]>(oldThreads);
+            return Ok(mappedOldThreads);
         }
 
         [AllowAnonymous]
@@ -69,19 +69,22 @@ namespace ThoughtWall.API.Controllers
                 .Where(x => x.Title.ToLower().Contains(keyword.ToLower()))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
-            return Ok(matches);
+            var mappedMatches = _mapper.Map<ThreadGetDto[]>(matches);
+            return Ok(mappedMatches);
         }
 
         // GET api/values/5
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSpecificThread(string id)
+        public async Task<ActionResult<ThreadGetDto>> GetSpecificThread(int id)
         {
-            var thread = await _context.Threads
-                .Where(x => x.Id == Int32.Parse(id))
-                .OrderByDescending(x => x.TimeStamp)
-                .ToListAsync();
-            return Ok(thread);
+            var thread = await _context.Threads.FindAsync(id);
+            if (thread == null)
+            {
+                return NotFound();
+            }
+            var mappedThread = _mapper.Map<ThreadGetDto>(thread);
+            return Ok(mappedThread);
         }
 
         // POST api/values/submit

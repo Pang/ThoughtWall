@@ -8,8 +8,7 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<ThreadPostDto, Thread>();
 
-        CreateMap<Thread, ThreadsGetDto>();
-        CreateMap<ThreadsGetDto, Thread>();
-
+        CreateMap<Thread, ThreadGetDto>();
+        CreateMap<ThreadGetDto, Thread>();
     }
 }

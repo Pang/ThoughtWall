@@ -2,8 +2,8 @@
   <div id="fullThread">
     <h1>{{ thread.title }}</h1>
     <span class="timeStamp">
-      {{ thread.username | titlecase }} |        
-      {{ thread.timeStamp | date:'longDate' }}. 
+      {{ thread.username | titlecase }} ~
+      {{ thread.timeStamp | date:'longDate' }}.
       {{ thread.timeStamp | date:'shortTime' }}
     </span>
     <hr>
@@ -11,8 +11,7 @@
   </div>
   <div *ngIf="loggedIn()">
     <form #commentForm="ngForm" (ngSubmit)="postComment()">
-      <textarea [(ngModel)]="comment.body" name="body" 
-      placeholder="What are your thoughts?"></textarea><br>
+      <textarea [(ngModel)]="comment.body" name="body" placeholder="What are your thoughts?"></textarea><br>
       <button type="submit">Comment</button>
     </form>
     <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>

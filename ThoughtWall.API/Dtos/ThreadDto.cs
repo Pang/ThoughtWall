@@ -17,7 +17,7 @@ namespace ThoughtWall.API.Dtos
         [StringLength(1000, MinimumLength = 4, ErrorMessage = "Your post must be between 4 to 1000 characters")]
         public string Body { get; set; }
     }
-    public class ThreadsGetDto
+    public class ThreadGetDto
     {
         public int Id { get; set; }
         public User User { get; set; }
