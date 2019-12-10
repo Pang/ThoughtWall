@@ -4,6 +4,11 @@
     margin-right: auto;
 }
 
+.timeStamp {
+    color: rgb(128, 163, 173);
+    font-size: 14px;
+}
+
 #fullThread {
     background-color: rgb(32, 35, 46);
     color: white;

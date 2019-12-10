@@ -19,7 +19,7 @@ export class SubmitPageComponent {
     this.httpApi.postThread(this.threadPost).subscribe(
       success => {
         this.httpApi.redirectTo(this.threadPost.title).subscribe(
-        res => this.router.navigate([`/thread/${res['id']}`]));
+          res => this.router.navigate([`/thread/${res}`]));
       },
       fail => {
         if (fail.status === 401) {

@@ -1,10 +1,10 @@
 <div class="comments" *ngFor="let post of comments">
   <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
-    [{{ post.timeStamp | date:'shortDate' }} -
+    [{{ post.timeStamp | date:'shortDate' }},
     {{ post.timeStamp | date:'shortTime' }}]
   </span>
   <span style="color: rgb(119, 210, 235)">
-    <b>{{ post.username | titlecase }} : </b>
+    {{ post.username | titlecase }} :
   </span>
   <ng-template #justNow>
     <span class="timeStamp">Just now</span>

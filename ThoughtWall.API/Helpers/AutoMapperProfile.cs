@@ -10,5 +10,8 @@ public class AutoMapperProfile : Profile
 
         CreateMap<Thread, ThreadGetDto>();
         CreateMap<ThreadGetDto, Thread>();
+
+        CreateMap<CommentGetDto, Comment>();
+        CreateMap<Comment, CommentGetDto>();
     }
 }

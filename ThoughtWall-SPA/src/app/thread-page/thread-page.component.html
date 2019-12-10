@@ -1,9 +1,9 @@
-<div id="page">
+<div *ngIf="thread.title" id="page">
   <div id="fullThread">
     <h1>{{ thread.title }}</h1>
+    <span style="color:rgb(119, 210, 235)">{{ thread.username | titlecase }}</span>
     <span class="timeStamp">
-      {{ thread.username | titlecase }} ~
-      {{ thread.timeStamp | date:'longDate' }}.
+      ~ {{ thread.timeStamp | date:'longDate' }}.
       {{ thread.timeStamp | date:'shortTime' }}
     </span>
     <hr>
@@ -17,4 +17,8 @@
     <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
   <app-comment [comments]="comments"></app-comment>
+</div>
+
+<div *ngIf="!thread.title">
+  <p style="color: white">LOADING...</p>
 </div>

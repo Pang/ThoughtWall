@@ -76,7 +76,7 @@ namespace ThoughtWall.API.Controllers
         // GET api/values/5
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<ThreadGetDto>> GetSpecificThread(int id)
+        public async Task<IActionResult> GetSpecificThread(int id)
         {
             var thread = await _context.Threads.FindAsync(id);
             if (thread == null)
@@ -92,12 +92,12 @@ namespace ThoughtWall.API.Controllers
         public async Task<IActionResult> PostThread(ThreadPostDto threadPostDto)
         {
             DateTime timeStamp = DateTime.Now;
-            var newThread = _mapper.Map<Thread>(threadPostDto);
-            newThread.Username = User.FindFirst(ClaimTypes.Name).Value;
-            newThread.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            newThread.TimeStamp = timeStamp;
+            var mappedThread = _mapper.Map<Thread>(threadPostDto);
+            mappedThread.Username = User.FindFirst(ClaimTypes.Name).Value;
+            mappedThread.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            mappedThread.TimeStamp = timeStamp;
 
-            await _context.Threads.AddAsync(newThread);
+            await _context.Threads.AddAsync(mappedThread);
             await _context.SaveChangesAsync();
             return StatusCode(201);
         }
@@ -112,7 +112,7 @@ namespace ThoughtWall.API.Controllers
                 .Where(x => x.Title == title)
                 .FirstAsync();
 
-            return Ok(id);
+            return Ok(id.Id);
         }
 
         // GET api/values/5/comments
@@ -124,7 +124,8 @@ namespace ThoughtWall.API.Controllers
                 .Where(x => x.ThreadId == Int32.Parse(id))
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
-            return Ok(comments);
+            var mappedComments = _mapper.Map<CommentGetDto[]>(comments);
+            return Ok(mappedComments);
         }
 
         [AllowAnonymous]
@@ -135,25 +136,23 @@ namespace ThoughtWall.API.Controllers
                 .Where(x => x.ThreadId == Int32.Parse(id))
                 .OrderByDescending(x => x.TimeStamp)
                 .FirstAsync();
-            return Ok(comment);
+            var mappedComment = _mapper.Map<CommentGetDto>(comment);
+            return Ok(mappedComment);
         }
         // POST api/values/comment
         [HttpPost("comment")]
         public async Task<IActionResult> PostComment(CommentPostDto commentPostDto)
         {
-            DateTime timeStamp = DateTime.Now;
-            var comment = new Comment
-            {
-                Username = User.FindFirst(ClaimTypes.Name).Value,
-                UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
-                ThreadId = Int32.Parse(commentPostDto.ThreadId),
-                Body = commentPostDto.Body,
-                TimeStamp = timeStamp
-            };
+            var mappedComment = _mapper.Map<Comment>(commentPostDto);
+            mappedComment.Username = User.FindFirst(ClaimTypes.Name).Value;
+            mappedComment.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            await _context.Comments.AddAsync(comment);
+            DateTime timeStamp = DateTime.Now;
+            timeStamp = mappedComment.TimeStamp;
+
+            await _context.Comments.AddAsync(mappedComment);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.Group(comment.ThreadId.ToString()).SendAsync("newComment", comment);
+            await _hubContext.Clients.Group(mappedComment.ThreadId.ToString()).SendAsync("newComment", mappedComment);
             return StatusCode(201);
         }
     }
