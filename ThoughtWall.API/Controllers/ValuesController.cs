@@ -76,6 +76,9 @@ namespace ThoughtWall.API.Controllers
         // GET api/values/5
         [AllowAnonymous]
         [HttpGet("{id}")]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
+
         public async Task<IActionResult> GetSpecificThread(int id)
         {
             var thread = await _context.Threads.FindAsync(id);
@@ -89,6 +92,7 @@ namespace ThoughtWall.API.Controllers
 
         // POST api/values/submit
         [HttpPost("submit")]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> PostThread(ThreadPostDto threadPostDto)
         {
             DateTime timeStamp = DateTime.Now;
@@ -141,6 +145,7 @@ namespace ThoughtWall.API.Controllers
         }
         // POST api/values/comment
         [HttpPost("comment")]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> PostComment(CommentPostDto commentPostDto)
         {
             var mappedComment = _mapper.Map<Comment>(commentPostDto);

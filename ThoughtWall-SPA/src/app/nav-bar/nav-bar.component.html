@@ -6,7 +6,7 @@
 
     <div class="links">
       <form (ngSubmit)="onSearchSubmit()" id="searchBar">
-        <input id="searchBar" [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
+        <input [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
       </form>
 
       <a *ngIf="loggedIn()" [routerLink]="['/submit']">

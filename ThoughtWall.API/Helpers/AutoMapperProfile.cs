@@ -13,5 +13,7 @@ public class AutoMapperProfile : Profile
 
         CreateMap<CommentGetDto, Comment>();
         CreateMap<Comment, CommentGetDto>();
+
+        CreateMap<UserRegisterDto, User>();
     }
 }

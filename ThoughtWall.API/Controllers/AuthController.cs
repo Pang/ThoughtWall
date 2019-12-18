@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using AutoMapper;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -20,13 +21,18 @@ namespace ThoughtWall.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IMapper _mapper;
+
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
             _repo = repo;
             _config = config;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> Register(UserRegisterDto userRegister)
         {
             userRegister.Username = userRegister.Username.ToLower();
@@ -34,17 +40,15 @@ namespace ThoughtWall.API.Controllers
             if (await _repo.UserExists(userRegister.Username))
                 return BadRequest("Username already exists");
 
-            var userToCreate = new User
-            {
-                Username = userRegister.Username
-            };
-
+            var userToCreate = _mapper.Map<User>(userRegister);
             var createdUser = _repo.Register(userToCreate, userRegister.Password);
 
             return StatusCode(201);
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> Login(UserLoginDto userLogin)
         {
             var userFromRepo = await _repo.Login(userLogin.Username.ToLower(), userLogin.Password);

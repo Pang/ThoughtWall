@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThoughtWall.API.Data;
+using ThoughtWall.API.Dtos;
+using AutoMapper;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -13,10 +15,12 @@ namespace ThoughtWall.API.Controllers
     public class ProfileController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public ProfileController(DataContext context)
+        public ProfileController(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet("threads")]
@@ -26,7 +30,8 @@ namespace ThoughtWall.API.Controllers
                 .Where(x => x.UserId == id)
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
-            return Ok(threads);
+            var mappedThreads = _mapper.Map<ThreadGetDto[]>(threads);
+            return Ok(mappedThreads);
         }
 
         [HttpGet("comments")]
@@ -37,7 +42,8 @@ namespace ThoughtWall.API.Controllers
                 .Where(x => x.UserId == id)
                 .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
-            return Ok(comments);
+            var mappedComments = _mapper.Map<CommentGetDto[]>(comments);
+            return Ok(mappedComments);
         }
     }
 }

@@ -1,8 +1,8 @@
-#formBox {
+.formBox {
     align-content: center;
 }
 
-#dataForm {
+.dataForm {
     background-color: rgb(32, 35, 46);
     color: white;
     text-align: center;

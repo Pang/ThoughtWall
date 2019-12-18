@@ -1,6 +1,6 @@
 <div>
-    <div id="formBox">
-      <form id="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
+    <div class="formBox">
+      <form class="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
         <h2>Login</h2>
         <label>Username</label><br>
         <input [(ngModel)]="login.Username" name="username" type="text"><br>
@@ -10,8 +10,8 @@
       </form>
     </div>
     
-    <div id="formBox">
-      <form id="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
+    <div class="formBox">
+      <form class="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
         <h2><i>Register</i></h2>
         <label>Username</label><br>
         <input [(ngModel)]="register.Username" name="username" type="text"><br>
