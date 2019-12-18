@@ -19,5 +19,7 @@ namespace ThoughtWall.API.Dtos
         public int UserId { get; set; }
         public string Body { get; set; }
         public DateTime TimeStamp { get; set; }
+        public ThreadGetDto Thread { get; set; }
+
     }
 }

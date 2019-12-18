@@ -23,7 +23,7 @@ export class ProfilePageComponent {
       );
     this.authService.getUsersComments(this.decodedToken['nameid'])
       .subscribe(
-        x => this.usersComments = x
+        x => { this.usersComments = x; console.log(this.usersComments) }
       );
   }
 
