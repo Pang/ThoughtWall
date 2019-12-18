@@ -16,14 +16,13 @@ export class ProfilePageComponent {
 
   constructor(private authService: AuthService, private router: Router) {
     this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    console.log(this.decodedToken);
     this.authService.getUsersThreads(this.decodedToken['nameid'])
       .subscribe(
         x => this.usersThreads = x
       );
     this.authService.getUsersComments(this.decodedToken['nameid'])
       .subscribe(
-        x => { this.usersComments = x; console.log(this.usersComments) }
+        x => this.usersComments = x
       );
   }
 
