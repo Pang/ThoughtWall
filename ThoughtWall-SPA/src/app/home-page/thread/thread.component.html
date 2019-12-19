@@ -2,7 +2,7 @@
 [ngClass]="{'newPost' : newThread === true }"
 [routerLink]="['/thread', thread.id]">
   <span id="timestamp">
-    {{ thread.username | titlecase }} | 
+    <span style="color: rgb(119, 210, 235)">{{ thread.username | titlecase }}</span> | 
     {{ thread.timeStamp | date:'longDate' }} -  
     {{ thread.timeStamp | date:'shortTime' }} | 
     {{ thread.comments.length }} comment(s)
