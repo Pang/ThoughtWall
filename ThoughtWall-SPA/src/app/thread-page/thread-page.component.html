@@ -10,9 +10,13 @@
     <p>{{ thread.body }}</p>
   </div>
   <div *ngIf="loggedIn()">
-    <form #commentForm="ngForm" (ngSubmit)="postComment()">
+    <form id="commentForm" #commentForm="ngForm" (ngSubmit)="postComment()">
       <textarea [(ngModel)]="comment.body" name="body" placeholder="What are your thoughts?"></textarea><br>
-      <button type="submit">Comment</button>
+      <button>
+        <svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path fill="white" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+        </svg>
+      </button>
     </form>
     <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
