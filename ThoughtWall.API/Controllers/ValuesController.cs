@@ -121,8 +121,12 @@ namespace ThoughtWall.API.Controllers
 
         [HttpPut("edit")]
         [ProducesResponseType(204)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> EditPost(ThreadGetDto threadGetDto)
         {
+            if (threadGetDto.Username != User.FindFirst(ClaimTypes.Name).Value)
+                return Unauthorized();
+
             var mappedThread = _mapper.Map<Thread>(threadGetDto);
             var originalPost = await _context.Threads.FirstOrDefaultAsync(thread => thread.Id == mappedThread.Id);
             originalPost.Body = mappedThread.Body;

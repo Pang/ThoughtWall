@@ -49,7 +49,6 @@ export class HttpApiService {
   }
 
   postComment(comment: any) {
-
     return this.http.post(this.apiUrl + '/comment', comment);
   }
 

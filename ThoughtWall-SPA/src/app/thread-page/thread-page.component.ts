@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 import { ActivatedRoute } from '@angular/router';
 import { HttpApiService } from '../_services/http-api.service';
@@ -12,6 +13,7 @@ import { ThreadModel } from '../models/threadModel';
 })
 export class ThreadPageComponent implements OnInit, OnDestroy {
   connection = new HubConnectionBuilder().withUrl('http://localhost:5000/postHub').build();
+  helper = new JwtHelperService();
   comments = [];
   thread: ThreadModel;
   comment = {
@@ -22,7 +24,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   editEnabled = false;
   edittedBody: string;
 
-  constructor(private route: ActivatedRoute, private httpApi: HttpApiService, ) {
+  constructor(private route: ActivatedRoute, private httpApi: HttpApiService) {
     this.comment.threadId = this.route.snapshot.paramMap.get('id');
     this.httpApi.getFullThread(this.comment.threadId)
       .subscribe(res => this.thread = res);
@@ -30,8 +32,8 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
       .subscribe(res => this.comments = res);
   }
   ngOnInit() {
-    this.connection.start().then(x => this.connection.invoke("JoinThread", this.comment.threadId)).catch(err => console.log(err));
-    this.connection.on("newComment", data => {
+    this.connection.start().then(x => this.connection.invoke('JoinThread', this.comment.threadId)).catch(err => console.log(err));
+    this.connection.on('newComment', data => {
       this.httpApi.getLatestComments(this.comment.threadId).subscribe(res => this.comments.unshift(res));
     });
   }
@@ -64,6 +66,16 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   loggedIn() {
     const token = localStorage.getItem('token');
     return !!token;
+  }
+
+  canEdit() {
+    var decodedToken = localStorage.getItem('token');
+    decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    console.log(decodedToken);
+    if (decodedToken['unique_name'] == this.thread.username) {
+      return true;
+    }
+    return false;
   }
 
   ngOnDestroy() {
