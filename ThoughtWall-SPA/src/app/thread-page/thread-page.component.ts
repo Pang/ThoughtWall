@@ -44,7 +44,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   }
 
   editThread() {
-    var newThread = this.thread;
+    let newThread = this.thread;
     newThread.body = this.edittedBody;
 
     this.httpApi.editThread(newThread).subscribe(
@@ -69,9 +69,8 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   }
 
   canEdit() {
-    var decodedToken = localStorage.getItem('token');
+    let decodedToken = localStorage.getItem('token');
     decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    console.log(decodedToken);
     if (decodedToken['unique_name'] == this.thread.username) {
       return true;
     }
