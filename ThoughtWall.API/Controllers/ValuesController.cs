@@ -37,9 +37,9 @@ namespace ThoughtWall.API.Controllers
         {
             // Orders by most recent (using TimeStamp)
             var threads = await _context.Threads
+                .OrderByDescending(x => x.TimeStamp)
                 .Take(5)
                 .Include(x => x.Comments)
-                .OrderByDescending(x => x.TimeStamp)
                 .ToListAsync();
             var mappedThreads = _mapper.Map<ThreadGetDto[]>(threads);
             return Ok(mappedThreads);
@@ -119,6 +119,19 @@ namespace ThoughtWall.API.Controllers
             return Ok(id.Id);
         }
 
+        [HttpPut("edit")]
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> EditPost(ThreadGetDto threadGetDto)
+        {
+            var mappedThread = _mapper.Map<Thread>(threadGetDto);
+            var originalPost = await _context.Threads.FirstOrDefaultAsync(thread => thread.Id == mappedThread.Id);
+            originalPost.Body = mappedThread.Body;
+            _context.Threads.Update(originalPost);
+            await _context.SaveChangesAsync();
+            return StatusCode(204);
+
+        }
+        
         // GET api/values/5/comments
         [AllowAnonymous]
         [HttpGet("{id}/comments")]
@@ -148,12 +161,11 @@ namespace ThoughtWall.API.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> PostComment(CommentPostDto commentPostDto)
         {
+            DateTime timeStamp = DateTime.Now;
             var mappedComment = _mapper.Map<Comment>(commentPostDto);
             mappedComment.Username = User.FindFirst(ClaimTypes.Name).Value;
             mappedComment.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            DateTime timeStamp = DateTime.Now;
-            timeStamp = mappedComment.TimeStamp;
+            mappedComment.TimeStamp = timeStamp;
 
             await _context.Comments.AddAsync(mappedComment);
             await _context.SaveChangesAsync();

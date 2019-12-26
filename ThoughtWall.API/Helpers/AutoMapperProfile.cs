@@ -12,6 +12,7 @@ public class AutoMapperProfile : Profile
         CreateMap<ThreadGetDto, Thread>();
 
         CreateMap<CommentGetDto, Comment>();
+        CreateMap<CommentPostDto, Comment>();
         CreateMap<Comment, CommentGetDto>();
 
         CreateMap<UserRegisterDto, User>();

@@ -1,6 +1,6 @@
 <div class="comments" *ngFor="let post of comments">
   <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
-    [{{ post.timeStamp | date:'shortDate' }},
+    [{{ post.timeStamp | date: 'd/M/yy' }},
     {{ post.timeStamp | date:'shortTime' }}]
   </span>
   <span style="color: rgb(119, 210, 235)">

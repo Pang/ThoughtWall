@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { CommentModel } from '../models/commentModel';
+import { ThreadModel } from '../models/threadModel';
 
 @Injectable({
   providedIn: 'root'
@@ -36,17 +37,20 @@ export class HttpApiService {
 
   // Takes an object from the ngform input and posts to API
   postThread(threadPost: any) {
-    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(this.apiUrl + '/submit', threadPost, { headers: header });
+    return this.http.post(this.apiUrl + '/submit', threadPost);
+  }
+
+  editThread(edittedPost: any) {
+    return this.http.put(this.apiUrl + '/edit', edittedPost);
   }
 
   getFullThread(id: string) {
-    return this.http.get(this.apiUrl + `/${id}`);
+    return this.http.get<ThreadModel>(this.apiUrl + `/${id}`);
   }
 
   postComment(comment: any) {
-    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(this.apiUrl + '/comment', comment, { headers : header });
+
+    return this.http.post(this.apiUrl + '/comment', comment);
   }
 
   getComments(id: string): Observable<[]> {

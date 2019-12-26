@@ -12,13 +12,11 @@ export class AuthService {
   private apiUrl = environment.apiUrl + '/profile';
 
   getUsersThreads(id: number): Observable<[]> {
-    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<[]>(this.apiUrl + `/threads?id=${id}`, {headers: header});
+    return this.http.get<[]>(this.apiUrl + `/threads?id=${id}`);
   }
 
   getUsersComments(id: number): Observable<[]> {
-    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<[]>(this.apiUrl + `/comments?id=${id}`, {headers: header});
+    return this.http.get<[]>(this.apiUrl + `/comments?id=${id}`);
   }
 
   loggedin() {

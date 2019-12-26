@@ -1,4 +1,4 @@
-<div *ngIf="thread.title" id="page">
+<div *ngIf="thread" id="page">
   <div id="fullThread">
     <h1>{{ thread.title }}</h1>
     <span style="color:rgb(119, 210, 235)">{{ thread.username | titlecase }}</span>
@@ -6,8 +6,16 @@
       ~ {{ thread.timeStamp | date:'longDate' }}.
       {{ thread.timeStamp | date:'shortTime' }}
     </span>
+    <a (click)="editButton()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+        <path class="icon" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="white"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+    </a>
     <hr>
-    <p>{{ thread.body }}</p>
+    <p *ngIf="!editEnabled">{{ thread.body }}</p>
+    <textarea [(ngModel)]="edittedBody" *ngIf="editEnabled">{{ thread.body }}</textarea>
+    <button *ngIf="editEnabled" (click)="editThread()">Edit Post</button>
   </div>
   <div *ngIf="loggedIn()">
     <form id="commentForm" #commentForm="ngForm" (ngSubmit)="postComment()">
@@ -23,6 +31,6 @@
   <app-comment [comments]="comments"></app-comment>
 </div>
 
-<div *ngIf="!thread.title">
+<div *ngIf="!thread">
   <p style="color: white">LOADING...</p>
 </div>
