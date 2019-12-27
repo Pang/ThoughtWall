@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.get<[]>(this.apiUrl + `/comments?id=${id}`);
   }
 
-  loggedin() {
+  loggedin(): boolean {
     const token = localStorage.getItem('token');
     return !!token;
   }
