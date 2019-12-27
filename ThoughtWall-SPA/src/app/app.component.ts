@@ -12,7 +12,6 @@ export class AppComponent implements OnInit{
   helper = new JwtHelperService();
 
   ngOnInit() {
-    console.log(this.jwtHelper.getTokenExpirationDate());
     if (!this.helper.isTokenExpired()) {
       localStorage.removeItem('token');
     }
