@@ -18,18 +18,22 @@ import { CommentComponent } from './thread-page/comment/comment.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 const appRoutes: Routes = [
-  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  { path: 'page/:pn', component: HomePageComponent },
   { path: 'submit', component: SubmitPageComponent },
   { path: 'thread/:id', component: ThreadPageComponent },
   { path: 'search/:kw', component: SearchPageComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterPageComponent },
+  { path: '', redirectTo: 'page/1', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({
@@ -44,6 +48,7 @@ const appRoutes: Routes = [
     CommentComponent,
     ProfilePageComponent,
     RegisterPageComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

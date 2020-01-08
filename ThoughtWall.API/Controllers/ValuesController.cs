@@ -33,11 +33,13 @@ namespace ThoughtWall.API.Controllers
         // GET api/values
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetThreads()
+        public async Task<IActionResult> GetThreads(int pageNo)
         {
+            int noToSkip = (pageNo * 5) - 5;
             // Orders by most recent (using TimeStamp)
             var threads = await _context.Threads
                 .OrderByDescending(x => x.TimeStamp)
+                .Skip(noToSkip)
                 .Take(5)
                 .Include(x => x.Comments)
                 .ToListAsync();

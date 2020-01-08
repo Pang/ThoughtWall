@@ -7,8 +7,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  constructor(private jwtHelper: JwtHelperService){}
-  title = 'ThoughtWall-SPA';
+  constructor() {}
+  title = 'ThoughtWall';
   helper = new JwtHelperService();
 
   ngOnInit() {

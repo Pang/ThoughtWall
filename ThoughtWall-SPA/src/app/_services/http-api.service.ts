@@ -14,8 +14,9 @@ export class HttpApiService {
   private apiUrl = environment.apiUrl + '/values';
 
   // Home page, most recent threads
-  getThreads(): Observable<[]> {
-    return this.http.get<[]>(this.apiUrl);
+  getThreads(pageNo: string): Observable<[]> {
+    const params = new HttpParams().set('pageNo', pageNo.toString());
+    return this.http.get<[]>(this.apiUrl, { params });
   }
 
   // Uses length of current array of Threads to skip
