@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavbarService } from '../_services/navbar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +10,11 @@ import { Router } from '@angular/router';
 export class NavBarComponent implements OnInit {
   keyword: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private navbarService: NavbarService ) {}
+
+  hitHome() {
+    this.navbarService.changeNav(1);
+  }
 
   loggedIn() {
     const token = localStorage.getItem('token');
