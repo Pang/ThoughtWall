@@ -14,7 +14,7 @@ export class HttpApiService {
   private apiUrl = environment.apiUrl + '/values';
 
   // Home page, most recent threads
-  getThreads(pageNo: string): Observable<[]> {
+  getThreads(pageNo: number): Observable<[]> {
     const params = new HttpParams().set('pageNo', pageNo.toString());
     return this.http.get<[]>(this.apiUrl, { params });
   }

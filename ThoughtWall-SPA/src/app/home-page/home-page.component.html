@@ -2,8 +2,8 @@
 
 <form #loadMore="ngForm">
     <span id="pageNo">
-        <span class="arrow" (click)="prevPage()" *ngIf="pageNo != 1" >&#8592;</span>
+        <span class="arrow" (click)="prevPage()" *ngIf="pageNo != 1">&#8592;</span>
             {{ pageNo }}
-        <span class="arrow" (click)="nextPage()" >&#8594;</span>
+        <span class="arrow" (click)="nextPage()" *ngIf="threadsNext()">&#8594;</span>
     </span>
 </form> 

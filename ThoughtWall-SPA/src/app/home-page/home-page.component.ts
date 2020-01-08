@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent {
   threads = [];
-  pageNo: string;
+  pageNo: number;
 
   constructor(private httpApi: HttpApiService, private route: ActivatedRoute, private router: Router) {
-    this.pageNo = this.route.snapshot.paramMap.get('pn');
+    this.pageNo = parseInt(this.route.snapshot.paramMap.get('pn'));
 
     this.httpApi.getThreads(this.pageNo)
       .subscribe(res => this.threads = res);
@@ -24,15 +24,23 @@ export class HomePageComponent {
       .subscribe(res => this.threads.concat(res));
   }
 
+  threadsNext() {
+    if(this.threads.length >= 5) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   prevPage() {
-    this.pageNo = (parseInt(this.pageNo) - 1).toString();
+    this.pageNo = this.pageNo - 1;
     this.router.navigate(['page/' + this.pageNo]);
     this.httpApi.getThreads(this.pageNo)
       .subscribe(res => this.threads = res);
   }
 
   nextPage() {
-    this.pageNo = (parseInt(this.pageNo) + 1).toString();
+    this.pageNo = this.pageNo + 1;
     this.router.navigate(['page/' + this.pageNo]);
     this.httpApi.getThreads(this.pageNo)
       .subscribe(res => this.threads = res);
