@@ -2,15 +2,18 @@
   <div id="profile">
     <span id="logoutBtn" style="float: right;" (click)="logout()">Logout</span>
 
-      <h1>{{ decodedToken.unique_name | titlecase }}</h1>
-      <h4><u>Threads</u></h4>
-      <ul>
-        <li *ngFor="let thread of usersThreads"><b>{{ thread.title }}</b> ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
-      </ul>
-      <h4><u>Comments</u></h4>
-      <ul>
-        <li *ngFor="let comment of usersComments"><b>[{{ comment.thread.title }}]</b>
+    <h1>{{ decodedToken.unique_name | titlecase }}</h1>
+    <h4><u>Threads</u></h4>
+    <ul>
+      <li *ngFor="let thread of usersThreads"><b class="threadLink"
+          [routerLink]="['/thread', thread.id]">{{ thread.title }}</b>
+        ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
+    </ul>
+    <h4><u>Comments</u></h4>
+    <ul>
+      <li *ngFor="let comment of usersComments">
+        <b class="threadLink" [routerLink]="['/thread', comment.thread.id]">[{{ comment.thread.title }}]</b>
         <br> <i>"{{ comment.body }}"</i> - {{ comment.timeStamp | date: "dd/MM/yyyy" }}</li>
-      </ul>
+    </ul>
   </div>
 </div>

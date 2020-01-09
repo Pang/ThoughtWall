@@ -5828,23 +5828,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cPango\\.nuget\\packages\\": {},
+    "C:\\Users\\TG1650\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CodeProjects\\ThoughtWall\\ThoughtWall.API\\ThoughtWall.API.csproj",
+      "projectUniqueName": "C:\\Development\\ThoughtWall\\ThoughtWall.API\\ThoughtWall.API.csproj",
       "projectName": "ThoughtWall.API",
-      "projectPath": "D:\\CodeProjects\\ThoughtWall\\ThoughtWall.API\\ThoughtWall.API.csproj",
-      "packagesPath": "C:\\Users\\cPango\\.nuget\\packages\\",
-      "outputPath": "D:\\CodeProjects\\ThoughtWall\\ThoughtWall.API\\obj\\",
+      "projectPath": "C:\\Development\\ThoughtWall\\ThoughtWall.API\\ThoughtWall.API.csproj",
+      "packagesPath": "C:\\Users\\TG1650\\.nuget\\packages\\",
+      "outputPath": "C:\\Development\\ThoughtWall\\ThoughtWall.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\cPango\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TG1650\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

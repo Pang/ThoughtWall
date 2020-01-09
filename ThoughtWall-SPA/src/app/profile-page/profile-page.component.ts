@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from '../_services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { HttpApiService } from 'src/app/_services/http-api.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
