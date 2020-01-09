@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { HttpApiService } from 'src/app/_services/http-api.service';
 import { NavbarService } from '../_services/navbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +12,7 @@ import { NavbarService } from '../_services/navbar.service';
 export class NavBarComponent implements OnInit {
   keyword: string;
 
-  constructor(private router: Router, private navbarService: NavbarService ) {}
+  constructor(private router: Router, private navbarService: NavbarService) { }
 
   hitHome() {
     this.navbarService.changeNav(1);

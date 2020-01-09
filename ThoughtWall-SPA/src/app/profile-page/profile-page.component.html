@@ -9,11 +9,14 @@
           [routerLink]="['/thread', thread.id]">{{ thread.title }}</b>
         ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
     </ul>
+    <span>Prev</span> - <span>Next</span>
+
     <h4><u>Comments</u></h4>
     <ul>
       <li *ngFor="let comment of usersComments">
         <b class="threadLink" [routerLink]="['/thread', comment.thread.id]">[{{ comment.thread.title }}]</b>
         <br> <i>"{{ comment.body }}"</i> - {{ comment.timeStamp | date: "dd/MM/yyyy" }}</li>
     </ul>
+    <span>Prev</span> - <span>Next</span>
   </div>
 </div>
