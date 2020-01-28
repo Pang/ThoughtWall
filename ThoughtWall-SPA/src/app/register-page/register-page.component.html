@@ -1,23 +1,35 @@
 <div>
-    <div class="formBox">
-      <form class="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
-        <h2>Login</h2>
-        <label>Username</label><br>
-        <input [(ngModel)]="login.Username" name="username" type="text"><br>
-        <label>Password</label><br>
-        <input [(ngModel)]="login.Password" name="password" type="password"><br>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    
-    <div class="formBox">
-      <form class="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
-        <h2><i>Register</i></h2>
-        <label>Username</label><br>
-        <input [(ngModel)]="register.Username" name="username" type="text"><br>
-        <label>Password</label><br>
-        <input [(ngModel)]="register.Password" name="password" type="text"><br>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+  <div class="formBox">
+    <form class="dataForm form-control" #registerForm="ngForm" (ngSubmit)="loginUser()">
+      <h2>Login</h2>
+      <label>Username</label><br>
+      <input required autocomplete="off" minlength="3" [(ngModel)]="login.Username" 
+        name="username" type="text" #username="ngModel"><br>
+      <label>Password</label><br>
+      <input required [(ngModel)]="login.Password" name="password" type="password"><br>
+      <button type="submit">Submit</button>
+
+      <div style="color: white" *ngIf="isError">Invalid login details</div>
+    </form>
   </div>
+
+  <div class="formBox">
+    <form class="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
+      <h2><i>Register</i></h2>
+      <label for="username">Username</label><br>
+      <input required type="text" autocomplete="off" minlength="3" [(ngModel)]="register.Username" 
+        id="username" name="username" #username="ngModel"><br>
+      <label for="password">Password</label><br>
+      <input required type="text" autocomplete="off" minlength="8" [(ngModel)]="register.Password" 
+        id="password" name="password" #password="ngModel"><br>
+      <button type="submit">Submit</button>
+
+      <div style="color: white" [hidden]="username.valid || username.pristine">
+        Username needs to be a minimum of 3 characters
+      </div>
+      <div style="color: white" [hidden]="password.valid || password.pristine">
+        Password needs to be a minimum of 8 characters
+      </div>
+    </form>
+  </div>
+</div>
