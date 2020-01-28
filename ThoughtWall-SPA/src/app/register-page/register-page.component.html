@@ -1,6 +1,6 @@
 <div>
   <div class="formBox">
-    <form class="dataForm form-control" #registerForm="ngForm" (ngSubmit)="loginUser()">
+    <form class="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
       <h2>Login</h2>
       <label>Username</label><br>
       <input required autocomplete="off" minlength="3" [(ngModel)]="login.Username" 
