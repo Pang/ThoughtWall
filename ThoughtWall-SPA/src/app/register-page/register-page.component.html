@@ -1,12 +1,11 @@
 <div>
   <div class="formBox">
-    <form class="dataForm" #registerForm="ngForm" (ngSubmit)="loginUser()">
+    <form class="dataForm" [formGroup]="loginForm" (ngSubmit)="loginUser()">
       <h2>Login</h2>
       <label>Username</label><br>
-      <input required autocomplete="off" minlength="3" [(ngModel)]="login.Username" 
-        name="username" type="text" #username="ngModel"><br>
+      <input formControlName="username" autocomplete="off" type="text"><br>
       <label>Password</label><br>
-      <input required [(ngModel)]="login.Password" name="password" type="password"><br>
+      <input formControlName="password" type="password"><br>
       <button type="submit">Submit</button>
 
       <div style="color: white" *ngIf="isError">Invalid login details</div>
@@ -14,21 +13,19 @@
   </div>
 
   <div class="formBox">
-    <form class="dataForm" #registerForm="ngForm" (ngSubmit)="registerUser()">
+    <form class="dataForm" [formGroup]="registerForm" (ngSubmit)="registerUser()">
       <h2><i>Register</i></h2>
       <label for="username">Username</label><br>
-      <input required type="text" autocomplete="off" minlength="3" [(ngModel)]="register.Username" 
-        id="username" name="username" #username="ngModel"><br>
+      <input formControlName="username" type="text" autocomplete="off"><br>
       <label for="password">Password</label><br>
-      <input required type="text" autocomplete="off" minlength="8" [(ngModel)]="register.Password" 
-        id="password" name="password" #password="ngModel"><br>
+      <input formControlName="password" type="password" autocomplete="off"><br>
       <button type="submit">Submit</button>
 
-      <div style="color: white" [hidden]="username.valid || username.pristine">
-        Username needs to be a minimum of 3 characters
+      <div style="color: red" [hidden]="registerForm.get('username').valid || registerForm.get('username').pristine">
+        Username needs to be between 3 - 12 characters
       </div>
-      <div style="color: white" [hidden]="password.valid || password.pristine">
-        Password needs to be a minimum of 8 characters
+      <div style="color: red" [hidden]="registerForm.get('password').valid || registerForm.get('password').pristine">
+        Password needs to be between 6 - 20 characters
       </div>
     </form>
   </div>

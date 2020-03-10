@@ -5,7 +5,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommentComponent } from './thread-page/comment/comment.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HttpApiService } from './_services/http-api.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -55,6 +55,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({

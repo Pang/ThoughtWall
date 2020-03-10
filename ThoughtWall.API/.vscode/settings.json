@@ -1,6 +1,7 @@
 {
     "workbench.colorCustomizations": {
         "activityBar.background": "#7a97ab",
+        "activityBar.activeBackground": "#7a97ab",
         "activityBar.activeBorder": "#e6d8e0",
         "activityBar.foreground": "#15202b",
         "activityBar.inactiveForeground": "#15202b99",
