@@ -24,6 +24,8 @@
     margin-top: 20px;
     padding: 5px 20px;;
     margin: 20px 20px 0 20px;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
 h1 {

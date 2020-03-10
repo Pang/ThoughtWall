@@ -20,6 +20,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { ThreadComponent } from './home-page/thread/thread.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
+import { MatCardModule } from '@angular/material/card';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatCardModule,
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {

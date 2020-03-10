@@ -5,6 +5,8 @@
     background-color: rgb(32, 35, 46);
     color: white;
     padding: 10px;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
 .timeStamp {

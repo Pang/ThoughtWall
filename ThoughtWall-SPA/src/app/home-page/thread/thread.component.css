@@ -8,13 +8,14 @@
     margin: 20px;
     margin-left: auto;
     margin-right: auto;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
 #threadOverview:hover {
     cursor: pointer;
-}
-#threadOverview:hover > h2 {
-    text-decoration: underline;
+    -webkit-box-shadow: 3px 3px 7px rgba(79, 151, 233, 0.418);
+    box-shadow: 3px 3px 7px rgba(79, 151, 233, 0.418);
 }
 
 @keyframes newPostAnime {
