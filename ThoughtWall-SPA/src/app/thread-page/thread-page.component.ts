@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 import { ActivatedRoute } from '@angular/router';
-import { HttpApiService } from '../_services/http-api.service';
+import { ThreadService } from '../_services/thread.service';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 import { ThreadModel } from '../models/threadModel';
-import { AuthService } from '../_services/auth.service';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-thread-page',
@@ -25,7 +25,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   editEnabled = false;
   edittedBody: string;
 
-  constructor(private route: ActivatedRoute, private httpApi: HttpApiService, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private httpApi: ThreadService, private accountService: AccountService) {
     this.comment.threadId = this.route.snapshot.paramMap.get('id');
     this.httpApi.getFullThread(this.comment.threadId)
       .subscribe(res => this.thread = res);
@@ -70,7 +70,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   }
 
   canEdit() {
-    if (this.authService.loggedin()) {
+    if (this.accountService.loggedin()) {
       const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
       if (decodedToken['unique_name'] == this.thread.username) {
         return true;

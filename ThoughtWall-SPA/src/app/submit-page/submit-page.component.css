@@ -10,6 +10,8 @@
     border-radius: 10px;
     position: relative;
     top: 50px;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
 input, textarea, button {
@@ -20,7 +22,6 @@ input, textarea, button {
     border: none;
     margin-top: 20px;
     padding: 5px;
-
 }
 
 button {  
@@ -39,7 +40,6 @@ button:hover {
 }
 
 h2 {
-    text-decoration: underline;
     margin-top: 10px;
 }
 

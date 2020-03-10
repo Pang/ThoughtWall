@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { HttpApiService } from 'src/app/_services/http-api.service';
+import { ThreadService } from 'src/app/_services/thread.service';
 import { NavbarService } from '../_services/navbar.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,12 +16,12 @@ export class HomePageComponent implements OnInit {
   pageNo: number;
   subscription: Subscription;
 
-  constructor(private httpApi: HttpApiService,
+  constructor(private threadService: ThreadService,
     private route: ActivatedRoute,
     private router: Router,
     private navbarService: NavbarService) {
     this.pageNo = parseInt(this.route.snapshot.paramMap.get('pn'));
-    this.httpApi.getThreads(this.pageNo)
+    this.threadService.getThreads(this.pageNo)
       .subscribe(res => this.threads = res);
   }
 
@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
 
   getPageThreads(item) {
     this.router.navigate(['page/' + this.pageNo]);
-    this.httpApi.getThreads(item)
+    this.threadService.getThreads(item)
       .subscribe(res => this.threads = res);
   }
 

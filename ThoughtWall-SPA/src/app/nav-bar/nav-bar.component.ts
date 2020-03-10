@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpApiService } from 'src/app/_services/http-api.service';
+import { ThreadService } from 'src/app/_services/thread.service';
 import { NavbarService } from '../_services/navbar.service';
 import { Router } from '@angular/router';
 

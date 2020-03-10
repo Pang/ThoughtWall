@@ -2,10 +2,8 @@
   <div class="formBox">
     <form class="dataForm" [formGroup]="loginForm" (ngSubmit)="loginUser()">
       <h2>Login</h2>
-      <label>Username</label><br>
-      <input formControlName="username" autocomplete="off" type="text"><br>
-      <label>Password</label><br>
-      <input formControlName="password" type="password"><br>
+      <input formControlName="username" autocomplete="off" type="text" placeholder="Username"><br>
+      <input formControlName="password" type="password" placeholder="Password"><br>
       <button type="submit">Submit</button>
 
       <div style="color: white" *ngIf="isError">Invalid login details</div>
@@ -15,18 +13,17 @@
   <div class="formBox">
     <form class="dataForm" [formGroup]="registerForm" (ngSubmit)="registerUser()">
       <h2><i>Register</i></h2>
-      <label for="username">Username</label><br>
-      <input formControlName="username" type="text" autocomplete="off"><br>
-      <label for="password">Password</label><br>
-      <input formControlName="password" type="password" autocomplete="off"><br>
-      <button type="submit">Submit</button>
 
-      <div style="color: red" [hidden]="registerForm.get('username').valid || registerForm.get('username').pristine">
+      <input formControlName="username" type="text" autocomplete="off" placeholder="Username"><br>
+      <input formControlName="password" type="password" autocomplete="off" placeholder="Password">
+      <div style="color: white" [hidden]="registerForm.get('username').valid || registerForm.get('username').pristine">
         Username needs to be between 3 - 12 characters
       </div>
-      <div style="color: red" [hidden]="registerForm.get('password').valid || registerForm.get('password').pristine">
+      <div style="color: white" [hidden]="registerForm.get('password').valid || registerForm.get('password').pristine">
         Password needs to be between 6 - 20 characters
-      </div>
+      </div><br>
+
+      <button type="submit">Submit</button>
     </form>
   </div>
 </div>

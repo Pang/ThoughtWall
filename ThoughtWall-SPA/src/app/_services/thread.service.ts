@@ -1,6 +1,6 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
 import { CommentModel } from '../models/commentModel';
 import { ThreadModel } from '../models/threadModel';
@@ -8,7 +8,7 @@ import { ThreadModel } from '../models/threadModel';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpApiService {
+export class ThreadService {
   constructor(private http: HttpClient) { }
 
   private apiUrl = environment.apiUrl + '/values';

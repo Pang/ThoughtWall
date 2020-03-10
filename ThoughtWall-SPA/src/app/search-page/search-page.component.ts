@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpApiService } from '../_services/http-api.service';
+import { ThreadService } from '../_services/thread.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SearchPageComponent implements OnInit {
   threads = [];
 
-  constructor(private route: ActivatedRoute, private httpApi: HttpApiService) {
+  constructor(private route: ActivatedRoute, private httpApi: ThreadService) {
     const keyword = this.route.snapshot.paramMap.get('kw');
     this.httpApi.getSearchedThreads(keyword)
       .subscribe(res => this.threads = res);

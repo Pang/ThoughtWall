@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommentComponent } from './thread-page/comment/comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
-import { HttpApiService } from './_services/http-api.service';
+import { ThreadService } from './_services/thread.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -20,7 +20,6 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { ThreadComponent } from './home-page/thread/thread.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
-import { MatCardModule } from '@angular/material/card';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -58,7 +57,6 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCardModule,
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -68,7 +66,7 @@ const appRoutes: Routes = [
       }
     })
   ],
-  providers: [HttpApiService],
+  providers: [ThreadService],
   bootstrap: [AppComponent]
 })
 

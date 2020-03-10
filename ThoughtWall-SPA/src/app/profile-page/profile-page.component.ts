@@ -1,6 +1,5 @@
-import { AuthService } from '../_services/auth.service';
+import { AccountService } from '../_services/account.service';
 import { Component } from '@angular/core';
-import { HttpApiService } from 'src/app/_services/http-api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 
@@ -15,15 +14,15 @@ export class ProfilePageComponent {
   usersThreads = [];
   usersComments = [];
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private accountService: AccountService, private router: Router) {
     this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    this.authService.getUsersThreads(this.decodedToken['nameid'])
+    this.accountService.getUsersThreads(this.decodedToken['nameid'])
       .subscribe(
-        x => this.usersThreads = x
+        data => this.usersThreads = data
       );
-    this.authService.getUsersComments(this.decodedToken['nameid'])
+    this.accountService.getUsersComments(this.decodedToken['nameid'])
       .subscribe(
-        x => this.usersComments = x
+        data => this.usersComments = data
       );
   }
 

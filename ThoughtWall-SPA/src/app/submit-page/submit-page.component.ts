@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpApiService } from '../_services/http-api.service';
+import { ThreadService } from '../_services/thread.service';
 import { Router } from '@angular/router';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-submit-page',
@@ -8,30 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./submit-page.component.css']
 })
 export class SubmitPageComponent {
-  threadPost: any = {};
-  errorMsg = [];
+  threadPostForm: FormGroup;
 
-  constructor(private httpApi: HttpApiService, private router: Router) {
+  constructor(private threadService: ThreadService, private router: Router) {
+    this.threadPostForm = new FormGroup({
+      title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
+      body: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(400)]),
+    })
   }
 
   onSubmit() {
-    this.errorMsg = [];
-    this.httpApi.postThread(this.threadPost).subscribe(
-      success => {
-        this.httpApi.redirectTo(this.threadPost.title).subscribe(
+    console.log("asfadsfa")
+    this.threadService.postThread(this.threadPostForm.value).subscribe(
+      () => {
+        this.threadService.redirectTo(this.threadPostForm.get("title").value).subscribe(
           res => this.router.navigate([`/thread/${res}`]));
       },
       fail => {
         if (fail.status === 401) {
-          this.errorMsg.push('You are not logged in.');
+          console.log("401");
         } else {
           console.log(fail);
-          // for (const error of fail.error.errors.Title) {
-          //   this.errorMsg.push(error);
-          // }
-          // for (const error of fail.error.errors.Body) {
-          //   this.errorMsg.push(error);
-          // }
         }
       }
     );

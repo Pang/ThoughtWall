@@ -15,6 +15,8 @@
     position: relative;
     top: 50px;
     margin-bottom: 50px;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
 #profile{
@@ -33,4 +35,27 @@
     text-align: center;
     font-size: 30px;
     color: rgb(202, 42, 42);
+}
+
+input {
+    background-color: rgb(244, 244, 255);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+button[type="submit"] {
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+button[type="submit"]:hover {
+    cursor: pointer;
+    background-color: rgb(28, 165, 28);
 }

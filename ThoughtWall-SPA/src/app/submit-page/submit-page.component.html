@@ -1,9 +1,10 @@
 <div id="formBox">
-  <form id="threadForm" #threadForm="ngForm" (ngSubmit)="onSubmit()">
-    <h2>Post a thread!</h2>
-    <input [(ngModel)]="threadPost.title" name="title" type="text" placeholder="Title"/>
-    <textarea [(ngModel)]="threadPost.body" name="body" row="4" style="height: 150px;" placeholder="Body"></textarea>
-    <div class="errorMsg" *ngFor="let err of errorMsg">{{ err }}</div>
-    <button type="submit">Submit</button>
+  <form [formGroup]="threadPostForm" id="threadForm" (ngSubmit)="onSubmit()">
+    <h2>Post something!</h2>
+    <input formControlName="title" type="text" placeholder="Title"/>
+    <div *ngIf="threadPostForm.get('title').invalid && threadPostForm.get('title').dirty">Title needs to be between 2-40 characters</div>
+    <textarea formControlName="body" row="4" style="height: 150px;" placeholder="Body"></textarea>
+    <div *ngIf="threadPostForm.get('body').invalid && threadPostForm.get('body').dirty">Body needs to be between 10-400 characters</div>
+    <button type="submit" [disabled]="threadPostForm.invalid">Submit</button>
   </form>
 </div>
