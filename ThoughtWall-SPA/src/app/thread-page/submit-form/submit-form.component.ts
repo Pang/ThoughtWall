@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ThreadService } from '../_services/thread.service';
+import { ThreadService } from '../../_services/thread/thread.service';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-submit-page',
-  templateUrl: './submit-page.component.html',
-  styleUrls: ['./submit-page.component.css']
+  selector: 'app-submit-form',
+  templateUrl: './submit-form.component.html',
+  styleUrls: ['./submit-form.component.css']
 })
 export class SubmitPageComponent {
   threadPostForm: FormGroup;
@@ -19,7 +19,6 @@ export class SubmitPageComponent {
   }
 
   onSubmit() {
-    console.log("asfadsfa")
     this.threadService.postThread(this.threadPostForm.value).subscribe(
       () => {
         this.threadService.redirectTo(this.threadPostForm.get("title").value).subscribe(

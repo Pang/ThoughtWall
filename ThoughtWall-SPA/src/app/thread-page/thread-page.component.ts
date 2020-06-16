@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { ActivatedRoute } from '@angular/router';
-import { ThreadService } from '../_services/thread.service';
+import { ThreadService } from '../_services/thread/thread.service';
 import { HubConnectionBuilder } from '@aspnet/signalr';
-import { ThreadModel } from '../models/threadModel';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../_services/account/account.service';
+import { CommentService } from '../_services/thread/comment.service';
+import { ModelThread } from '../_models/ModelThread';
 
 @Component({
   selector: 'app-thread-page',
@@ -16,7 +17,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   connection = new HubConnectionBuilder().withUrl('http://localhost:5000/postHub').build();
   helper = new JwtHelperService();
   comments: any[];
-  thread: ThreadModel;
+  thread: ModelThread;
   comment = {
     threadId: '',
     body: ''
@@ -25,21 +26,27 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   editEnabled = false;
   edittedBody: string;
 
-  constructor(private route: ActivatedRoute, private httpApi: ThreadService, private accountService: AccountService) {
-    this.comment.threadId = this.route.snapshot.paramMap.get('id');
-    this.httpApi.getFullThread(this.comment.threadId)
-      .subscribe(res => this.thread = res);
-    this.httpApi.getComments(this.comment.threadId)
-      .subscribe(res => {
-        if (res.length > 0) {
-          this.comments = res;
-        }
-      });
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private threadService: ThreadService,
+    private commentService: CommentService,
+    private accountService: AccountService
+    ) {
+      this.comment.threadId = this.route.snapshot.paramMap.get('id');
+      this.threadService.getFullThread(this.comment.threadId)
+        .subscribe(res => this.thread = res);
+      this.commentService.getComments(this.comment.threadId)
+        .subscribe(res => {
+          if (res.length > 0) {
+            this.comments = res;
+          }
+        });
+    }
+
   ngOnInit() {
     this.connection.start().then(x => this.connection.invoke('JoinThread', this.comment.threadId)).catch(err => console.log(err));
     this.connection.on('newComment', data => {
-      this.httpApi.getLatestComments(this.comment.threadId).subscribe(res => this.comments.unshift(res));
+      this.commentService.getLatestComments(this.comment.threadId).subscribe(res => this.comments.unshift(res));
     });
   }
 
@@ -49,23 +56,23 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   }
 
   editThread() {
-    let newThread = this.thread;
-    newThread.body = this.edittedBody;
+    // let newThread = this.thread;
+    // newThread.body = this.edittedBody;
 
-    this.httpApi.editThread(newThread).subscribe(
-      res => { this.errorMsg = '', this.comment.body = ''; },
-      err => this.errorMsg = err.error.errors.Body[0]
-    );
-    this.editEnabled = false;
+    // this.threadService.editThread(newThread).subscribe(
+    //   res => { this.errorMsg = '', this.comment.body = ''; },
+    //   err => this.errorMsg = err.error.errors.Body[0]
+    // );
+    // this.editEnabled = false;
   }
 
   postComment() {
-    if (this.comment.body.length < 255 && this.comment.body.length > 3) {
-      this.httpApi.postComment(this.comment).subscribe(
-        res => { this.errorMsg = '', this.comment.body = ''; },
-        err => this.errorMsg = err.error.errors.Body[0]
-      );
-    }
+    // if (this.comment.body.length < 255 && this.comment.body.length > 3) {
+    //   this.commentService.postComment(this.comment).subscribe(
+    //     res => { this.errorMsg = '', this.comment.body = ''; },
+    //     err => this.errorMsg = err.error.errors.Body[0]
+    //   );
+    // }
   }
 
   loggedIn() {

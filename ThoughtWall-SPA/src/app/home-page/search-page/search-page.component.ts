@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ThreadService } from '../_services/thread.service';
 import { ActivatedRoute } from '@angular/router';
+import { ThreadService } from 'src/app/_services/thread/thread.service';
 
 @Component({
   selector: 'app-search-page',
-  templateUrl: './search-page.component.html',
+  template: `
+    <app-thread-summary [threads]="threads"></app-thread-summary>
+  `,
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
   threads = [];
 
-  constructor(private route: ActivatedRoute, private httpApi: ThreadService) {
+  constructor(private route: ActivatedRoute, private threadService: ThreadService) {
     const keyword = this.route.snapshot.paramMap.get('kw');
-    this.httpApi.getSearchedThreads(keyword)
+    this.threadService.getSearch(keyword)
       .subscribe(res => this.threads = res);
   }
 

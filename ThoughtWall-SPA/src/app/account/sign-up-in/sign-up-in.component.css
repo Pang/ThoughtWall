@@ -1,0 +1,16 @@
+div {
+    margin: 70px auto;
+    text-align: center;
+
+}
+
+mat-card {
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    vertical-align: middle;
+    display: inline-block;
+    margin: 70px 50px;
+    width: 300px;
+    padding: 40px 0;
+
+}
