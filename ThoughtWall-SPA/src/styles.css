@@ -1,8 +1,0 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-    margin: 0;
-    background-color: rgb(35, 39, 58);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

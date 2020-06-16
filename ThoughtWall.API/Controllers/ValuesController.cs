@@ -35,8 +35,8 @@ namespace ThoughtWall.API.Controllers {
             // Orders by most recent (using TimeStamp)
             var threads = await _context.Threads
                 .OrderByDescending (x => x.TimeStamp)
-                .Skip (noToSkip)
-                .Take (5)
+                // .Skip (noToSkip)
+                .Take (50)
                 .Include (x => x.Comments)
                 .ToListAsync ();
             var mappedThreads = _mapper.Map<ThreadGetDto[]> (threads);

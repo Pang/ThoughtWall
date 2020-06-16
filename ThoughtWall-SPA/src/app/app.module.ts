@@ -12,7 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgModule } from '@angular/core';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
@@ -21,6 +23,7 @@ import { ThreadComponent } from './home-page/thread/thread.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { RegisterFormComponent } from './nav-bar/register-form/register-form.component';
 import { LoginFormComponent } from './nav-bar/login-form/login-form.component';
+import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -32,8 +35,8 @@ const appRoutes: Routes = [
   { path: 'thread/:id', component: ThreadPageComponent },
   { path: 'search/:kw', component: SearchPageComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: null },
-  { path: 'login', component: null },
+  // { path: 'register', component: null },
+  // { path: 'login', component: null },
   { path: '', redirectTo: 'page/1', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 
@@ -55,6 +58,12 @@ const appRoutes: Routes = [
     LoginFormComponent,
   ],
   imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatCardModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
