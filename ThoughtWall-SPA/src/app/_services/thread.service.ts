@@ -14,9 +14,9 @@ export class ThreadService {
   private apiUrl = environment.apiUrl + '/values';
 
   // Home page, most recent threads
-  getThreads(pageNo: number): Observable<[]> {
-    const params = new HttpParams().set('pageNo', pageNo.toString());
-    return this.http.get<[]>(this.apiUrl, { params });
+  getThreads(): Observable<[]> {
+    // const params = new HttpParams().set('pageNo', pageNo.toString());
+    return this.http.get<[]>(this.apiUrl);
   }
 
   // Uses length of current array of Threads to skip

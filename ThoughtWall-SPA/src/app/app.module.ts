@@ -13,13 +13,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
-import { ThreadComponent } from './home-page/thread/thread.component';
+import { ThreadSummaryComponent } from './home-page/thread-summary/thread-summary.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { RegisterFormComponent } from './nav-bar/register-form/register-form.component';
 import { LoginFormComponent } from './nav-bar/login-form/login-form.component';
@@ -30,14 +31,14 @@ export function tokenGetter() {
 }
 
 const appRoutes: Routes = [
-  { path: 'page/:pn', component: HomePageComponent },
+  { path: '', component: HomePageComponent },
   { path: 'submit', component: SubmitPageComponent },
   { path: 'thread/:id', component: ThreadPageComponent },
   { path: 'search/:kw', component: SearchPageComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
   // { path: 'register', component: null },
   // { path: 'login', component: null },
-  { path: '', redirectTo: 'page/1', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 
 ];
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
-    ThreadComponent,
+    ThreadSummaryComponent,
     SubmitPageComponent,
     NavBarComponent,
     ThreadPageComponent,
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
     LoginFormComponent,
   ],
   imports: [
+    MatMenuModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

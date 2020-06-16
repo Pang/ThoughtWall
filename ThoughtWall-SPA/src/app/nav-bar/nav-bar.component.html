@@ -8,8 +8,13 @@
         <input [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
       </form>
 
-      <button mat-icon-button color="accent">
+      <button mat-icon-button color="accent" [matMenuTriggerFor]="accountMenu">
         <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">article</mat-icon>
       </button>
+      <mat-menu #accountMenu="matMenu">
+        <button mat-menu-item>Register/Login</button>
+        <button mat-menu-item>About</button>
+        <button mat-menu-item>Settings</button>
+      </mat-menu>
     </div>
 </mat-toolbar>

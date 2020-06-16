@@ -1,4 +1,4 @@
-<div class="comments" *ngFor="let post of comments">
+<mat-card class="comments" *ngFor="let post of comments">
   <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
     [{{ post.timeStamp | date: 'd/M/yy' }},
     {{ post.timeStamp | date:'shortTime' }}]
@@ -10,4 +10,4 @@
     <span class="timeStamp">Just now</span>
   </ng-template>
   <span>{{ post.body }}</span>
-</div>
+</mat-card>

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-thread',
+  selector: 'app-thread-summary',
   template: `
     <div class="container">
       <mat-card *ngFor="let thread of threads"
@@ -23,10 +23,10 @@ import { Component, Input } from '@angular/core';
       </mat-card>
     <div>
   `,
-  styleUrls: ['./thread.component.css'],
+  styleUrls: ['./thread-summary.component.css'],
 })
 
-export class ThreadComponent {
+export class ThreadSummaryComponent {
   @Input() threads: [];
 
   constructor() {}

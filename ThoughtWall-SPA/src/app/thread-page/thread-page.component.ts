@@ -15,7 +15,7 @@ import { AccountService } from '../_services/account.service';
 export class ThreadPageComponent implements OnInit, OnDestroy {
   connection = new HubConnectionBuilder().withUrl('http://localhost:5000/postHub').build();
   helper = new JwtHelperService();
-  comments = [];
+  comments: any[];
   thread: ThreadModel;
   comment = {
     threadId: '',
@@ -30,7 +30,11 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
     this.httpApi.getFullThread(this.comment.threadId)
       .subscribe(res => this.thread = res);
     this.httpApi.getComments(this.comment.threadId)
-      .subscribe(res => this.comments = res);
+      .subscribe(res => {
+        if (res.length > 0) {
+          this.comments = res
+        }
+      });
   }
   ngOnInit() {
     this.connection.start().then(x => this.connection.invoke('JoinThread', this.comment.threadId)).catch(err => console.log(err));

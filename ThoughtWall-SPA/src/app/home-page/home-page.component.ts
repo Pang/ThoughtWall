@@ -16,44 +16,9 @@ export class HomePageComponent implements OnInit {
   pageNo: number;
   subscription: Subscription;
 
-  constructor(private threadService: ThreadService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private navbarService: NavbarService) {
-    this.pageNo = parseInt(this.route.snapshot.paramMap.get('pn'));
-    this.threadService.getThreads(this.pageNo)
-      .subscribe(res => this.threads = res);
-  }
+  constructor(private threadService: ThreadService) {}
 
   ngOnInit() {
-    this.subscription = this.navbarService.navItem$
-      .subscribe(item => {
-        this.pageNo = 1;
-        this.getPageThreads(item);
-      });
-  }
-
-  threadsNext() {
-    if (this.threads.length >= 5) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  getPageThreads(item) {
-    this.router.navigate(['page/' + this.pageNo]);
-    this.threadService.getThreads(item)
-      .subscribe(res => this.threads = res);
-  }
-
-  prevPage() {
-    this.pageNo = this.pageNo - 1;
-    this.getPageThreads(this.pageNo);
-  }
-
-  nextPage() {
-    this.pageNo = this.pageNo + 1;
-    this.getPageThreads(this.pageNo);
+    this.threadService.getThreads().subscribe(res => this.threads = res);
   }
 }
