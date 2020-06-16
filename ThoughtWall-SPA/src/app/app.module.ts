@@ -15,11 +15,12 @@ import { NgModule } from '@angular/core';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { ThreadComponent } from './home-page/thread/thread.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
+import { RegisterFormComponent } from './nav-bar/register-form/register-form.component';
+import { LoginFormComponent } from './nav-bar/login-form/login-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
   { path: 'thread/:id', component: ThreadPageComponent },
   { path: 'search/:kw', component: SearchPageComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterPageComponent },
+  { path: 'register', component: null },
+  { path: 'login', component: null },
   { path: '', redirectTo: 'page/1', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 
@@ -48,8 +50,9 @@ const appRoutes: Routes = [
     SearchPageComponent,
     CommentComponent,
     ProfilePageComponent,
-    RegisterPageComponent,
     PageNotFoundComponent,
+    RegisterFormComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

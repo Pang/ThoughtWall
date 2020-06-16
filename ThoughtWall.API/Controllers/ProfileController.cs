@@ -36,7 +36,7 @@ namespace ThoughtWall.API.Controllers
 
         [HttpGet("comments")]
         public async Task<IActionResult> GetUserComments(int id)
-        {
+        { 
             var comments = await _context.Comments
                 .Include(x => x.Thread)
                 .Where(x => x.UserId == id)

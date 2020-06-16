@@ -1,5 +1,5 @@
 #threadOverview {
-    background-color: rgb(32, 35, 46);
+    background-color: rgb(47, 52, 71);
     color: white;
     padding: 10px 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -14,8 +14,8 @@
 
 #threadOverview:hover {
     cursor: pointer;
-    -webkit-box-shadow: 3px 3px 7px rgba(79, 151, 233, 0.418);
-    box-shadow: 3px 3px 7px rgba(79, 151, 233, 0.418);
+    -webkit-box-shadow: 3px 3px 7px rgba(231, 231, 231, 0.418);
+    box-shadow: 3px 3px 7px rgba(231, 231, 231, 0.418);
 }
 
 @keyframes newPostAnime {
