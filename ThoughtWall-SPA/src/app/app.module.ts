@@ -20,11 +20,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
-import { ThreadSummaryComponent } from './home-page/thread-summary/thread-summary.component';
+import { ThreadSummaryComponent } from './thread-page/thread-summary/thread-summary.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { RegisterFormComponent } from './nav-bar/register-form/register-form.component';
 import { LoginFormComponent } from './nav-bar/login-form/login-form.component';
 import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     RegisterFormComponent,
     LoginFormComponent,
+    TimeAgoPipe,
   ],
   imports: [
     MatMenuModule,

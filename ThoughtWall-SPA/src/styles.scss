@@ -7,6 +7,16 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+mat-card-title {
+    text-align: left;
+}
+mat-card-subtitle {
+    text-align: left;
+}
+mat-card-content {
+    text-align: left;
+}
+
 // mat-card {
 //     color: white;
 //     margin-top: 20px;

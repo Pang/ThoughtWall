@@ -1,6 +1,6 @@
 <mat-card *ngIf="thread" id="page">
   <h1>{{ thread.title }}</h1>
-  <span style="color:rgb(119, 210, 235)">{{ thread.username | titlecase }}</span>
+  <span style="color:#4DD0E1">{{ thread.username | titlecase }}</span>
   <span class="timeStamp">
     ~ {{ thread.timeStamp | date:'longDate' }}.
     {{ thread.timeStamp | date:'shortTime' }}

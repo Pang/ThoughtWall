@@ -19,8 +19,20 @@ h2 {
     width: 350px;
     min-height: 180px;
     vertical-align:top;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
-
+.mat-card:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 6px 6px 12px rgb(119, 210, 235);
+    box-shadow: 6px 6px 12px rgb(119, 210, 235);
+}
 .container {
     text-align: center;
+}
+
+.cardFooter {
+    position: absolute;
+    bottom: 4px;
+    right: 7px;
 }

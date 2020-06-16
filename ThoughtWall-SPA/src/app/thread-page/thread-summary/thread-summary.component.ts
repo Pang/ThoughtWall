@@ -9,9 +9,7 @@ import { Component, Input } from '@angular/core';
         <mat-card-header>
           <div mat-card-avatar class="centre">{{ thread.username.slice(0,1) | uppercase}}</div>
           <mat-card-title>{{ thread.title }}</mat-card-title>
-          <mat-card-subtitle>{{ thread.username | titlecase }} |
-          {{ thread.timeStamp | date:'longDate' }} -
-          {{ thread.timeStamp | date:'shortTime' }} |
+          <mat-card-subtitle><span style="color:#4DD0E1">{{ thread.username | titlecase }}</span> |
           {{ thread.comments.length }} comment{{ thread.comments.length == 1 ? '' : 's' }}
           </mat-card-subtitle>
         </mat-card-header>
@@ -19,7 +17,8 @@ import { Component, Input } from '@angular/core';
           <p>{{ thread.body | slice:0:200 }}
           {{ thread.body.length <= 200 ? '' : '...' }}
           </p>
-        </mat-card-content>
+        </mat-card-content><br />
+        <div class="cardFooter">{{ thread.timeStamp | timeAgo  }}</div>
       </mat-card>
     <div>
   `,

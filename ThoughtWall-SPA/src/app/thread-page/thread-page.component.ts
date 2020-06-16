@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { ActivatedRoute } from '@angular/router';
 import { ThreadService } from '../_services/thread.service';
@@ -32,7 +32,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
     this.httpApi.getComments(this.comment.threadId)
       .subscribe(res => {
         if (res.length > 0) {
-          this.comments = res
+          this.comments = res;
         }
       });
   }
