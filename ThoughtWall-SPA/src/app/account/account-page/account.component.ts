@@ -12,9 +12,9 @@ import { Component, OnInit } from '@angular/core';
       </mat-card>
     </div>
   `,
-  styleUrls: ['./sign-up-in.component.css']
+  styleUrls: ['./account.component.css']
 })
-export class SignUpInComponent implements OnInit {
+export class AccountComponent implements OnInit {
 
   constructor() { }
 
