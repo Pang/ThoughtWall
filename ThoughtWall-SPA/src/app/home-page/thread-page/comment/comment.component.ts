@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommentService } from 'src/app/_services/thread/comment.service';
 import { FormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/_services/account/account.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-comment',
@@ -13,18 +14,21 @@ export class CommentComponent implements OnInit {
   commentForm: FormGroup;
   errorMsg: string;
 
-  constructor(private commentService: CommentService, private accountService: AccountService) { }
+  constructor(private store: Store<{changeThread: {}}>,private commentService: CommentService, private accountService: AccountService) { }
 
   ngOnInit() {
-    // TODO put threadID in state
-    // this.comment.threadId = this.route.snapshot.paramMap.get('id');
     this.commentForm = this.commentService.createForm();
+    this.store.select('changeThread').subscribe(data => {
+      this.commentForm.get('threadId').patchValue(data);
+    });
   }
 
   postComment() {
-    if (this.commentForm.get('comment').value.length < 255 && this.commentForm.get('comment').value.length > 3) {
-      this.commentService.postComment(this.commentForm).subscribe(
-        res => this.commentForm.reset(),
+    if (this.commentForm.get('body').value.length < 255 && this.commentForm.get('body').value.length > 3) {
+      this.commentService.postComment(this.commentForm.value).subscribe(
+        () => {
+          this.commentForm.reset();
+        },
         err => this.errorMsg = err.error.errors.Body[0]
       );
     }
@@ -32,7 +36,6 @@ export class CommentComponent implements OnInit {
 
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.accountService.isLoggedIn();
   }
 }

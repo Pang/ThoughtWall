@@ -16,7 +16,7 @@ export class CommentService {
   createForm(): FormGroup {
     return new FormGroup({
       threadId: new FormControl(null, [Validators.required]),
-      comment: new FormControl(null, [Validators.required]),
+      body: new FormControl(null, [Validators.required]),
     });
   }
 
