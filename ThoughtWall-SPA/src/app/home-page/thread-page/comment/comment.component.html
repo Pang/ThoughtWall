@@ -1,12 +1,39 @@
-<p *ngFor="let post of comments">
-  <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
-    [{{ post.timeStamp | timeAgo }}]
-  </span>
-  <span style="color: rgb(119, 210, 235)">
-    {{ post.username | titlecase }} :
-  </span>
-  <ng-template #justNow>
-    <span class="timeStamp">Just now</span>
-  </ng-template>
-  <span>{{ post.body }}</span>
-</p>
+<div class="flexContainer">
+  <div class="flexItem">
+    <mat-card class="shadow">
+      <form [formGroup]="commentForm" *ngIf="loggedIn(); else notLoggedIn" (submit)="postComment()">
+        <app-mat-textarea [formGroup]="commentForm" formControlName="comment" placeholder="What are your thoughts?"
+          ngDefaultControl>
+        </app-mat-textarea>
+        <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>
+        <div align="right">
+          <button mat-flat-button color="accent" type="submit" (click)="postComment()">Submit</button>
+        </div>
+      </form>
+      <ng-template #notLoggedIn>
+        <i>You need to be logged in to comment.</i>
+      </ng-template>
+    </mat-card>
+  </div>
+
+  <div class="flexItem">
+    <mat-card class="shadow" *ngIf="comments; else noComments">
+      <p *ngFor="let post of comments">
+        <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
+          [{{ post.timeStamp | timeAgo }}]
+        </span>
+        <span style="color: rgb(119, 210, 235)">
+          {{ post.username | titlecase }} :
+        </span>
+        <ng-template #justNow>
+          <span class="timeStamp">Just now</span>
+        </ng-template>
+        <span>{{ post.body }}</span>
+      </p>
+    </mat-card>
+    <ng-template #noComments>
+      <p>No comments yet..</p>
+    </ng-template>
+
+  </div>
+</div>

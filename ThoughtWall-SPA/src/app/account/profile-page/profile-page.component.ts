@@ -9,18 +9,15 @@ import { AccountService } from 'src/app/_services/account/account.service';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent {
-  helper = new JwtHelperService();
-  decodedToken = {};
   usersThreads = [];
   usersComments = [];
 
   constructor(private accountService: AccountService, private router: Router) {
-    this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    this.accountService.getUsersThreads(this.decodedToken[`nameid`])
+    this.accountService.getUsersThreads(this.accountService.getUserId)
       .subscribe(
         data => this.usersThreads = data
       );
-    this.accountService.getUsersComments(this.decodedToken[`nameid`])
+    this.accountService.getUsersComments(this.accountService.getUserId)
       .subscribe(
         data => this.usersComments = data
       );

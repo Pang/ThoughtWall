@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
           <button mat-flat-button type="submit" color="accent">Login</button>
       </form>
   `,
-  styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;

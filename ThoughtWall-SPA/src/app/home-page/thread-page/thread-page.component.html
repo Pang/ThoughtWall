@@ -19,32 +19,8 @@
   <button id="editBtn" *ngIf="editEnabled" (click)="editThread()">Edit Post</button>
 </mat-card>
 
-<div class="flexContainer">
-  <div class="flexItem">
-    <mat-card class="shadow">
-      <form [formGroup]="commentForm" *ngIf="loggedIn()" (submit)="postComment()">
-        <app-mat-textarea [formGroup]="commentForm" formControlName="comment" placeholder="What are your thoughts?"
-          ngDefaultControl>
-        </app-mat-textarea>
-        <p id="errorMsg" *ngIf="errorMsg">{{ errorMsg }}</p>
-        <div align="right">
-          <button mat-flat-button color="accent" type="submit" (click)="postComment()">Submit</button>
-        </div>
-      </form>
-    </mat-card>
-  </div>
-
-  <div class="flexItem">
-    <mat-card class="shadow" *ngIf="comments; else noComments">
-      <app-comment [comments]="comments"></app-comment>
-    </mat-card>
-    <ng-template #noComments>
-      <p>No comments yet..</p>
-    </ng-template>
-
-  </div>
-</div>
-
 <div *ngIf="!thread">
   <p style="color: white">LOADING...</p>
 </div>
+
+<app-comment [comments]="comments"></app-comment>
