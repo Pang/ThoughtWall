@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { ModelComment } from 'src/app/_models/ModelComment';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,13 @@ import { ModelComment } from 'src/app/_models/ModelComment';
 export class CommentService {
   constructor(private http: HttpClient) { }
   private apiUrl = environment.apiUrl + '/values';
+
+  createForm(): FormGroup {
+    return new FormGroup({
+      threadId: new FormControl(null, [Validators.required]),
+      comment: new FormControl(null, [Validators.required]),
+    })
+  }
 
   postComment(comment: FormGroup) {
     return this.http.post(this.apiUrl + '/comment', comment);

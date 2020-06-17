@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
+import { AccountService } from 'src/app/_services/account/account.service';
 import { ActivatedRoute } from '@angular/router';
-import { ThreadService } from '../_services/thread/thread.service';
+import { CommentService } from 'src/app/_services/thread/comment.service';
+import { FormGroup } from '@angular/forms';
 import { HubConnectionBuilder } from '@aspnet/signalr';
-import { AccountService } from '../_services/account/account.service';
-import { CommentService } from '../_services/thread/comment.service';
-import { ModelThread } from '../_models/ModelThread';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { ModelThread } from 'src/app/_models/ModelThread';
+import { ThreadService } from 'src/app/_services/thread/thread.service';
 
 @Component({
   selector: 'app-thread-page',
@@ -18,6 +19,7 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   helper = new JwtHelperService();
   comments: any[];
   thread: ModelThread;
+  commentForm: FormGroup;
   comment = {
     threadId: '',
     body: ''
@@ -31,19 +33,20 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
     private threadService: ThreadService,
     private commentService: CommentService,
     private accountService: AccountService
-    ) {
-      this.comment.threadId = this.route.snapshot.paramMap.get('id');
-      this.threadService.getFullThread(this.comment.threadId)
-        .subscribe(res => this.thread = res);
-      this.commentService.getComments(this.comment.threadId)
-        .subscribe(res => {
-          if (res.length > 0) {
-            this.comments = res;
-          }
-        });
-    }
+  ) {
+    this.comment.threadId = this.route.snapshot.paramMap.get('id');
+    this.threadService.getFullThread(this.comment.threadId)
+      .subscribe(res => this.thread = res);
+    this.commentService.getComments(this.comment.threadId)
+      .subscribe(res => {
+        if (res.length > 0) {
+          this.comments = res;
+        }
+      });
+  }
 
   ngOnInit() {
+    this.commentForm = this.commentService.createForm();
     this.connection.start().then(x => this.connection.invoke('JoinThread', this.comment.threadId)).catch(err => console.log(err));
     this.connection.on('newComment', data => {
       this.commentService.getLatestComments(this.comment.threadId).subscribe(res => this.comments.unshift(res));
@@ -67,12 +70,12 @@ export class ThreadPageComponent implements OnInit, OnDestroy {
   }
 
   postComment() {
-    // if (this.comment.body.length < 255 && this.comment.body.length > 3) {
-    //   this.commentService.postComment(this.comment).subscribe(
-    //     res => { this.errorMsg = '', this.comment.body = ''; },
-    //     err => this.errorMsg = err.error.errors.Body[0]
-    //   );
-    // }
+    if (this.commentForm.get('comment').value.length < 255 && this.commentForm.get('comment').value.length > 3) {
+      this.commentService.postComment(this.commentForm).subscribe(
+        res => this.commentForm.reset(),
+        err => this.errorMsg = err.error.errors.Body[0]
+      );
+    }
   }
 
   loggedIn() {

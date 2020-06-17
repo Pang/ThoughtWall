@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommentComponent } from './thread-page/comment/comment.component';
+import { CommentComponent } from './home-page/thread-page/comment/comment.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputComponent } from './form-controls/mat-input/mat-input.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTextareaComponent } from './form-controls/mat-textarea/mat-textarea.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgModule } from '@angular/core';
@@ -23,10 +24,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProfilePageComponent } from './account/profile-page/profile-page.component';
 import { RegisterFormComponent } from './account/account-page/register-form/register-form.component';
 import { SearchPageComponent } from './home-page/search-page/search-page.component';
-import { SubmitPageComponent } from './thread-page/submit-form/submit-form.component';
-import { ThreadPageComponent } from './thread-page/thread-page.component';
+import { SubmitPageComponent } from './home-page/thread-page/submit-form/submit-form.component';
+import { ThreadPageComponent } from './home-page/thread-page/thread-page.component';
 import { ThreadService } from './_services/thread/thread.service';
-import { ThreadSummaryComponent } from './thread-page/thread-summary/thread-summary.component';
+import { ThreadSummaryComponent } from './home-page/thread-page/thread-summary/thread-summary.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 
 export function tokenGetter() {
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
     TimeAgoPipe,
     MatInputComponent,
     AccountComponent,
+    MatTextareaComponent,
   ],
   imports: [
     MatMenuModule,
