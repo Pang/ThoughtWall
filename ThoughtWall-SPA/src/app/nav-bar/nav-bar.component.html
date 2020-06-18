@@ -1,20 +1,20 @@
 <mat-toolbar color="primary">
-    <a id="title" (click)="hitHome()" [routerLink]="['']">
-      <h1>ThoughtWall</h1>
-    </a>
+  <a id="title" [routerLink]="['']">
+    <h1>ThoughtWall</h1>
+  </a>
 
-    <div class="links">
-      <form (ngSubmit)="onSearchSubmit()" id="searchBar">
-        <input [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
-      </form>
+  <div class="links">
+    <form (ngSubmit)="onSearchSubmit()" id="searchBar">
+      <input [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
+    </form>
 
-      <button mat-icon-button color="accent" [matMenuTriggerFor]="accountMenu">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">article</mat-icon>
-      </button>
-      <mat-menu #accountMenu="matMenu">
-        <button mat-menu-item [routerLink]="['/account']">Account</button>
-        <button mat-menu-item>About</button>
-        <button mat-menu-item>Settings</button>
-      </mat-menu>
-    </div>
+    <button mat-icon-button color="accent" [matMenuTriggerFor]="accountMenu">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">article</mat-icon>
+    </button>
+    <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/account']">Account</button>
+      <button mat-menu-item>About</button>
+      <button mat-menu-item>Settings</button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

@@ -28,5 +28,6 @@ import { Component, Input } from '@angular/core';
 export class ThreadSummaryComponent {
   @Input() threads: [];
 
-  constructor() {}
+  constructor() {
+  }
 }

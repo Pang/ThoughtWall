@@ -1,7 +1,9 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
+import { metaReducers, reducers } from './reducers';
 
+import { AccountPageComponent } from './account/account-page/account-page.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,17 +22,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfilePageComponent } from './account/profile-page/profile-page.component';
 import { RegisterFormComponent } from './account/account-page/register-form/register-form.component';
 import { SearchPageComponent } from './home-page/search-page/search-page.component';
+import { StoreModule } from '@ngrx/store';
 import { SubmitPageComponent } from './home-page/thread-page/submit-form/submit-form.component';
 import { ThreadPageComponent } from './home-page/thread-page/thread-page.component';
 import { ThreadService } from './_services/thread/thread.service';
 import { ThreadSummaryComponent } from './home-page/thread-page/thread-summary/thread-summary.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
-import { AccountPageComponent } from './account/account-page/account-page.component';
-import { ProfilePageComponent } from './account/profile-page/profile-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');

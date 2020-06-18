@@ -1,6 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
+import { HubConnection } from '@aspnet/signalr';
 import { Injectable } from '@angular/core';
 import { ModelComment } from 'src/app/_models/ModelComment';
 import { Observable } from 'rxjs';
@@ -25,7 +26,7 @@ export class CommentService {
   }
 
   getComments(id: string): Observable<ModelComment[]> {
-    return this.http.get<[]>(this.apiUrl + `/${id}/comments`);
+    return this.http.get<ModelComment[]>(this.apiUrl + `/${id}/comments`);
   }
 
   getLatestComments(id: string) {

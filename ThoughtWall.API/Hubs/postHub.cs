@@ -10,9 +10,9 @@ namespace ThoughtWall.API.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
         }
 
-        // public Task LeaveThread(string roomName)
-        // {
-        //     return Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
-        // }
+        public Task LeaveThread(string roomName)
+        {
+            return Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
+        }
     }
 }

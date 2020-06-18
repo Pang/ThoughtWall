@@ -1,9 +1,10 @@
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
+import { ModelThread } from 'src/app/_models/ModelThread';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.prod';
-import { ModelThread } from 'src/app/_models/ModelThread';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,15 @@ import { FormGroup } from '@angular/forms';
 export class ThreadService {
   constructor(private http: HttpClient) { }
   private apiUrl = environment.apiUrl + '/values';
+
+  createForm() {
+    return new FormGroup({
+      id: new FormControl(null, [Validators.required]),
+      username: new FormControl(null, [Validators.required]),
+      title: new FormControl(null, [Validators.required]),
+      body: new FormControl(null, [Validators.required]),
+    })
+  }
 
   // Home page, most recent threads
   getThreads(): Observable<ModelThread[]> {
@@ -24,12 +34,12 @@ export class ThreadService {
 
   getSearch(keyword: string): Observable<ModelThread[]> {
     const params = new HttpParams().set('keyword', keyword);
-    return this.http.get<[]>(this.apiUrl + '/search', {params});
+    return this.http.get<[]>(this.apiUrl + '/search', { params });
   }
 
   redirectTo(title: string): Observable<{}> {
     const params = new HttpParams().set('title', title.toString());
-    return this.http.get<{}>(this.apiUrl + '/redirect', {params});
+    return this.http.get<{}>(this.apiUrl + '/redirect', { params });
   }
 
   // TODO: find way to get post to return ID for redirecting user

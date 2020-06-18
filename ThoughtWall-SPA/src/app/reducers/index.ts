@@ -1,18 +1,19 @@
 import {
   ActionReducerMap,
+  MetaReducer,
   createFeatureSelector,
-  createSelector,
-  MetaReducer
+  createSelector
 } from '@ngrx/store';
+
+import { ThreadReducer } from '../home-page/thread-page/store/thread.reducer';
 import { environment } from '../../environments/environment';
-import { ThreadReducer } from '../home-page/thread-page/store/account.reducer';
 
 export interface State {
 
 }
 
 export const reducers: ActionReducerMap<State> = {
-  changeThread: ThreadReducer
+  currentThread: ThreadReducer
 };
 
 
