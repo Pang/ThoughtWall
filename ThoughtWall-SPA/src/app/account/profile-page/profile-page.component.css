@@ -11,3 +11,15 @@ mat-card {
     -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
     box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
+
+.flexContainer {
+    max-width: 1000px;
+    display: flex;
+    margin: 10px auto;
+}
+
+.flexItem {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: flex-start;
+}

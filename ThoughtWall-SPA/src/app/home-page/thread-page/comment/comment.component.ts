@@ -39,7 +39,6 @@ export class CommentComponent implements OnInit {
         if (res.length > 0) {
           this.comments = res;
         }
-        console.log(res);
       });
   }
 
