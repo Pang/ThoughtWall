@@ -16,10 +16,10 @@ namespace ThoughtWall.API.Dtos
     public class CommentGetDto
     {
         public string Username { get; set; }
+        public string ThreadId { get; set; }
         public int UserId { get; set; }
         public string Body { get; set; }
         public DateTime TimeStamp { get; set; }
-        public ThreadGetDto Thread { get; set; }
-
+        // public ThreadGetDto Thread { get; set; }
     }
 }

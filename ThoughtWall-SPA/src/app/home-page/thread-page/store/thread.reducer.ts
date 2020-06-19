@@ -1,4 +1,4 @@
-import * as threadActions from './account.actions';
+import * as threadActions from './thread.actions';
 
 const initialState = {
     threadId: null,

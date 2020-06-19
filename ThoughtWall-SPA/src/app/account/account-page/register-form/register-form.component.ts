@@ -9,19 +9,18 @@ import { Router } from '@angular/router';
         <form class="dataForm" [formGroup]="registerForm" (ngSubmit)="registerUser()">
           <h2><i>Register</i></h2>
           <app-mat-input [formGroup]="registerForm" formControlName="username" placeholder="Username" ngDefaultControl></app-mat-input>
-          <app-mat-input [formGroup]="registerForm" formControlName="password" placeholder="Password" ngDefaultControl></app-mat-input>
-          <app-mat-input [formGroup]="registerForm" formControlName="passwordMatch" placeholder="Retype Password" ngDefaultControl></app-mat-input>
+          <app-mat-input [formGroup]="registerForm" formControlName="password" type="password" placeholder="Password" ngDefaultControl></app-mat-input>
+          <app-mat-input [formGroup]="registerForm" formControlName="passwordMatch" type="password" placeholder="Retype Password" ngDefaultControl></app-mat-input>
           <app-mat-input [formGroup]="registerForm" formControlName="email" placeholder="Email Address" ngDefaultControl></app-mat-input>
-
-          <div style="color: white" [hidden]="registerForm.get('username').valid || registerForm.get('username').pristine">
+          <p style="color: white" [hidden]="registerForm.get('username').valid || registerForm.get('username').pristine">
             Username needs to be between 3 - 12 characters
-          </div>
-          <div style="color: white" [hidden]="registerForm.get('password').valid || registerForm.get('password').pristine">
+          </p>
+          <p style="color: white" [hidden]="registerForm.get('password').valid || registerForm.get('password').pristine">
             Password needs to be between 6 - 20 characters
-          </div>
-          <div *ngIf="isError">
+          </p>
+          <p *ngIf="isError">
             {{ errorMsg }}
-          </div>
+          </p>
           <button mat-flat-button type="submit" color="accent">Register</button>
         </form>
   `,
@@ -37,13 +36,24 @@ export class RegisterFormComponent implements OnInit {
     this.registerForm = this.registerService.createForm();
   }
 
+  checkPasswords() { // here we have the 'passwords' group
+    const pass = this.registerForm.get('password').value;
+    const passwordMatch = this.registerForm.get('passwordMatch').value;
+    return pass === passwordMatch ? true : false;
+  }
+
   registerUser() {
-    this.registerService.post(this.registerForm.value).subscribe(
-      () => this.router.navigate(['/']),
-      () => {
-        this.isError = true;
-        this.errorMsg = 'Unable to register';
-      }
-    );
+    if (this.checkPasswords()) {
+      this.registerService.post(this.registerForm.value).subscribe(
+        () => this.router.navigate(['/']),
+        () => {
+          this.isError = true;
+          this.errorMsg = 'Unable to register';
+        }
+      );
+    } else {
+      this.isError = true;
+      this.errorMsg = 'Passwords do not match';
+    }
   }
 }

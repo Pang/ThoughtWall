@@ -35,10 +35,6 @@ mat-card {
     float: unset;
 }
 
-#editBtn:hover > svg > .icon {
-    fill: rgb(128, 163, 173);
-}
-
 .timeStamp {
     color: rgb(128, 163, 173);
     font-size: 14px;

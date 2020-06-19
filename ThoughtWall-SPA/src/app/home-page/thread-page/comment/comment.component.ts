@@ -18,7 +18,11 @@ export class CommentComponent implements OnInit {
   commentForm: FormGroup;
   errorMsg: string;
 
-  constructor(private store: Store<{ currentThread: {} }>, private commentService: CommentService, private accountService: AccountService) { }
+  constructor(
+    private store: Store<{ currentThread: {} }>,
+    private commentService: CommentService,
+    private accountService: AccountService
+  ) { }
 
   ngOnInit() {
     this.commentForm = this.commentService.createForm();
@@ -35,6 +39,7 @@ export class CommentComponent implements OnInit {
         if (res.length > 0) {
           this.comments = res;
         }
+        console.log(res);
       });
   }
 

@@ -19,7 +19,7 @@ export class ThreadService {
       username: new FormControl(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       body: new FormControl(null, [Validators.required]),
-    })
+    });
   }
 
   // Home page, most recent threads
@@ -51,7 +51,7 @@ export class ThreadService {
     return this.http.put(this.apiUrl + '/edit', form);
   }
 
-  getFullThread(id: string) {
+  getFullThread(id: string): Observable<ModelThread> {
     return this.http.get<ModelThread>(this.apiUrl + `/${id}`);
   }
 

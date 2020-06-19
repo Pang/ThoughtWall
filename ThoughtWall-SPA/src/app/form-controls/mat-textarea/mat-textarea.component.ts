@@ -7,7 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
     <form [formGroup]="formGroup">
       <mat-form-field>
         <mat-label>{{ placeholder }}</mat-label>
-        <textarea matInput [formControlName]="formControlName" [type]="type" [placeholder]="placeholder" autocomplete="off"></textarea>
+        <textarea matInput [formControlName]="formControlName" [type]="type" [placeholder]="placeholder" autocomplete="off" [value]="value"></textarea>
       </mat-form-field>
     </form>
   `,
@@ -22,7 +22,8 @@ export class MatTextareaComponent implements OnInit {
   @Input() formGroup: FormGroup = new FormGroup({ default: new FormControl() });
   @Input() placeholder: string;
   @Input() autocomplete: string;
-  @Input() type: string = 'text';
+  @Input() type = 'text';
+  @Input() value: string = null;
 
   constructor() { }
 

@@ -22,7 +22,7 @@ export class ThreadPageComponent implements OnInit {
   threadForm: FormGroup;
   thread: ModelThread;
   editEnabled = false;
-  edittedBody: string;
+  errorMsg: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,32 +36,32 @@ export class ThreadPageComponent implements OnInit {
     this.store.dispatch(new ThreadPageActions.ChangeThread({ threadId: this.route.snapshot.paramMap.get('id') }));
     this.threadForm = this.threadService.createForm();
     this.store.select('currentThread').subscribe((data: { threadId: string }) => {
-      this.threadForm.get('id').patchValue(data.threadId)
+      this.threadForm.get('id').patchValue(data.threadId);
       this.getData();
-    })
+    });
   }
 
   getData() {
     this.threadService.getFullThread(this.threadForm.get('id').value)
       .subscribe(res => {
         this.thread = res;
+        this.threadForm.patchValue({
+          username: res.username,
+          title: res.title,
+          body: res.body,
+        });
       });
   }
 
-  editButton() {
-    this.edittedBody = this.thread.body;
-    this.editEnabled = !this.editEnabled;
-  }
-
   editThread() {
-    // let newThread = this.thread;
-    // newThread.body = this.edittedBody;
-
-    // this.threadService.editThread(newThread).subscribe(
-    //   res => { this.errorMsg = '', this.comment.body = ''; },
-    //   err => this.errorMsg = err.error.errors.Body[0]
-    // );
-    // this.editEnabled = false;
+    this.threadService.editThread(this.threadForm.value).subscribe(
+      () => {
+        this.threadForm.get('body').patchValue('');
+        this.editEnabled = false;
+        this.getData();
+      },
+      err => this.errorMsg = err
+    );
   }
 
   canEdit() {
