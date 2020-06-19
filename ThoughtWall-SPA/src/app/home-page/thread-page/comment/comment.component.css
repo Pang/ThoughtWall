@@ -26,10 +26,6 @@ mat-card {
 }
 
 .comments {
-    max-width: 1000px;    
-    margin: 6px auto;
-    color: white;
-    padding: 5px 15px;
     -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
     box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }

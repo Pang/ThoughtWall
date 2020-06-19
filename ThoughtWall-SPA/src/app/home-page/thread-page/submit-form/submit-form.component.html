@@ -1,10 +1,15 @@
-<div id="formBox">
-  <form [formGroup]="threadPostForm" id="threadForm" (ngSubmit)="onSubmit()">
+<mat-card class="shadow">
+  <form [formGroup]="threadPostForm" (ngSubmit)="onSubmit()">
     <h2>Post something!</h2>
-    <input formControlName="title" type="text" placeholder="Title"/>
+    <app-mat-input [formGroup]="threadPostForm" formControlName="title" placeholder="Title" ngDefaultControl></app-mat-input>
+    <app-mat-textarea [formGroup]="threadPostForm" formControlName="body" placeholder="What are your thoughts?"
+          ngDefaultControl>
+        </app-mat-textarea>
+   
     <div *ngIf="threadPostForm.get('title').invalid && threadPostForm.get('title').dirty">Title needs to be between 2-40 characters</div>
-    <textarea formControlName="body" row="4" style="height: 150px;" placeholder="Body"></textarea>
     <div *ngIf="threadPostForm.get('body').invalid && threadPostForm.get('body').dirty">Body needs to be between 10-400 characters</div>
-    <button type="submit" [disabled]="threadPostForm.invalid">Submit</button>
+    <div align="right">
+      <button mat-flat-button color="accent" type="button" (click)="onSubmit()">Submit</button>
+    </div>
   </form>
-</div>
+</mat-card>

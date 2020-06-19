@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
           <app-mat-input [formGroup]="registerForm" formControlName="username" placeholder="Username" ngDefaultControl></app-mat-input>
           <app-mat-input [formGroup]="registerForm" formControlName="password" type="password" placeholder="Password" ngDefaultControl></app-mat-input>
           <app-mat-input [formGroup]="registerForm" formControlName="passwordMatch" type="password" placeholder="Retype Password" ngDefaultControl></app-mat-input>
-          <app-mat-input [formGroup]="registerForm" formControlName="email" placeholder="Email Address" ngDefaultControl></app-mat-input>
+          <app-mat-input [formGroup]="registerForm" formControlName="emailAddress" placeholder="Email Address" ngDefaultControl></app-mat-input>
           <p style="color: white" [hidden]="registerForm.get('username').valid || registerForm.get('username').pristine">
             Username needs to be between 3 - 12 characters
           </p>
@@ -43,8 +43,9 @@ export class RegisterFormComponent implements OnInit {
   }
 
   registerUser() {
+    console.log(this.registerForm.value)
     if (this.checkPasswords()) {
-      this.registerService.post(this.registerForm.value).subscribe(
+      this.registerService.post(this.registerForm).subscribe(
         () => this.router.navigate(['/']),
         () => {
           this.isError = true;

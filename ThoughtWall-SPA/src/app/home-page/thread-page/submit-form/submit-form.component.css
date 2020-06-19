@@ -14,44 +14,20 @@
     box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
-input, textarea, button {
-    font-size: 20px;
-    width: 500px;
-    color: white;
-    background-color: rgb(61, 65, 85);
-    border: none;
-    margin-top: 20px;
-    padding: 5px;
-}
-
-button {  
-    background-color: rgb(77, 143, 75);
-    border: none;
-    border-radius: 3px;
-    color: white;
+mat-card {
     text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    font-weight: bold;
+    margin-top: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
-button:hover {  
-    background-color: rgb(93, 173, 90);
+.shadow {
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
-
-h2 {
-    margin-top: 10px;
-}
-
-#formBox {
-    align-content: center;
-}
-
-@media only screen and (max-width:700px) {
-    #threadForm {
-        width: 90%
-    }
-    input, textarea, button {
-        width:80%;
-    }
+.app-mat-input {
+    width: 900px;
 }

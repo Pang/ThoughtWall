@@ -12,6 +12,10 @@ export class ProfilePageComponent {
   usersThreads = [];
   usersComments = [];
 
+  get uniqueName() {
+    return this.accountService.getUniqueName;
+  }
+  
   constructor(private accountService: AccountService, private router: Router) {
     this.accountService.getUsersThreads(this.accountService.getUserId)
       .subscribe(

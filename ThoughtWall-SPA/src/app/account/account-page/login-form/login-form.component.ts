@@ -30,7 +30,6 @@ export class LoginFormComponent implements OnInit {
   loginUser() {
     this.loginService.post(this.loginForm.value).subscribe(
       res => {
-        // TODO put Token into state (NGRX)
         localStorage.setItem('token', res[`token`]),
           this.router.navigate(['/']);
       },

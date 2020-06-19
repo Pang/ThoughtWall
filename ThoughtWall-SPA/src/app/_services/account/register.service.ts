@@ -15,11 +15,11 @@ export class RegisterService {
       username: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
       passwordMatch: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
-      email: new FormControl(null, [Validators.required]),
+      emailAddress: new FormControl(null, [Validators.required]),
     });
   }
 
   post(form: FormGroup) {
-    return this.http.post(this.baseUrl + '/register', form)
+    return this.http.post(this.baseUrl + '/register', form.value);
   }
 }

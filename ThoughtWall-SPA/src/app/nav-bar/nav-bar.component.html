@@ -9,12 +9,16 @@
     </form>
 
     <button mat-icon-button color="accent" [matMenuTriggerFor]="accountMenu">
-      <mat-icon class="example-icon" aria-hidden="false">article</mat-icon>
+      <mat-icon>article</mat-icon>
     </button>
     <mat-menu #accountMenu="matMenu">
-      <button mat-menu-item [routerLink]="['/account']">Account</button>
-      <button mat-menu-item>About</button>
-      <button mat-menu-item>Settings</button>
+      <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon><span>Home</span></button>
+      <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/profile']"><mat-icon>person</mat-icon><span>Profile</span></button>
+      <button *ngIf="!loggedIn" mat-menu-item [routerLink]="['/account']"><mat-icon>person_outline</mat-icon><span>Account</span></button>
+      <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/submit']"><mat-icon>create</mat-icon><span>Write Post</span></button>
+      <!-- <button mat-menu-item>About</button>
+      <button mat-menu-item>Settings</button> -->
+      <button *ngIf="loggedIn" mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon><span>Logout</span></button>
     </mat-menu>
   </div>
 </mat-toolbar>

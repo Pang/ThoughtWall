@@ -17,23 +17,21 @@
   </div>
 
   <div class="flexItem">
-    <mat-card class="shadow" *ngIf="comments; else noComments">
+    <mat-card class="comments" *ngIf="comments.length > 0; else noComments">
       <p *ngFor="let post of comments">
-        <span *ngIf="post.timeStamp; else justNow" class="timeStamp">
+        <span class="timeStamp">
           [{{ post.timeStamp | timeAgo }}]
         </span>
         <span style="color: rgb(119, 210, 235)">
           {{ post.username | titlecase }} :
         </span>
-        <ng-template #justNow>
-          <span class="timeStamp">Just now</span>
-        </ng-template>
         <span>{{ post.body }}</span>
       </p>
     </mat-card>
     <ng-template #noComments>
-      <p>No comments yet..</p>
+      <mat-card class="comments">
+        <p>No comments yet..</p>
+      </mat-card>
     </ng-template>
-
   </div>
 </div>

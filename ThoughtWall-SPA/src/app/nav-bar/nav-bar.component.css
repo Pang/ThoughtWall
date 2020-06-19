@@ -29,33 +29,12 @@ h1 {
     }
 }
 
-#header {
-    background-color: rgb(27, 30, 41);
-    width: 100%;
-}
-
-#container {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
 .links {
     margin-left: auto;
     display: inline-block;
     vertical-align: middle;
 }
 
-svg {
-    vertical-align: middle;
-}
-
-svg:hover > .icon {
-    fill: rgb(128, 163, 173);
-}
 
 input[type="text"] {
     flex-grow: 2;
@@ -66,10 +45,5 @@ input[type="text"] {
     border: rgb(182, 182, 182) 1px solid;
     padding: 5px;
     font-size: 16px;
-    color: white;
     vertical-align: middle;
-}
-
-input[type="text"]::placeholder {
-    color: rgb(182, 182, 182);
 }

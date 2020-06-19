@@ -1,8 +1,6 @@
 <div>
-  <div id="profile">
-    <span id="logoutBtn" style="float: right;" (click)="logout()">Logout</span>
-
-    <h1>{{ decodedToken.unique_name | titlecase }}</h1>
+  <mat-card>
+    <h1>{{ uniqueName | titlecase }}</h1>
     <h4><u>Threads</u></h4>
     <ul>
       <li *ngFor="let thread of usersThreads"><b class="threadLink"
@@ -18,5 +16,5 @@
         <br> <i>"{{ comment.body }}"</i> - {{ comment.timeStamp | date: "dd/MM/yyyy" }}</li>
     </ul>
     <span>Prev</span> - <span>Next</span>
-  </div>
+  </mat-card>
 </div>

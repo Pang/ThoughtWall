@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ThoughtWall.API.Migrations
 {
-    public partial class InititialCreate : Migration
+    public partial class emailAddress : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,8 @@ namespace ThoughtWall.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Username = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
-                    PasswordSalt = table.Column<byte[]>(nullable: true)
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    EmailAddress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,6 +29,7 @@ namespace ThoughtWall.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Username = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Body = table.Column<string>(nullable: true),
@@ -50,6 +52,7 @@ namespace ThoughtWall.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Username = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     ThreadId = table.Column<int>(nullable: false),
                     Body = table.Column<string>(nullable: true),
