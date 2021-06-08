@@ -64,7 +64,6 @@ const appRoutes: Routes = [
     LoginFormComponent,
     TimeAgoPipe,
     MatInputComponent,
-    CommentComponent,
     MatTextareaComponent,
     AccountPageComponent,
   ],
