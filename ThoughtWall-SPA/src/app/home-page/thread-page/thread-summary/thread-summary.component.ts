@@ -41,8 +41,6 @@ import { Component, Input } from '@angular/core';
         width: 350px;
         min-height: 180px;
         vertical-align:top;
-        -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
     }
     .mat-card:hover {
         cursor: pointer;

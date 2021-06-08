@@ -21,15 +21,6 @@ app-mat-textarea {
     width: 100%;
 }
 
-mat-card {
-    margin-top: 10px;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-}
-
 #editBtn {
     cursor: pointer;
     float: unset;

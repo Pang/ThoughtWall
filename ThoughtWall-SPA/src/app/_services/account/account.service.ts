@@ -14,11 +14,11 @@ export class AccountService {
   decodedToken: ModelToken;
 
   get getUserId() {
-    return this.decodedToken.nameid;
+    return this.decodedToken?.nameid;
   }
 
   get getUniqueName() {
-    return this.decodedToken.unique_name;
+    return this.decodedToken?.unique_name;
   }
 
   constructor(private http: HttpClient) {

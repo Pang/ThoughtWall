@@ -18,8 +18,6 @@ import { Component, OnInit } from '@angular/core';
       text-align: center;
     }
     mat-card {
-      box-shadow: 3px 3px 7px rgba(0,0,0,0.3) !important;
-      -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3) !important;
       vertical-align: middle;
       display: inline-block;
       margin: 70px 50px;

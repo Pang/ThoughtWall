@@ -56,14 +56,7 @@ import { ModelProfile } from 'app/_models/ModelProfile';
       cursor: pointer;
       color: rgb(119, 210, 235);
     }
-    mat-card {
-        margin-top: 10px;
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-        -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-    }
+
     .flexContainer {
         max-width: 1000px;
         display: flex;
@@ -79,12 +72,6 @@ import { ModelProfile } from 'app/_models/ModelProfile';
 
 export class ProfilePageComponent {
   userProfileData: ModelProfile;
-  usersThreads = [];
-  usersComments = [];
-
-  get uniqueName() {
-    return this.accountService.getUniqueName;
-  }
 
   constructor(
     private accountService: AccountService,
@@ -98,7 +85,6 @@ export class ProfilePageComponent {
     const routeUser = this.route.snapshot.paramMap.get('user');
     this.profileService.getProfileData(routeUser).subscribe((data) => {
       this.userProfileData = data;
-      console.log(data);
     });
   }
 }

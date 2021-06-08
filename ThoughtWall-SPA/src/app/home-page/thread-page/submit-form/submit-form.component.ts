@@ -43,10 +43,6 @@ import { ThreadService } from '../../../_services/thread/thread.service';
         text-align: center;
         margin-top: 50px;
         max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
     }
     .shadow {
         -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
