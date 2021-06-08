@@ -24,8 +24,14 @@ import { Router } from '@angular/router';
           <button mat-flat-button type="submit" color="accent">Register</button>
         </form>
   `,
-  styleUrls: ['./register-form.component.css']
+  styles: [`
+    p {
+      margin-top:0px;
+      font-size: 12px;
+    }`
+  ]
 })
+
 export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup;
   isError: boolean;
