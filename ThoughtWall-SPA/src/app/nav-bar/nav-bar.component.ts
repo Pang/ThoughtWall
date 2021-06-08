@@ -20,7 +20,7 @@ import { AccountService } from '../_services/account/account.service';
         </button>
         <mat-menu #accountMenu="matMenu">
         <button mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon><span>Home</span></button>
-          <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/profile/' + accountService.getUserId]"><mat-icon>person</mat-icon><span>Profile</span></button>
+          <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/profile/' + accountService.getUniqueName]"><mat-icon>person</mat-icon><span>Profile</span></button>
           <button *ngIf="!loggedIn" mat-menu-item [routerLink]="['/account']"><mat-icon>person_outline</mat-icon><span>Account</span></button>
           <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/submit']"><mat-icon>create</mat-icon><span>Write Post</span></button>
           <!-- <button mat-menu-item>About</button>
@@ -80,7 +80,6 @@ export class NavBarComponent implements OnInit {
   keyword: string;
 
   constructor(private router: Router, private accountService: AccountService) {
-    this.accountService.getUserId;
   }
 
   get loggedIn() {

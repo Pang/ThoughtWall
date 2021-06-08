@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using ThoughtWall.API.Dtos;
 
 namespace ThoughtWall.API.Data
 {
@@ -12,5 +13,8 @@ namespace ThoughtWall.API.Data
         [StringLength(50)]
         public string Country { get; set; }
         public DateTime Dob { get; set; }
+
+        public ThreadGetDto[] threads { get; set; }
+        public CommentGetDto[] comments { get; set; }
     }
 }

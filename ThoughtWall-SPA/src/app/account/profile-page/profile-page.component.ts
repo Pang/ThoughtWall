@@ -34,7 +34,7 @@ import { ModelProfile } from 'app/_models/ModelProfile';
         <div class="flexItem">
           <h4><u>Threads</u></h4>
           <ul>
-            <li *ngFor="let thread of usersThreads"><b class="threadLink"
+            <li *ngFor="let thread of userProfileData?.threads"><b class="threadLink"
                 [routerLink]="['/thread', thread.id]">{{ thread.title }}</b>
               ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
           </ul>
@@ -43,7 +43,7 @@ import { ModelProfile } from 'app/_models/ModelProfile';
         <div class="flexItem">
           <h4><u>Comments</u></h4>
           <ul>
-            <li *ngFor="let comment of usersComments">
+            <li *ngFor="let comment of userProfileData?.comments">
               <b class="threadLink" [routerLink]="['/thread', comment.threadId]">[{{ comment.threadId }}]</b>&nbsp;
               <i>"{{ comment.body }}"</i> ({{ comment.timeStamp | date: "dd/MM/yyyy" }})</li>
           </ul>
@@ -86,20 +86,19 @@ export class ProfilePageComponent {
     return this.accountService.getUniqueName;
   }
 
-  constructor(private accountService: AccountService, private profileService: ProfileService, private route: ActivatedRoute) {
-    var routeId = this.route.snapshot.paramMap.get('id');
-    this.profileService.getProfileData(routeId).subscribe((data) => {
-      this.userProfileData = data;
-    });
-    this.getThreadData(routeId);
+  constructor(
+    private accountService: AccountService,
+    private profileService: ProfileService,
+    private route: ActivatedRoute
+  ) {
+      this.getData();
   }
 
-  getThreadData(id: string) {
-    this.profileService.getUsersThreads(id).subscribe(
-        data => this.usersThreads = data
-      );
-    this.profileService.getUsersComments(id).subscribe(
-        data => this.usersComments = data
-      );
+  getData() {
+    const routeUser = this.route.snapshot.paramMap.get('user');
+    this.profileService.getProfileData(routeUser).subscribe((data) => {
+      this.userProfileData = data;
+      console.log(data);
+    });
   }
 }

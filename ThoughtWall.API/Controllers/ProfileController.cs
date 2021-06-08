@@ -49,13 +49,26 @@ namespace ThoughtWall.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProfileDetails(int id)
+        public async Task<IActionResult> GetProfileDetails(string username)
         {
             var profileData = await _context.Users
-                .Where(x => x.Id == id)
+                .Where(x => x.Username == username)
                 .FirstOrDefaultAsync();
 
+            var threads = await _context.Threads
+                .Where(x => x.Username == username)
+                .OrderByDescending(x => x.TimeStamp)
+                .ToListAsync();
+
+            var comments = await _context.Comments
+                .Where(x => x.Username == username)
+                .OrderByDescending(x => x.TimeStamp)
+                .ToListAsync();
+
             var mappedProfile = _mapper.Map<ProfileDto>(profileData);
+            mappedProfile.threads = _mapper.Map<ThreadGetDto[]>(threads);
+            mappedProfile.comments = _mapper.Map<CommentGetDto[]>(comments);
+
             return Ok(mappedProfile);
         }
 
