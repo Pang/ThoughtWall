@@ -3,7 +3,7 @@ import * as ThreadPageActions from './store/thread.actions';
 import { Component, OnInit } from '@angular/core';
 
 import { AccountService } from '../../_services/account/account.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ModelComment } from '../../_models/ModelComment';
@@ -26,6 +26,7 @@ export class ThreadPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private threadService: ThreadService,
     private accountService: AccountService,
     private store: Store<{ currentThread: {} }>,
@@ -43,14 +44,17 @@ export class ThreadPageComponent implements OnInit {
 
   getData() {
     this.threadService.getFullThread(this.threadForm.get('id').value)
-      .subscribe(res => {
-        this.thread = res;
-        this.threadForm.patchValue({
-          username: res.username,
-          title: res.title,
-          body: res.body,
-        });
-      });
+      .subscribe(
+        (res) => {
+          this.thread = res;
+          this.threadForm.patchValue({
+            username: res.username,
+            title: res.title,
+            body: res.body,
+          });
+        },
+        () => this.router.navigate(['/404'])
+      );
   }
 
   editThread() {
