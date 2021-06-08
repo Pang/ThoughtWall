@@ -1,5 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { RouterModule, Routes } from '@angular/router';
 import { metaReducers, reducers } from './reducers';
 
@@ -95,6 +97,9 @@ const appRoutes: Routes = [
         strictActionImmutability: true
       }
     })
+  ],
+  exports: [
+    RegisterFormComponent,
   ],
   providers: [ThreadService],
   bootstrap: [AppComponent]

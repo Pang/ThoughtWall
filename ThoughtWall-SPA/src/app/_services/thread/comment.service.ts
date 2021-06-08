@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HubConnection } from '@aspnet/signalr';
 import { Injectable } from '@angular/core';
-import { ModelComment } from 'src/app/_models/ModelComment';
+import { ModelComment } from '../../_models/ModelComment';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

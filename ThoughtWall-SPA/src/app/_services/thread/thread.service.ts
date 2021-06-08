@@ -2,7 +2,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { ModelThread } from 'src/app/_models/ModelThread';
+import { ModelThread } from '../../_models/ModelThread';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.prod';
 

@@ -22,7 +22,42 @@ import { Component, Input } from '@angular/core';
       </mat-card>
     <div>
   `,
-  styleUrls: ['./thread-summary.component.css'],
+  styles: [`
+    h2 {
+      margin: 0px 0 0 0;
+    }
+    #timestamp {
+        color: rgb(128, 163, 173);
+        font-size: 12px;
+    }
+    .centre {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .mat-card {
+        display: inline-block;
+        margin: 20px;
+        width: 350px;
+        min-height: 180px;
+        vertical-align:top;
+        -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+        box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    }
+    .mat-card:hover {
+        cursor: pointer;
+        -webkit-box-shadow: 6px 6px 12px rgb(119, 210, 235);
+        box-shadow: 6px 6px 12px rgb(119, 210, 235);
+    }
+    .container {
+        text-align: center;
+    }
+    .cardFooter {
+        position: absolute;
+        bottom: 4px;
+        right: 7px;
+    }
+  `],
 })
 
 export class ThreadSummaryComponent {

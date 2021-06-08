@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ModelToken } from 'src/app/_models/ModelToken';
+import { ModelToken } from '../../_models/ModelToken';
 
 @Injectable({
   providedIn: 'root'

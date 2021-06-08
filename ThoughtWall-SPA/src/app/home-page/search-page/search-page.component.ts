@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ThreadService } from 'src/app/_services/thread/thread.service';
+import { ThreadService } from  '../../_services/thread/thread.service';
 
 @Component({
   selector: 'app-search-page',
   template: `
     <app-thread-summary [threads]="threads"></app-thread-summary>
   `,
-  styleUrls: ['./search-page.component.css']
 })
+
 export class SearchPageComponent implements OnInit {
   threads = [];
 
@@ -20,6 +20,5 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit() {
   }
-
 
 }

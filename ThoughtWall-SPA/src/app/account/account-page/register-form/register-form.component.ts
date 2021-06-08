@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { RegisterService } from 'src/app/_services/account/register.service';
+import { RegisterService } from '../../../_services/account/register.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,7 +31,6 @@ import { Router } from '@angular/router';
     }`
   ]
 })
-
 export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup;
   isError: boolean;
