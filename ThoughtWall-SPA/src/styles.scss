@@ -15,7 +15,6 @@ mat-card {
     -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
     box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
-
 mat-card-title {
     text-align: left;
 }
@@ -24,4 +23,11 @@ mat-card-subtitle {
 }
 mat-card-content {
     text-align: left;
+}
+
+mat-spinner {
+    position: absolute;
+    top: 30%;
+    margin-left: auto;
+    margin-right: auto;
 }

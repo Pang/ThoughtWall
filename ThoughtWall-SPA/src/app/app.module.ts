@@ -19,6 +19,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputComponent } from './form-controls/mat-input/mat-input.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTextareaComponent } from './form-controls/mat-textarea/mat-textarea.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -33,6 +35,7 @@ import { ThreadPageComponent } from './home-page/thread-page/thread-page.compone
 import { ThreadService } from './_services/thread/thread.service';
 import { ThreadSummaryComponent } from './home-page/thread-page/thread-summary/thread-summary.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { EditProfileDialogComponent } from './account/profile-page/edit-profile-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -61,6 +64,7 @@ const appRoutes: Routes = [
     SearchPageComponent,
     CommentComponent,
     ProfilePageComponent,
+    EditProfileDialogComponent,
     PageNotFoundComponent,
     RegisterFormComponent,
     LoginFormComponent,
@@ -72,9 +76,11 @@ const appRoutes: Routes = [
   imports: [
     MatMenuModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
     MatCardModule,
     BrowserModule,

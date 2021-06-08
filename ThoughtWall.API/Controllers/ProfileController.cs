@@ -73,7 +73,7 @@ namespace ThoughtWall.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PostProfileDetails(ProfileDto profileDto)
+        public async Task<IActionResult> UpdateProfileDetails(ProfileDto profileDto)
         {
             if (profileDto.Username != User.FindFirst (ClaimTypes.Name).Value)
                 return Unauthorized ();

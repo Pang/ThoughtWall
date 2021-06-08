@@ -1,4 +1,4 @@
-<mat-card *ngIf="thread" class="shadow">
+<mat-card *ngIf="thread; else loadingSpinner" class="shadow">
   <h1>{{ thread.title }}</h1>
   <span style="color:#4DD0E1">{{ thread.username | titlecase }}</span>
   <span class="timeStamp">
@@ -17,8 +17,8 @@
   </form>
 </mat-card>
 
-<div *ngIf="!thread">
-  <p style="color: white">LOADING...</p>
-</div>
+<ng-template #loadingSpinner>
+  <mat-spinner color="accent"></mat-spinner>
+</ng-template>
 
 <app-comment></app-comment>

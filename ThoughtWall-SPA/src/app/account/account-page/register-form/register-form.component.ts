@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-form',
   template: `
-        <form class="dataForm" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
           <h2><i>Register</i></h2>
           <app-mat-input [formGroup]="registerForm" formControlName="username" placeholder="Username" ngDefaultControl></app-mat-input>
           <app-mat-input [formGroup]="registerForm" formControlName="password" type="password" placeholder="Password" ngDefaultControl></app-mat-input>

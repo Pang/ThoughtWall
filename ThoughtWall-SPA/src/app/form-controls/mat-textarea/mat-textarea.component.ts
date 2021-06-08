@@ -5,8 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   selector: 'app-mat-textarea',
   template: `
     <form [formGroup]="formGroup">
-      <mat-form-field>
-        <mat-label>{{ placeholder }}</mat-label>
+      <mat-form-field color="accent">
         <textarea matInput [formControlName]="formControlName" [type]="type" [placeholder]="placeholder" autocomplete="off" [value]="value"></textarea>
       </mat-form-field>
     </form>
