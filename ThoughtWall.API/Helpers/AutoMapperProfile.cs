@@ -1,4 +1,5 @@
 using AutoMapper;
+using ThoughtWall.API.Data;
 using ThoughtWall.API.Dtos;
 using ThoughtWall.API.Models;
 
@@ -16,5 +17,9 @@ public class AutoMapperProfile : Profile
         CreateMap<Comment, CommentGetDto>();
 
         CreateMap<UserRegisterDto, User>();
+
+        CreateMap<ProfileDto, User>();
+        CreateMap<User, ProfileDto>();
+
     }
 }

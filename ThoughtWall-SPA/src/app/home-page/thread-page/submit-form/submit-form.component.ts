@@ -9,7 +9,7 @@ import { ThreadService } from '../../../_services/thread/thread.service';
   template: `
     <mat-card class="shadow">
     <form [formGroup]="threadPostForm" (ngSubmit)="onSubmit()">
-      <h2>Post something!</h2>
+      <h2>Share your thoughts!</h2>
       <app-mat-input [formGroup]="threadPostForm" formControlName="title" placeholder="Title" ngDefaultControl></app-mat-input>
       <app-mat-textarea [formGroup]="threadPostForm" formControlName="body" placeholder="What are your thoughts?"
             ngDefaultControl>

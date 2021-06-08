@@ -43,7 +43,7 @@ const appRoutes: Routes = [
   { path: 'submit', component: SubmitPageComponent },
   { path: 'thread/:id', component: ThreadPageComponent },
   { path: 'search/:kw', component: SearchPageComponent },
-  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id', component: ProfilePageComponent, canActivate: [AuthGuard] },
   { path: 'account', component: AccountPageComponent },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

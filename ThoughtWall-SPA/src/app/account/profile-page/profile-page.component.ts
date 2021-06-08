@@ -1,15 +1,35 @@
 import { Component } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../_services/account/account.service';
+import { ProfileService } from 'app/_services/account/profile.service';
+import { ModelProfile } from 'app/_models/ModelProfile';
 
 @Component({
   selector: 'app-profile-page',
   template: `
     <div>
       <mat-card>
-        <h1>{{ uniqueName | titlecase }}'s Profile</h1>
+        <h1>{{ userProfileData?.username | titlecase }}'s Profile</h1>
       </mat-card>
+
+      <mat-card>
+        <div>
+          <h4><u>Bio</u></h4>
+          <p>{{ userProfileData?.bio }}</p>
+        </div>
+        <div class="flexContainer">
+          <div class="flexItem">
+            <h4><u>Country</u></h4>
+            <p>{{ userProfileData?.country }}</p>
+          </div>
+          <div class="flexItem">
+            <h4><u>DoB</u></h4>
+            <p>{{ userProfileData?.dob }}</p>
+          </div>
+        </div>
+      </mat-card>
+
       <mat-card class="flexContainer">
         <div class="flexItem">
           <h4><u>Threads</u></h4>
@@ -58,26 +78,28 @@ import { AccountService } from '../../_services/account/account.service';
 })
 
 export class ProfilePageComponent {
+  userProfileData: ModelProfile;
   usersThreads = [];
   usersComments = [];
 
   get uniqueName() {
     return this.accountService.getUniqueName;
   }
-  
-  constructor(private accountService: AccountService, private router: Router) {
-    this.accountService.getUsersThreads(this.accountService.getUserId)
-      .subscribe(
-        data => this.usersThreads = data
-      );
-    this.accountService.getUsersComments(this.accountService.getUserId)
-      .subscribe(
-        data => this.usersComments = data
-      );
+
+  constructor(private accountService: AccountService, private profileService: ProfileService, private route: ActivatedRoute) {
+    var routeId = this.route.snapshot.paramMap.get('id');
+    this.profileService.getProfileData(routeId).subscribe((data) => {
+      this.userProfileData = data;
+    });
+    this.getThreadData(routeId);
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/']);
+  getThreadData(id: string) {
+    this.profileService.getUsersThreads(id).subscribe(
+        data => this.usersThreads = data
+      );
+    this.profileService.getUsersComments(id).subscribe(
+        data => this.usersComments = data
+      );
   }
 }

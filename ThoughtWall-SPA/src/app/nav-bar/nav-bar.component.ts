@@ -20,7 +20,7 @@ import { AccountService } from '../_services/account/account.service';
         </button>
         <mat-menu #accountMenu="matMenu">
         <button mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon><span>Home</span></button>
-          <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/profile']"><mat-icon>person</mat-icon><span>Profile</span></button>
+          <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/profile/' + accountService.getUserId]"><mat-icon>person</mat-icon><span>Profile</span></button>
           <button *ngIf="!loggedIn" mat-menu-item [routerLink]="['/account']"><mat-icon>person_outline</mat-icon><span>Account</span></button>
           <button *ngIf="loggedIn" mat-menu-item [routerLink]="['/submit']"><mat-icon>create</mat-icon><span>Write Post</span></button>
           <!-- <button mat-menu-item>About</button>
@@ -35,7 +35,6 @@ import { AccountService } from '../_services/account/account.service';
       cursor: pointer;
     }
     h1 {
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-size: 30px;
         margin: 0 0 0 10px;
         display: inline-block;
@@ -80,7 +79,9 @@ import { AccountService } from '../_services/account/account.service';
 export class NavBarComponent implements OnInit {
   keyword: string;
 
-  constructor(private router: Router, private accountService: AccountService) { }
+  constructor(private router: Router, private accountService: AccountService) {
+    this.accountService.getUserId;
+  }
 
   get loggedIn() {
     return this.accountService.isLoggedIn();

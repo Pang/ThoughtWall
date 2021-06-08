@@ -25,14 +25,6 @@ export class AccountService {
     this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
   }
 
-  getUsersThreads(id: any): Observable<[]> {
-    return this.http.get<[]>(this.apiUrl + `/threads?id=${id}`);
-  }
-
-  getUsersComments(id: any): Observable<[]> {
-    return this.http.get<[]>(this.apiUrl + `/comments?id=${id}`);
-  }
-
   isLoggedIn(): boolean {
     return !this.helper.isTokenExpired(localStorage.getItem('token')) ? true : false;
   }

@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using ThoughtWall.API.Data;
 using ThoughtWall.API.Dtos;
 using AutoMapper;
+using ThoughtWall.API.Models;
+using System.Security.Claims;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -44,6 +46,37 @@ namespace ThoughtWall.API.Controllers
                 .ToListAsync();
             var mappedComments = _mapper.Map<CommentGetDto[]>(comments);
             return Ok(mappedComments);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProfileDetails(int id)
+        {
+            var profileData = await _context.Users
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            var mappedProfile = _mapper.Map<ProfileDto>(profileData);
+            return Ok(mappedProfile);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PostProfileDetails(ProfileDto profileDto)
+        {
+            if (profileDto.Username != User.FindFirst (ClaimTypes.Name).Value)
+                return Unauthorized ();
+
+            var originalUserData = await _context.Users
+                .Where(x => x.Id == profileDto.Id)
+                .FirstOrDefaultAsync();
+            
+            originalUserData.Bio = profileDto.Bio;
+            originalUserData.Country = profileDto.Country;
+            originalUserData.Dob = profileDto.Dob;
+            _context.Users.Update(originalUserData);
+            await _context.SaveChangesAsync();
+
+            var mappedProfile = _mapper.Map<User>(originalUserData);
+            return Ok(mappedProfile);
         }
     }
 }

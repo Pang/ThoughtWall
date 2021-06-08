@@ -125,7 +125,6 @@ namespace ThoughtWall.API.Controllers {
             _context.Threads.Update (originalPost);
             await _context.SaveChangesAsync ();
             return StatusCode (204);
-
         }
 
         // GET api/values/5/comments
