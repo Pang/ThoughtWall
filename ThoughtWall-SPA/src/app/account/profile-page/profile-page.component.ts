@@ -73,12 +73,8 @@ import { ModelProfile } from 'app/_models/ModelProfile';
 export class ProfilePageComponent {
   userProfileData: ModelProfile;
 
-  constructor(
-    private accountService: AccountService,
-    private profileService: ProfileService,
-    private route: ActivatedRoute
-  ) {
-      this.getData();
+  constructor(private profileService: ProfileService, private route: ActivatedRoute) {
+    this.getData();
   }
 
   getData() {
