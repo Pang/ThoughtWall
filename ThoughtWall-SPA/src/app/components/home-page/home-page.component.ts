@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ThreadService } from '../../_services/thread/thread.service';
+import { ThreadService } from './_services/thread.service';
 
 @Component({
   selector: 'app-home-page',

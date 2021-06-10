@@ -2,9 +2,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { ModelThread } from '../../_models/ModelThread';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'environments/environment';
+import { ModelThread } from '../_models/ModelThread';
 
 @Injectable({
   providedIn: 'root'

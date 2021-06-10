@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ModelToken } from '../../_models/ModelToken';
-import { ModelProfile } from 'app/_models/ModelProfile';
+import { ModelProfile } from 'app/components/account/_models/ModelProfile';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'

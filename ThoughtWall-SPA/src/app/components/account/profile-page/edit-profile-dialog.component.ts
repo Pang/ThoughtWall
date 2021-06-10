@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModelProfile } from 'app/_models/ModelProfile';
-import { ProfileService } from 'app/_services/account/profile.service';
+import { ModelProfile } from 'app/components/account/_models/ModelProfile';
+import { ProfileService } from '../_services/profile.service';
 
 @Component({
     selector: 'app-profile-page',

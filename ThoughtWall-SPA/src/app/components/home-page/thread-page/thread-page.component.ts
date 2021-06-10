@@ -2,18 +2,43 @@ import * as ThreadPageActions from './store/thread.actions';
 
 import { Component, OnInit } from '@angular/core';
 
-import { AccountService } from '../../../_services/account/account.service';
+import { AccountService } from '../../account/_services/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ModelComment } from '../../../_models/ModelComment';
-import { ModelThread } from '../../../_models/ModelThread';
+import { ModelComment } from '../_models/ModelComment';
 import { Store } from '@ngrx/store';
-import { ThreadService } from '../../../_services/thread/thread.service';
+import { ThreadService } from '../_services/thread.service';
+import { ModelThread } from '../_models/ModelThread';
 
 @Component({
   selector: 'app-thread-page',
-  templateUrl: './thread-page.component.html',
+  template: `
+    <mat-card *ngIf="thread; else loadingSpinner" class="shadow">
+      <h1>{{ thread.title }}</h1>
+      <span style="color:#4DD0E1">{{ thread.username | titlecase }}</span>
+      <span class="timeStamp">
+        ~ {{ thread.timeStamp | date:'longDate' }}.
+        {{ thread.timeStamp | date:'shortTime' }}
+      </span>
+      <button id="editBtn" *ngIf="canEdit()" mat-icon-button color="accent" (click)="this.editEnabled = !this.editEnabled">
+        <mat-icon class="example-icon" aria-hidden="false">edit</mat-icon>
+      </button>
+      <hr>
+      <p *ngIf="!editEnabled">{{ thread.body }}</p>
+      <form [formGroup]="threadForm" *ngIf="editEnabled">
+        <app-mat-textarea [formGroup]="threadForm" formControlName="body"
+          [value]="thread.body" ngDefaultControl></app-mat-textarea>
+        <button mat-flat-button color="accent" type="button" (click)="editThread()">Save</button>
+      </form>
+    </mat-card>
+
+    <ng-template #loadingSpinner>
+      <mat-spinner color="accent"></mat-spinner>
+    </ng-template>
+
+    <app-comment></app-comment>
+  `,
   styleUrls: ['./thread-page.component.css']
 })
 export class ThreadPageComponent implements OnInit {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AccountService } from '../../../_services/account/account.service';
-import { ProfileService } from 'app/_services/account/profile.service';
-import { ModelProfile } from 'app/_models/ModelProfile';
+import { AccountService } from '../_services/account.service';
+import { ProfileService } from '../_services/profile.service';
+import { ModelProfile } from 'app/components/account/_models/ModelProfile';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileDialogComponent } from './edit-profile-dialog.component';
 

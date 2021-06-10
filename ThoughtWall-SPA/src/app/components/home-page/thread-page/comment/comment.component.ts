@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AccountService } from '../../../../_services/account/account.service';
-import { CommentService } from '../../../../_services/thread/comment.service';
+import { AccountService } from '../../../account/_services/account.service';
+import { CommentService } from '../../_services/comment.service';
 import { FormGroup } from '@angular/forms';
 import { HubConnectionBuilder } from '@aspnet/signalr';
-import { ModelComment } from '../../../../_models/ModelComment';
+import { ModelComment } from '../../_models/ModelComment';
 import { Store } from '@ngrx/store';
 
 @Component({
