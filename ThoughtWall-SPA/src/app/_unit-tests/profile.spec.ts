@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
-import { ProfilePageComponent } from 'app/account/profile-page/profile-page.component';
+import { ProfilePageComponent } from 'app/components/account/profile-page/profile-page.component';
 import { ModelProfile } from 'app/_models/ModelProfile';
 import { ProfileService } from 'app/_services/account/profile.service';
 import { Observable, of } from 'rxjs';

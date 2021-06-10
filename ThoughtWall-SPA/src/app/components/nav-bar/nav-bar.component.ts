@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from '../_services/account/account.service';
+import { AccountService } from '../../_services/account/account.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -46,17 +46,6 @@ import { AccountService } from '../_services/account/account.service';
         margin-right: 4px;
         vertical-align: middle;
     }
-    @media only screen and (max-width: 700px) {
-        #searchBar {
-            display: none;
-        }
-        h1 {
-            font-size: 35px;
-        }
-        a + a {
-            margin-left: 10px;
-        }
-    }
     .links {
         margin-left: auto;
         display: inline-block;
@@ -73,14 +62,24 @@ import { AccountService } from '../_services/account/account.service';
         font-size: 16px;
         vertical-align: middle;
     }
+    @media only screen and (max-width: 700px) {
+      #searchBar {
+          display: none;
+      }
+      h1 {
+          font-size: 35px;
+      }
+      a + a {
+          margin-left: 10px;
+      }
+    }
   `]
 })
 
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
   keyword: string;
 
-  constructor(private router: Router, private accountService: AccountService) {
-  }
+  constructor(private router: Router, private accountService: AccountService) {}
 
   get loggedIn() {
     return this.accountService.isLoggedIn();
@@ -93,8 +92,5 @@ export class NavBarComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
-  }
-
-  ngOnInit() {
   }
 }

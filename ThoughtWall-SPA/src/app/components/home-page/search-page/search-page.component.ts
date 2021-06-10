@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ThreadService } from  '../../_services/thread/thread.service';
+import { ThreadService } from '../../../_services/thread/thread.service';
 
 @Component({
   selector: 'app-search-page',

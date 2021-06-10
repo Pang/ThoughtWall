@@ -5,7 +5,7 @@ import {
   createSelector
 } from '@ngrx/store';
 
-import { ThreadReducer } from '../home-page/thread-page/store/thread.reducer';
+import { ThreadReducer } from '../components/home-page/thread-page/store/thread.reducer';
 import { environment } from '../../environments/environment';
 
 export interface State {

@@ -2,14 +2,14 @@ import * as ThreadPageActions from './store/thread.actions';
 
 import { Component, OnInit } from '@angular/core';
 
-import { AccountService } from '../../_services/account/account.service';
+import { AccountService } from '../../../_services/account/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ModelComment } from '../../_models/ModelComment';
-import { ModelThread } from '../../_models/ModelThread';
+import { ModelComment } from '../../../_models/ModelComment';
+import { ModelThread } from '../../../_models/ModelThread';
 import { Store } from '@ngrx/store';
-import { ThreadService } from '../../_services/thread/thread.service';
+import { ThreadService } from '../../../_services/thread/thread.service';
 
 @Component({
   selector: 'app-thread-page',

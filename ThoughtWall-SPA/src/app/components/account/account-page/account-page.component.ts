@@ -26,11 +26,6 @@ import { Component, OnInit } from '@angular/core';
     }
   `]
 })
-export class AccountPageComponent implements OnInit {
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+export class AccountPageComponent {
+  constructor() {}
 }
