@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../_services/account/account.service';
 import { ProfileService } from 'app/_services/account/profile.service';
@@ -83,7 +83,7 @@ import { EditProfileDialogComponent } from './edit-profile-dialog.component';
   `]
 })
 
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
   userProfileData: ModelProfile;
   routeProfile: string;
 
@@ -95,7 +95,9 @@ export class ProfilePageComponent {
     private profileService: ProfileService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.getData();
   }
 
