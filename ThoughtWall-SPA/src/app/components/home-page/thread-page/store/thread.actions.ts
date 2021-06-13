@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { ModelToken } from '../../../../_models/ModelToken';
 
 export const CHANGE_THREAD = 'CHANGE_THREAD';
 

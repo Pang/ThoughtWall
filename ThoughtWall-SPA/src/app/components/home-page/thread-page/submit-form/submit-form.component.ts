@@ -2,7 +2,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThreadService } from '../../../../_services/thread/thread.service';
+import { ThreadService } from '../../_services/thread.service';
 
 @Component({
   selector: 'app-submit-form',
