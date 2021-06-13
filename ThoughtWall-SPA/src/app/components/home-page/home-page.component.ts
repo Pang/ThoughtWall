@@ -36,9 +36,7 @@ export class HomePageComponent implements OnInit {
   constructor(private threadService: ThreadService) {}
 
   ngOnInit() {
-      console.log('test');
       this.threadService.getThreads().subscribe(res => {
-        console.log(res);
         this.threads = res;
       },
       err => console.log('err'));
