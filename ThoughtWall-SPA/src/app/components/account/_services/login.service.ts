@@ -18,6 +18,6 @@ export class LoginService {
   }
 
   post(form: FormGroup) {
-    return this.http.post(this.baseUrl + '/login', form)
+    return this.http.post(this.baseUrl + '/login', form);
   }
 }

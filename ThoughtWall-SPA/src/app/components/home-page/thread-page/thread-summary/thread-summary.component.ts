@@ -3,9 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-thread-summary',
   template: `
-    <div class="container">
-      <mat-card *ngFor="let thread of threads"
-      [routerLink]="['/thread', thread.id]">
+      <mat-card [routerLink]="['/thread', thread.id]">
         <mat-card-header>
           <div mat-card-avatar class="centre">{{ thread.username.slice(0,1) | uppercase}}</div>
           <mat-card-title>{{ thread.title }}</mat-card-title>
@@ -20,7 +18,6 @@ import { Component, Input } from '@angular/core';
         </mat-card-content><br />
         <div class="cardFooter">{{ thread.timeStamp | timeAgo  }}</div>
       </mat-card>
-    <div>
   `,
   styles: [`
     h2 {
@@ -37,18 +34,15 @@ import { Component, Input } from '@angular/core';
     }
     .mat-card {
         display: inline-block;
-        margin: 20px;
-        width: 350px;
-        min-height: 180px;
+        margin: 10px;
+        width: 100%;
+        min-height: 75px;
         vertical-align:top;
     }
     .mat-card:hover {
         cursor: pointer;
         -webkit-box-shadow: 6px 6px 12px rgb(119, 210, 235);
         box-shadow: 6px 6px 12px rgb(119, 210, 235);
-    }
-    .container {
-        text-align: center;
     }
     .cardFooter {
         position: absolute;
@@ -59,7 +53,7 @@ import { Component, Input } from '@angular/core';
 })
 
 export class ThreadSummaryComponent {
-  @Input() threads: [];
+  @Input() thread;
 
   constructor() {
   }

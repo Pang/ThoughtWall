@@ -14,7 +14,6 @@ import { ThreadService } from '../../_services/thread.service';
       <app-mat-textarea [formGroup]="threadPostForm" formControlName="body" placeholder="What are your thoughts?"
             ngDefaultControl>
           </app-mat-textarea>
-    
       <div *ngIf="threadPostForm.get('title').invalid && threadPostForm.get('title').dirty">Title needs to be between 2-40 characters</div>
       <div *ngIf="threadPostForm.get('body').invalid && threadPostForm.get('body').dirty">Body needs to be between 10-400 characters</div>
       <div align="right">
@@ -67,7 +66,7 @@ export class SubmitPageComponent {
   onSubmit() {
     this.threadService.postThread(this.threadPostForm.value).subscribe(
       () => {
-        this.threadService.redirectTo(this.threadPostForm.get("title").value).subscribe(
+        this.threadService.redirectTo(this.threadPostForm.get('title').value).subscribe(
           res => this.router.navigate([`/thread/${res}`]));
       },
       fail => {

@@ -25,29 +25,6 @@ namespace ThoughtWall.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("threads")]
-        public async Task<IActionResult> GetUserThreads(int id)
-        {
-            var threads = await _context.Threads
-                .Where(x => x.UserId == id)
-                .OrderByDescending(x => x.TimeStamp)
-                .ToListAsync();
-            var mappedThreads = _mapper.Map<ThreadGetDto[]>(threads);
-            return Ok(mappedThreads);
-        }
-
-        [HttpGet("comments")]
-        public async Task<IActionResult> GetUserComments(int id)
-        { 
-            var comments = await _context.Comments
-                .Include(x => x.Thread)
-                .Where(x => x.UserId == id)
-                .OrderByDescending(x => x.TimeStamp)
-                .ToListAsync();
-            var mappedComments = _mapper.Map<CommentGetDto[]>(comments);
-            return Ok(mappedComments);
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetProfileDetails(string username)
         {

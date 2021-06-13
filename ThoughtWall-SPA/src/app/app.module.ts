@@ -75,7 +75,7 @@ const appRoutes: Routes = [
     AccountPageComponent,
   ],
   imports: [
-    HttpClientTestingModule,
+    // HttpClientTestingModule,
     MatMenuModule,
     MatButtonModule,
     MatDialogModule,

@@ -4,9 +4,15 @@ import { ThreadService } from './_services/thread.service';
 @Component({
   selector: 'app-home-page',
   template: `
-    <app-thread-summary [threads]="threads"></app-thread-summary>
+    <div class="container"><br/>
+      <app-thread-summary *ngFor="let thread of threads" [thread]="thread"></app-thread-summary>
+    </div>
   `,
   styles: [`
+    .container {
+      width: 100%;
+      text-align: center;
+    }
     form {
       text-align: center;
     }
@@ -30,8 +36,11 @@ export class HomePageComponent implements OnInit {
   constructor(private threadService: ThreadService) {}
 
   ngOnInit() {
-    this.threadService.getThreads().subscribe(res => {
-      this.threads = res;
-    });
+      console.log('test');
+      this.threadService.getThreads().subscribe(res => {
+        console.log(res);
+        this.threads = res;
+      },
+      err => console.log('err'));
   }
 }
