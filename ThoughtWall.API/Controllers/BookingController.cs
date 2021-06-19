@@ -27,11 +27,13 @@ namespace ThoughtWall.API.Controllers {
             _mapper = mapper;
         }
 
-        [HttpGet]
-        [HttpGet ("created")]
-        public async Task<IActionResult> GetCreatedBookings(int id) {
+        [HttpGet("created")]
+        public async Task<IActionResult> GetCreatedBookings() {
+            var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
+            if (user == null) return Unauthorized("User not found");
+
             var bookings = await _context.Bookings
-                .Where(x => x.BookingOwnerId == id)
+                .Where(x => x.BookingOwnerId == user.Id)
                 .Include(x => x.BookingOwner)
                 .OrderByDescending(x => x.BookingCreated)
                 .ToListAsync();
@@ -40,11 +42,13 @@ namespace ThoughtWall.API.Controllers {
             return Ok(mappedBookings);
         }
 
-        [HttpGet]
-        [HttpGet ("received")]
-        public async Task<IActionResult> GetReceivedBookings(int id) {
+        [HttpGet("received")]
+        public async Task<IActionResult> GetReceivedBookings() {
+            var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
+            if (user == null) return Unauthorized("User not found");
+
             var bookings = await _context.Bookings
-                .Where(x => x.BookedWithUserId == id)
+                .Where(x => x.BookedWithUserId == user.Id)
                 .Include(x => x.BookedWithUser)
                 .OrderByDescending(x => x.BookingCreated)
                 .ToListAsync();
@@ -52,5 +56,74 @@ namespace ThoughtWall.API.Controllers {
             var mappedBookings = _mapper.Map<BookingDto[]> (bookings);
             return Ok(mappedBookings);
         }
+
+        [HttpPost("request")]
+        public async Task<IActionResult> RequestBooking(int bookeeId, DateTime reqForDt)
+        {
+            var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
+            if (user == null) return Unauthorized("User not found");
+
+            var bookee = await _context.Users.Where(x => x.Id == bookeeId).FirstOrDefaultAsync();
+            if (bookee.BookingsEnabled == false) return BadRequest("User does not currently take bookings");
+
+            DateTime currentDT = DateTime.Now;
+            Booking newBooking = new Booking() {
+                BookingOwnerId = user.Id,
+                BookedWithUserId = bookeeId,
+                BookingCreated = currentDT,
+                BookingUpdated = currentDT,
+                RequestedDT =  reqForDt,
+                StatusId = 1, // pending
+            };
+
+            await _context.Bookings.AddAsync(newBooking);
+            await _context.SaveChangesAsync();
+            return StatusCode (201);
+        }
+
+
+        [HttpPut("accept")]
+        public async Task<IActionResult> AcceptBooking(int bookingId) 
+        {
+            var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
+            if (user == null) return Unauthorized("User not found");
+
+            DateTime currentDT = DateTime.Now;
+            var booking = await _context.Bookings
+                .Where(x => x.Id == bookingId)
+                .FirstOrDefaultAsync();
+
+            booking.StatusId = 2; // Approved
+            booking.BookingUpdated = currentDT;
+
+            _context.Bookings.Update(booking);
+            await _context.SaveChangesAsync();
+
+            var mappedBooking = _mapper.Map<BookingDto>(booking);
+            return Ok(mappedBooking);
+        }
+
+        [HttpPut("decline")]
+        public async Task<IActionResult> DeclineBooking(int bookingId) 
+        {
+            var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
+            if (user == null) return Unauthorized("User not found");
+
+            DateTime currentDT = DateTime.Now;
+
+            var booking = await _context.Bookings
+                .Where(x => x.Id == bookingId)
+                .FirstOrDefaultAsync();
+
+            booking.StatusId = 3; // Declined
+            booking.BookingUpdated = currentDT;
+
+            _context.Bookings.Update(booking);
+            await _context.SaveChangesAsync();
+
+            var mappedBooking = _mapper.Map<BookingDto>(booking);
+            return Ok(mappedBooking);
+        }
     }
 }
+

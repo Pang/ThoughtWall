@@ -41,8 +41,8 @@ import { Component, Input } from '@angular/core';
     }
     .mat-card:hover {
         cursor: pointer;
-        -webkit-box-shadow: 6px 6px 12px rgb(119, 210, 235);
-        box-shadow: 6px 6px 12px rgb(119, 210, 235);
+        -webkit-box-shadow: 6px 6px 12px rgb(119, 210, 235) !important;
+        box-shadow: 6px 6px 12px rgb(119, 210, 235) !important;
     }
     .cardFooter {
         position: absolute;

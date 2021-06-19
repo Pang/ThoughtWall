@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { ProfileService } from '../_services/profile.service';
@@ -16,45 +16,53 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
         <button mat-flat-button color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="openBookingStatusDialog()">Bookings {{ bookingsEnabled ? 'Open' : 'Closed'}}</button>
         </mat-card>
 
-      <mat-card>
-        <button mat-icon-button *ngIf="canEdit" (click)="openEditDialog()" style="float: right;" color="accent">
-          <mat-icon aria-hidden="false">edit</mat-icon>
-        </button>
-        <div>
-          <h4 color="accent">Bio</h4>
-          <span>{{ userProfileData?.bio }}</span>
-        </div><br />
-        <div class="flexContainer">
-          <div class="flexItem">
-            <h4>Country</h4>
-            <span>{{ userProfileData?.country }}</span>
-          </div>
-          <div class="flexItem">
-            <h4>DoB</h4>
-            <span>{{ userProfileData?.dob }}</span>
-          </div>
-        </div>
-      </mat-card>
-
-      <mat-card class="flexContainer">
-        <div class="flexItem">
-          <h4><u>Threads</u></h4>
-          <ul>
-            <li *ngFor="let thread of userProfileData?.threads"><b class="threadLink"
-                [routerLink]="['/thread', thread.id]">{{ thread.title }}</b>
-              ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
-          </ul>
-        </div>
-
-        <div class="flexItem">
-          <h4><u>Comments</u></h4>
-          <ul>
-            <li *ngFor="let comment of userProfileData?.comments">
-              <b class="threadLink" [routerLink]="['/thread', comment.threadId]">[{{ comment.threadId }}]</b>&nbsp;
-              <i>"{{ comment.body }}"</i> ({{ comment.timeStamp | date: "dd/MM/yyyy" }})</li>
-          </ul>
-        </div>
-      </mat-card>
+        <mat-card style="min-height: 40vh">
+          <mat-tab-group>
+            <!-- PROFILE TAB -->
+            <mat-tab label="Profile"><br />
+              <button mat-icon-button *ngIf="canEdit" (click)="openEditDialog()" style="float: right;" color="accent">
+                <mat-icon aria-hidden="false">edit</mat-icon>
+              </button>
+              <div>
+                <h4 color="accent">Bio</h4>
+                <span>{{ userProfileData?.bio }}</span>
+              </div><br />
+              <div class="flexContainer">
+                <div class="flexItem">
+                  <h4>Country</h4>
+                  <span>{{ userProfileData?.country }}</span>
+                </div>
+                <div class="flexItem">
+                  <h4>DoB</h4>
+                  <span>{{ userProfileData?.dob }}</span>
+                </div>
+              </div>
+            </mat-tab>
+            <!-- THREADS TAB -->
+            <mat-tab label="Threads"><br/>
+              <div class="flexContainer">
+                <div class="flexItem">
+                  <h4><u>Threads</u></h4>
+                  <ul>
+                    <li *ngFor="let thread of userProfileData?.threads"><b class="threadLink"
+                        [routerLink]="['/thread', thread.id]">{{ thread.title }}</b>
+                      ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
+                  </ul>
+                </div>
+                <div class="flexItem">
+                  <h4><u>Comments</u></h4>
+                  <ul>
+                    <li *ngFor="let comment of userProfileData?.comments">
+                      <b class="threadLink" [routerLink]="['/thread', comment.threadId]">[{{ comment.threadId }}]</b>&nbsp;
+                      <i>"{{ comment.body }}"</i> ({{ comment.timeStamp | date: "dd/MM/yyyy" }})</li>
+                  </ul>
+                </div>
+              </div>
+            </mat-tab>
+            <!-- THREADS TAB -->
+            <mat-tab label="Bookings"> Content 3 </mat-tab>
+          </mat-tab-group>
+        </mat-card>
     </div>
 
     <ng-template #loadingSpinner>
@@ -82,7 +90,7 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
       margin-top: 0px;
       margin-bottom: 5px;
     }
-  `]
+  `],
 })
 
 export class ProfilePageComponent implements OnInit {

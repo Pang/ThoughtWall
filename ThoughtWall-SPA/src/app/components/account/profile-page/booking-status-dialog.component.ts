@@ -9,7 +9,7 @@ import { ProfileService } from '../_services/profile.service';
     template: `
         <div style="text-align: center">
             <h2>{{ profileData.bookingsEnabled ? 'Close' : 'Open' }} bookings?</h2>
-            <button mat-flat-button color="accent" type="submit" (click)="updateBookingStatus()">{{ profileData.bookingsEnabled ? 'Close' : 'Open' }}</button>
+            <button mat-flat-button color="accent" type="submit" (click)="updateBookingStatus()">{{ profileData.bookingsEnabled ? 'Close' : 'Open' }} bookings</button>
             <button mat-flat-button color="warn" type="submit" [mat-dialog-close]>Cancel</button>
         </div>
     `,
