@@ -72,12 +72,13 @@ namespace ThoughtWall.API.Controllers
 
         [HttpPut ("bookingsEnabled")]
         public async Task<IActionResult> SetBookingsEnabled(ProfileDto profileDto) {
-            var user = await _context.Users.Where(x => x.Id == profileDto.Id).FirstOrDefaultAsync();
+            if (profileDto.Username != User.FindFirst(ClaimTypes.Name).Value) return Unauthorized("User not found");
 
+            var user = await _context.Users.Where(x => x.Id == profileDto.Id).FirstOrDefaultAsync();
             user.BookingsEnabled = !user.BookingsEnabled;
+
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
-
             return Ok(user.BookingsEnabled);
         }
     }

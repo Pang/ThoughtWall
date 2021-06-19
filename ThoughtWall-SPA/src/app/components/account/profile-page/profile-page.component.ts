@@ -13,7 +13,7 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
     <div *ngIf="userProfileData; else loadingSpinner">
       <mat-card>
         <h1>{{ userProfileData?.username | titlecase }}'s Profile</h1>
-        <button mat-flat-button color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="openBookingStatusDialog()">Bookings {{ bookingsEnabled ? 'Open' : 'Closed'}}</button>
+        <button mat-flat-button *ngIf="canEdit" color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="openBookingStatusDialog()">Bookings {{ bookingsEnabled ? 'Open' : 'Closed'}}</button>
         </mat-card>
 
         <mat-card style="min-height: 40vh">
@@ -60,7 +60,9 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
               </div>
             </mat-tab>
             <!-- THREADS TAB -->
-            <mat-tab label="Bookings"> Content 3 </mat-tab>
+            <mat-tab label="Bookings"><br/>
+              <p>Your bookings will be displayed here</p>
+            </mat-tab>
           </mat-tab-group>
         </mat-card>
     </div>
