@@ -13,12 +13,12 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
     <div *ngIf="userProfileData; else loadingSpinner">
       <mat-card>
         <h1>{{ userProfileData?.username | titlecase }}'s Profile</h1>
-        <button mat-flat-button color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="testApi()">Bookings {{ bookingsEnabled ? 'Enabled' : 'Disabled'}}</button>
+        <button mat-flat-button color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="openBookingStatusDialog()">Bookings {{ bookingsEnabled ? 'Open' : 'Closed'}}</button>
         </mat-card>
 
       <mat-card>
         <button mat-icon-button *ngIf="canEdit" (click)="openEditDialog()" style="float: right;" color="accent">
-          <mat-icon class="example-icon" aria-hidden="false">edit</mat-icon>
+          <mat-icon aria-hidden="false">edit</mat-icon>
         </button>
         <div>
           <h4 color="accent">Bio</h4>
@@ -124,8 +124,8 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  testApi() {
-    const dialogRef = this.dialog.open(BookingStatusDialogComponent, { data: this.userProfileData });
+  openBookingStatusDialog() {
+    const dialogRef = this.dialog.open(BookingStatusDialogComponent, { minWidth: '20vw', data: this.userProfileData });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result != null) {

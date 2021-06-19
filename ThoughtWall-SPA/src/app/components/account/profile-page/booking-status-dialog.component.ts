@@ -8,9 +8,9 @@ import { ProfileService } from '../_services/profile.service';
     selector: 'app-profile-page',
     template: `
         <div style="text-align: center">
-            <h2>{{ profileData.bookingsEnabled ? 'Disable' : 'Enable' }} booking feature?</h2>
-            <button mat-flat-button color="accent" type="submit" (click)="updateBookingStatus()">Submit</button>
-            <button mat-flat-button color="warn" type="submit" [mat-dialog-close]>Close</button>
+            <h2>{{ profileData.bookingsEnabled ? 'Close' : 'Open' }} bookings?</h2>
+            <button mat-flat-button color="accent" type="submit" (click)="updateBookingStatus()">{{ profileData.bookingsEnabled ? 'Close' : 'Open' }}</button>
+            <button mat-flat-button color="warn" type="submit" [mat-dialog-close]>Cancel</button>
         </div>
     `,
     styles: [`
