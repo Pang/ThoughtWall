@@ -37,6 +37,7 @@ import { PageNotFoundComponent } from './components/shared-misc/page-not-found/p
 import { ThreadService } from './components/home-page/_services/thread.service';
 import { MatInputComponent } from './components/shared-misc/form-controls/mat-input/mat-input.component';
 import { MatTextareaComponent } from './components/shared-misc/form-controls/mat-textarea/mat-textarea.component';
+import { BookingStatusDialogComponent } from './components/account/profile-page/booking-status-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    BookingStatusDialogComponent,
     HomePageComponent,
     ThreadSummaryComponent,
     SubmitPageComponent,

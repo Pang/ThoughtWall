@@ -5,6 +5,7 @@ import { ProfileService } from '../_services/profile.service';
 import { ModelProfile } from 'app/components/account/_models/ModelProfile';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileDialogComponent } from './edit-profile-dialog.component';
+import { BookingStatusDialogComponent } from './booking-status-dialog.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -12,7 +13,8 @@ import { EditProfileDialogComponent } from './edit-profile-dialog.component';
     <div *ngIf="userProfileData; else loadingSpinner">
       <mat-card>
         <h1>{{ userProfileData?.username | titlecase }}'s Profile</h1>
-      </mat-card>
+        <button mat-flat-button color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="testApi()">Bookings {{ bookingsEnabled ? 'Enabled' : 'Disabled'}}</button>
+        </mat-card>
 
       <mat-card>
         <button mat-icon-button *ngIf="canEdit" (click)="openEditDialog()" style="float: right;" color="accent">
@@ -90,6 +92,10 @@ export class ProfilePageComponent implements OnInit {
   get canEdit() {
     return this.accountService.getUniqueName === this.routeProfile;
   }
+  get bookingsEnabled() {
+    return this.userProfileData.bookingsEnabled;
+  }
+
   constructor(
     private accountService: AccountService,
     private profileService: ProfileService,
@@ -114,6 +120,16 @@ export class ProfilePageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: ModelProfile) => {
       if (result != null) {
         this.userProfileData.bio = result.bio;
+      }
+    });
+  }
+
+  testApi() {
+    const dialogRef = this.dialog.open(BookingStatusDialogComponent, { data: this.userProfileData });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result != null) {
+        this.userProfileData.bookingsEnabled = result;
       }
     });
   }

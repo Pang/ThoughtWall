@@ -14,7 +14,7 @@ using ThoughtWall.API.Models;
 
 namespace ThoughtWall.API.Controllers {
     [Authorize]
-    [Route ("api/values")]
+    [Route ("api/thread")]
     [ApiController]
     public class ThreadController : ControllerBase {
         private readonly DataContext _context;
@@ -31,7 +31,6 @@ namespace ThoughtWall.API.Controllers {
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetThreads (int pageNo) {
-            Console.WriteLine("hit");
             int noToSkip = (pageNo * 5) - 5;
             // Orders by most recent (using TimeStamp)
             var threads = await _context.Threads
@@ -150,7 +149,8 @@ namespace ThoughtWall.API.Controllers {
             var mappedComment = _mapper.Map<CommentGetDto> (comment);
             return Ok (mappedComment);
         }
-        // POST api/values/comment
+        
+
         [HttpPost ("comment")]
         [ProducesResponseType (201)]
         public async Task<IActionResult> PostComment (CommentPostDto commentPostDto) {

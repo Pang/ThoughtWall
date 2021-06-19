@@ -7,19 +7,25 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<ThreadPostDto, Thread>();
-
-        CreateMap<Thread, ThreadGetDto>();
-        CreateMap<ThreadGetDto, Thread>();
+        
+        CreateMap<BookingDto, Booking>();
+        CreateMap<Booking, BookingDto>();
 
         CreateMap<CommentGetDto, Comment>();
         CreateMap<CommentPostDto, Comment>();
         CreateMap<Comment, CommentGetDto>();
 
-        CreateMap<UserRegisterDto, User>();
+        CreateMap<ThreadPostDto, Thread>();
 
         CreateMap<ProfileDto, User>();
         CreateMap<User, ProfileDto>();
+
+        CreateMap<Thread, ThreadGetDto>();
+        CreateMap<ThreadGetDto, Thread>();
+
+        CreateMap<UserRegisterDto, User>();
+
+
 
     }
 }

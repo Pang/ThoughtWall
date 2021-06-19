@@ -11,7 +11,7 @@ import { ModelThread } from '../_models/ModelThread';
 })
 export class ThreadService {
   constructor(private http: HttpClient) { }
-  private apiUrl = environment.apiUrl + '/values';
+  private apiUrl = environment.apiUrl + '/thread';
 
   createForm() {
     return new FormGroup({

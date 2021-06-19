@@ -8,6 +8,8 @@ using ThoughtWall.API.Dtos;
 using AutoMapper;
 using ThoughtWall.API.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace ThoughtWall.API.Controllers
 {
@@ -18,7 +20,6 @@ namespace ThoughtWall.API.Controllers
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-
         public ProfileController(DataContext context, IMapper mapper)
         {
             _context = context;
@@ -49,7 +50,7 @@ namespace ThoughtWall.API.Controllers
             return Ok(mappedProfile);
         }
 
-        [HttpPut]
+        [HttpPut ("update")]
         public async Task<IActionResult> UpdateProfileDetails(ProfileDto profileDto)
         {
             if (profileDto.Username != User.FindFirst (ClaimTypes.Name).Value)
@@ -67,6 +68,17 @@ namespace ThoughtWall.API.Controllers
 
             var mappedProfile = _mapper.Map<User>(originalUserData);
             return Ok(mappedProfile);
+        }
+
+        [HttpPut ("bookingsEnabled")]
+        public async Task<IActionResult> SetBookingsEnabled(ProfileDto profileDto) {
+            var user = await _context.Users.Where(x => x.Id == profileDto.Id).FirstOrDefaultAsync();
+
+            user.BookingsEnabled = !user.BookingsEnabled;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(user.BookingsEnabled);
         }
     }
 }

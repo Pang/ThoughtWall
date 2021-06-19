@@ -13,6 +13,7 @@ namespace ThoughtWall.API.Data
         [StringLength(50)]
         public string Country { get; set; }
         public DateTime Dob { get; set; }
+        public bool BookingsEnabled { get; set; }
 
         public ThreadGetDto[] threads { get; set; }
         public CommentGetDto[] comments { get; set; }

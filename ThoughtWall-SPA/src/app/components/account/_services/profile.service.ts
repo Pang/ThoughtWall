@@ -28,6 +28,10 @@ export class ProfileService {
   }
 
   updateProfile(profile: ModelProfile): Observable<ModelProfile> {
-    return this.http.put<ModelProfile>(this.baseUrl, profile);
+    return this.http.put<ModelProfile>(`${this.baseUrl}/update`, profile);
+  }
+
+  changeBookingEnabled(profile: ModelProfile): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/bookingsEnabled`, profile);
   }
 }
