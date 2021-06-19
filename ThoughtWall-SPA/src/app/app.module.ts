@@ -1,8 +1,4 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule, Routes } from '@angular/router';
 import { metaReducers, reducers } from './_reducers';
 
@@ -16,12 +12,6 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginFormComponent } from './components/account/account-page/login-form/login-form.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { ProfilePageComponent } from './components/account/profile-page/profile-page.component';
 import { RegisterFormComponent } from './components/account/account-page/register-form/register-form.component';
@@ -39,6 +29,7 @@ import { ThreadService } from './components/home-page/_services/thread.service';
 import { MatInputComponent } from './components/shared-misc/form-controls/mat-input/mat-input.component';
 import { MatTextareaComponent } from './components/shared-misc/form-controls/mat-textarea/mat-textarea.component';
 import { BookingStatusDialogComponent } from './components/account/profile-page/booking-status-dialog.component';
+import { MaterialModule } from './material.module';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -79,16 +70,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     // HttpClientTestingModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatCardModule,
+    MaterialModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,

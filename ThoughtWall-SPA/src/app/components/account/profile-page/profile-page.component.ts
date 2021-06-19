@@ -17,7 +17,7 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
         </mat-card>
 
         <mat-card style="min-height: 40vh">
-          <mat-tab-group>
+          <mat-tab-group style="height: 100% !important">
             <!-- PROFILE TAB -->
             <mat-tab label="Profile"><br />
               <button mat-icon-button *ngIf="canEdit" (click)="openEditDialog()" style="float: right;" color="accent">
@@ -38,8 +38,8 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
                 </div>
               </div>
             </mat-tab>
-            <!-- THREADS TAB -->
-            <mat-tab label="Threads"><br/>
+            <!-- POSTS TAB -->
+            <mat-tab label="Posts"><br/>
               <div class="flexContainer">
                 <div class="flexItem">
                   <h4><u>Threads</u></h4>
@@ -61,7 +61,23 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
             </mat-tab>
             <!-- THREADS TAB -->
             <mat-tab label="Bookings"><br/>
-              <p>Your bookings will be displayed here</p>
+              <div *ngIf="canEdit; else bookingForm">
+                <p>Your bookings will be displayed here</p>
+              </div>
+              <ng-template #bookingForm>
+                <p>Please select your preferred date and time</p>
+                <mat-form-field color="accent" appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+                </mat-form-field> &nbsp;&nbsp;&nbsp;
+                <mat-form-field color="accent">
+                  <mat-label>Time</mat-label>
+                  <input matInput type="time" id="appt" name="appt" min="09:00" max="18:00" required>
+                </mat-form-field><br/>
+                <button mat-flat-button color="accent">Submit</button>
+              </ng-template>
             </mat-tab>
           </mat-tab-group>
         </mat-card>
