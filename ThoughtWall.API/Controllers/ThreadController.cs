@@ -16,12 +16,12 @@ namespace ThoughtWall.API.Controllers {
     [Authorize]
     [Route ("api/values")]
     [ApiController]
-    public class ValuesController : ControllerBase {
+    public class ThreadController : ControllerBase {
         private readonly DataContext _context;
         private readonly IHubContext<PostHub> _hubContext;
         private readonly IMapper _mapper;
 
-        public ValuesController (DataContext context, IHubContext<PostHub> hubContext, IMapper mapper) {
+        public ThreadController (DataContext context, IHubContext<PostHub> hubContext, IMapper mapper) {
             _context = context;
             _hubContext = hubContext;
             _mapper = mapper;
