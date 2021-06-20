@@ -12,7 +12,7 @@ namespace ThoughtWall.API.Data
         public DbSet<Thread> Threads { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Booking> Booking { get; set; }
-        public DbSet<DimBookingStatus> DimBookingStatuses { get; set; }
+        public DbSet<DimBookingStatus> DimBookingStatus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

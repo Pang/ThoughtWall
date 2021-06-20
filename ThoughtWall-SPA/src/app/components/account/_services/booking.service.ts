@@ -32,4 +32,12 @@ export class BookingService {
   getCreatedBookings(): Observable<ModelBooking[]> {
       return this.http.get<ModelBooking[]>(this.baseUrl + '/created');
   }
+
+  acceptBooking(id: number) {
+    return this.http.put(this.baseUrl + '/accept', id);
+  }
+
+  declineBooking(id: number) {
+    return this.http.put(this.baseUrl + '/decline', id);
+  }
 }

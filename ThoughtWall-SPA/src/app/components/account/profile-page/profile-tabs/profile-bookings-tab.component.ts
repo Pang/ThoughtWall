@@ -1,20 +1,52 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ModelBooking, ModelBookingCreate } from '../../_models/ModelBooking';
 import { ModelProfile } from '../../_models/ModelProfile';
 import { BookingService } from '../../_services/booking.service';
+import { BookingRespondDialogComponent } from '../dialogs/booking-respond-dialog.component';
 
 @Component({
     selector: 'app-profile-bookings-tab',
     template: `
         <div *ngIf="isOwnProfile; else bookingForm">
-            <div *ngIf="allBookings | async as bookings">
-            Bookings:
-            <p *ngFor="let created of bookings.created">
-                Booking with {{ created.bookedWithUser.username | titlecase }} on {{ created.requestedDT | date:'medium'}}
-            </p>
-            </div>
+            <table *ngIf="allBookings | async as bookings" mat-table [dataSource]="bookings" class="mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="sentBy">
+                    <th mat-header-cell *matHeaderCellDef>Request from</th>
+                    <td mat-cell *matCellDef="let element">{{ element?.bookingOwner?.username | titlecase }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="sentTo">
+                    <th mat-header-cell *matHeaderCellDef>Sent to</th>
+                    <td mat-cell *matCellDef="let element">{{ element?.bookedWithUser?.username | titlecase }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Meeting Date</th>
+                    <td mat-cell *matCellDef="let element">{{ element?.requestedDT | date:'medium' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Booking Status</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-chip-list #chipList aria-label="Fruit selection">
+                            <mat-chip [color]="colorPending(element.statusId)" selected>{{ element?.status.status }}</mat-chip>
+                        </mat-chip-list>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="respond">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element" class="matBtnCol">
+                        <button [disabled]="element?.statusId != 1" mat-flat-button color="accent" (click)="openRespondDialog(element)">Respond</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
         </div>
 
         <!-- Booking Form -->
@@ -34,6 +66,20 @@ import { BookingService } from '../../_services/booking.service';
                 <button mat-flat-button type="submit" color="accent">Submit</button>
             </form>
         </ng-template>`,
+        styles: [`
+            table {
+                width: 100%;
+            }
+            h4 {
+                margin-top: 0px;
+                margin-bottom: 5px;
+            }
+            .matBtnCol {
+                display: flex;
+                padding: 10px 0;
+                justify-content: flex-end;
+            }
+        `]
 })
 
 export class ProfileBookingsTabComponent implements OnInit {
@@ -42,21 +88,44 @@ export class ProfileBookingsTabComponent implements OnInit {
     form: FormGroup;
     allBookings: Observable<ModelBooking[]>;
 
+    displayedColumns: string[] = ['sentBy', 'sentTo', 'date', 'status', 'respond'];
+
+    colorPending(statusId: number) {
+        switch (statusId) {
+            case 1:
+                return 'primary';
+            case 2:
+                return 'undefined';
+            case 3:
+                return 'warn';
+            default:
+                return 'primary';
+        }
+    }
+
     constructor(
         private bookingService: BookingService,
-      ) {}
+        private dialog: MatDialog,
+    ) {}
 
     ngOnInit() {
         this.form = this.bookingService.createForm();
         this.allBookings = this.bookingService.getAllBookings();
     }
 
+    openRespondDialog(element: ModelBooking) {
+        const dialogRef = this.dialog.open(BookingRespondDialogComponent, { minWidth: '20vw', data: element });
+
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            if (result != null) {
+                this.userProfileData.bookingsEnabled = result;
+            }
+        });
+    }
+
     bookMeeting() {
-        console.log(this.form.value.date);
         const newDateFormat = new Date(this.form.value.date)
           .setHours(this.form.value.time.slice(0, 2), this.form.value.time.slice(3, 5));
-
-        console.log(new Date(newDateFormat));
 
         const reqForm: ModelBookingCreate = {
           bookedWithUserId: this.userProfileData.id,
@@ -66,5 +135,5 @@ export class ProfileBookingsTabComponent implements OnInit {
         this.bookingService.createBooking(reqForm).subscribe(() => {
           console.log('Booked!');
         });
-      }
+    }
 }

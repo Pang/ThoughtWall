@@ -33,6 +33,7 @@ import { MaterialModule } from './material.module';
 import { ProfileInfoTabComponent } from './components/account/profile-page/profile-tabs/profile-info-tab.component';
 import { ProfilePostsTabComponent } from './components/account/profile-page/profile-tabs/profile-posts-tab.component';
 import { ProfileBookingsTabComponent } from './components/account/profile-page/profile-tabs/profile-bookings-tab.component';
+import { BookingRespondDialogComponent } from './components/account/profile-page/dialogs/booking-respond-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
     ProfileInfoTabComponent,
     ProfilePostsTabComponent,
     ProfileBookingsTabComponent,
+    BookingRespondDialogComponent,
     EditProfileDialogComponent,
     PageNotFoundComponent,
     RegisterFormComponent,

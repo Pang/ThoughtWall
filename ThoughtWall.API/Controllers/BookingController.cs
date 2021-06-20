@@ -66,6 +66,7 @@ namespace ThoughtWall.API.Controllers {
                 .Where(x => x.BookingOwnerId == user.Id)
                 .Include(x => x.BookingOwner)
                 .Include(x => x.BookedWithUser)
+                .Include(x => x.Status)
                 .OrderByDescending(x => x.BookingCreated)
                 .ToListAsync();
 
@@ -73,15 +74,13 @@ namespace ThoughtWall.API.Controllers {
                 .Where(x => x.BookedWithUserId == user.Id)
                 .Include(x => x.BookingOwner)
                 .Include(x => x.BookedWithUser)
+                .Include(x => x.Status)
                 .OrderByDescending(x => x.BookingCreated)
                 .ToListAsync();
 
             var mappedCreatedBookings = _mapper.Map<BookingDto[]>(createdBookings);
             var mappedReceivedBookings = _mapper.Map<BookingDto[]>(receivedBookings);
-            var allBookings = new {
-                created = mappedCreatedBookings,
-                received = mappedReceivedBookings,
-            };
+            var allBookings = mappedCreatedBookings.Concat(mappedReceivedBookings);
 
             return Ok(allBookings);
         }
@@ -89,8 +88,6 @@ namespace ThoughtWall.API.Controllers {
         [HttpPost("request")]
         public async Task<IActionResult> RequestBooking(BookingCreateDto bookingForm)
         {
-            Console.WriteLine(bookingForm.RequestedDT);
-            
             var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
             if (user == null) return Unauthorized("User not found");
 
@@ -114,7 +111,7 @@ namespace ThoughtWall.API.Controllers {
 
 
         [HttpPut("accept")]
-        public async Task<IActionResult> AcceptBooking(int bookingId) 
+        public async Task<IActionResult> AcceptBooking([FromBody] int bookingId) 
         {
             var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
             if (user == null) return Unauthorized("User not found");
@@ -124,6 +121,7 @@ namespace ThoughtWall.API.Controllers {
                 .Where(x => x.Id == bookingId)
                 .FirstOrDefaultAsync();
 
+            Console.WriteLine(booking);
             booking.StatusId = 2; // Approved
             booking.BookingUpdated = currentDT;
 
@@ -135,7 +133,7 @@ namespace ThoughtWall.API.Controllers {
         }
 
         [HttpPut("decline")]
-        public async Task<IActionResult> DeclineBooking(int bookingId) 
+        public async Task<IActionResult> DeclineBooking([FromBody] int bookingId) 
         {
             var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
             if (user == null) return Unauthorized("User not found");
