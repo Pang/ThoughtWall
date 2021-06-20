@@ -21,15 +21,18 @@ import { SubmitPageComponent } from './components/home-page/thread-page/submit-f
 import { ThreadPageComponent } from './components/home-page/thread-page/thread-page.component';
 import { ThreadSummaryComponent } from './components/home-page/thread-page/thread-summary/thread-summary.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
-import { EditProfileDialogComponent } from './components/account/profile-page/edit-profile-dialog.component';
+import { EditProfileDialogComponent } from './components/account/profile-page/dialogs/edit-profile-dialog.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NavBarComponent } from './components/shared-misc/nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './components/shared-misc/page-not-found/page-not-found.component';
 import { ThreadService } from './components/home-page/_services/thread.service';
 import { MatInputComponent } from './components/shared-misc/form-controls/mat-input/mat-input.component';
 import { MatTextareaComponent } from './components/shared-misc/form-controls/mat-textarea/mat-textarea.component';
-import { BookingStatusDialogComponent } from './components/account/profile-page/booking-status-dialog.component';
+import { BookingStatusDialogComponent } from './components/account/profile-page/dialogs/booking-status-dialog.component';
 import { MaterialModule } from './material.module';
+import { ProfileInfoTabComponent } from './components/account/profile-page/profile-tabs/profile-info-tab.component';
+import { ProfilePostsTabComponent } from './components/account/profile-page/profile-tabs/profile-posts-tab.component';
+import { ProfileBookingsTabComponent } from './components/account/profile-page/profile-tabs/profile-bookings-tab.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -59,6 +62,9 @@ const appRoutes: Routes = [
     SearchPageComponent,
     CommentComponent,
     ProfilePageComponent,
+    ProfileInfoTabComponent,
+    ProfilePostsTabComponent,
+    ProfileBookingsTabComponent,
     EditProfileDialogComponent,
     PageNotFoundComponent,
     RegisterFormComponent,
