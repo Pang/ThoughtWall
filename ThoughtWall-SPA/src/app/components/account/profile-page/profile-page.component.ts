@@ -50,7 +50,7 @@ import { Observable } from 'rxjs';
                   <ul>
                     <li *ngFor="let thread of userProfileData?.threads"><b class="threadLink"
                         [routerLink]="['/thread', thread.id]">{{ thread.title }}</b>
-                      ({{ thread.timeStamp | date: "dd/MM/yyyy" }})</li>
+                      ({{ thread.timeStamp | date: "mediumDate" }})</li>
                   </ul>
                 </div>
                 <div class="flexItem">
@@ -58,7 +58,7 @@ import { Observable } from 'rxjs';
                   <ul>
                     <li *ngFor="let comment of userProfileData?.comments">
                       <b class="threadLink" [routerLink]="['/thread', comment.threadId]">[{{ comment.threadId }}]</b>&nbsp;
-                      <i>"{{ comment.body }}"</i> ({{ comment.timeStamp | date: "dd/MM/yyyy" }})</li>
+                      <i>"{{ comment.body }}"</i> ({{ comment.timeStamp | date: "mediumDate" }})</li>
                   </ul>
                 </div>
               </div>
@@ -71,6 +71,7 @@ import { Observable } from 'rxjs';
                   <p *ngFor="let created of bookings.created">
                     Booking with {{ created.bookedWithUser.username | titlecase }} on {{ created.requestedDT | date:'medium'}}
                   </p>
+                  
                 </div>
               </div>
               <!-- Booking Form -->

@@ -12,7 +12,7 @@ import { environment } from '../../../../environments/environment.prod';
 })
 export class CommentService {
   constructor(private http: HttpClient) { }
-  private apiUrl = environment.apiUrl + '/values';
+  private apiUrl = environment.apiUrl + '/threads';
 
   createForm(): FormGroup {
     return new FormGroup({
