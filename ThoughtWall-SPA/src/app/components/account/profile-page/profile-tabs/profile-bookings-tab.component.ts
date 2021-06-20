@@ -40,7 +40,10 @@ import { BookingRespondDialogComponent } from '../dialogs/booking-respond-dialog
                 <ng-container matColumnDef="respond">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element" class="matBtnCol">
-                        <button [disabled]="element?.statusId != 1" mat-flat-button color="accent" (click)="openRespondDialog(element)">Respond</button>
+                        <button [disabled]="element?.statusId != 1 || element?.bookingOwnerId == userProfileData.id"
+                            mat-flat-button color="accent" (click)="openRespondDialog(element)">
+                            {{ element?.bookingOwnerId != userProfileData.id ? "Respond" : element?.statusId == 1 ? "Awaiting Response" : "Response Received" }}
+                        </button>
                     </td>
                 </ng-container>
 
