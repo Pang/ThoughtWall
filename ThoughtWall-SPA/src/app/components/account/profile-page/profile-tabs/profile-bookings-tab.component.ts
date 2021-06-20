@@ -14,7 +14,7 @@ import { BookingRespondDialogComponent } from '../dialogs/booking-respond-dialog
             <table *ngIf="allBookings | async as bookings" mat-table [dataSource]="bookings" class="mat-elevation-z8">
                 <!-- Position Column -->
                 <ng-container matColumnDef="sentBy">
-                    <th mat-header-cell *matHeaderCellDef>Request from</th>
+                    <th mat-header-cell *matHeaderCellDef>Requested By</th>
                     <td mat-cell *matCellDef="let element">{{ element?.bookingOwner?.username | titlecase }}</td>
                 </ng-container>
 
