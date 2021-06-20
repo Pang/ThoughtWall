@@ -6,6 +6,10 @@ import { ModelProfile } from 'app/components/account/_models/ModelProfile';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileDialogComponent } from './edit-profile-dialog.component';
 import { BookingStatusDialogComponent } from './booking-status-dialog.component';
+import { FormGroup } from '@angular/forms';
+import { BookingService } from '../_services/booking.service';
+import { ModelBooking, ModelBookingCreate } from '../_models/ModelBooking';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-page',
@@ -34,7 +38,7 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
                 </div>
                 <div class="flexItem">
                   <h4>DoB</h4>
-                  <span>{{ userProfileData?.dob }}</span>
+                  <span>{{ userProfileData?.dob | date: "dd/MM/yyyy" }}</span>
                 </div>
               </div>
             </mat-tab>
@@ -62,21 +66,29 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
             <!-- THREADS TAB -->
             <mat-tab label="Bookings"><br/>
               <div *ngIf="canEdit; else bookingForm">
-                <p>Your bookings will be displayed here</p>
+                <div *ngIf="allBookings | async as bookings">
+                  Bookings:
+                  <p *ngFor="let created of bookings.created">
+                    Booking with {{ created.bookedWithUser.username | titlecase }} on {{ created.requestedDT | date:'medium'}}
+                  </p>
+                </div>
               </div>
+              <!-- Booking Form -->
               <ng-template #bookingForm>
                 <p>Please select your preferred date and time</p>
-                <mat-form-field color="accent" appearance="fill">
-                  <mat-label>Choose a date</mat-label>
-                  <input matInput [matDatepicker]="picker">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
-                </mat-form-field> &nbsp;&nbsp;&nbsp;
-                <mat-form-field color="accent">
-                  <mat-label>Time</mat-label>
-                  <input matInput type="time" id="appt" name="appt" min="09:00" max="18:00" required>
-                </mat-form-field><br/>
-                <button mat-flat-button color="accent">Submit</button>
+                <form [formGroup]="form" (submit)="test()">
+                  <mat-form-field color="accent" appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput formControlName="date" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+                  </mat-form-field> &nbsp;&nbsp;&nbsp;
+                  <mat-form-field color="accent">
+                    <mat-label>Time</mat-label>
+                    <input matInput formControlName="time" type="time" id="appt" name="appt" min="09:00" max="18:00" required>
+                  </mat-form-field><br/>
+                  <button mat-flat-button type="submit" color="accent">Submit</button>
+                </form>
               </ng-template>
             </mat-tab>
           </mat-tab-group>
@@ -114,6 +126,8 @@ import { BookingStatusDialogComponent } from './booking-status-dialog.component'
 export class ProfilePageComponent implements OnInit {
   userProfileData: ModelProfile;
   routeProfile: string;
+  form: FormGroup;
+  allBookings: Observable<ModelBooking[]>;
 
   get canEdit() {
     return this.accountService.getUniqueName === this.routeProfile;
@@ -125,12 +139,16 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private profileService: ProfileService,
+    private bookingService: BookingService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
     this.getData();
+    this.form = this.bookingService.createForm();
+
+    this.allBookings = this.bookingService.getAllBookings();
   }
 
   getData() {
@@ -157,6 +175,23 @@ export class ProfilePageComponent implements OnInit {
       if (result != null) {
         this.userProfileData.bookingsEnabled = result;
       }
+    });
+  }
+
+  test() {
+    console.log(this.form.value.date);
+    const newDateFormat = new Date(this.form.value.date)
+      .setHours(this.form.value.time.slice(0, 2), this.form.value.time.slice(3, 5));
+
+    console.log(new Date(newDateFormat));
+
+    const reqForm: ModelBookingCreate = {
+      bookedWithUserId: this.userProfileData.id,
+      requestedDT: new Date(newDateFormat),
+    };
+
+    this.bookingService.createBooking(reqForm).subscribe(() => {
+      console.log("Booked!");
     });
   }
 }

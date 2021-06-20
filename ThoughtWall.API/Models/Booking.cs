@@ -8,7 +8,7 @@ namespace ThoughtWall.API.Models
         public int Id { get; set; }
         public int BookingOwnerId { get; set; }
         public int BookedWithUserId { get; set; }
-        public DateTime RequestedDT { get; set; }
+        public DateTimeOffset RequestedDT { get; set; }
         public int StatusId { get; set; }
         public DateTime BookingCreated { get; set; }
         public DateTime BookingUpdated { get; set; }

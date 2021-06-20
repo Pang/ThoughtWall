@@ -14,7 +14,7 @@ using ThoughtWall.API.Models;
 
 namespace ThoughtWall.API.Controllers {
     [Authorize]
-    [Route ("api/values")]
+    [Route ("api/booking")]
     [ApiController]
     public class BookingController : ControllerBase {
         private readonly DataContext _context;
@@ -32,7 +32,7 @@ namespace ThoughtWall.API.Controllers {
             var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
             if (user == null) return Unauthorized("User not found");
 
-            var bookings = await _context.Bookings
+            var bookings = await _context.Booking
                 .Where(x => x.BookingOwnerId == user.Id)
                 .Include(x => x.BookingOwner)
                 .OrderByDescending(x => x.BookingCreated)
@@ -47,7 +47,7 @@ namespace ThoughtWall.API.Controllers {
             var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
             if (user == null) return Unauthorized("User not found");
 
-            var bookings = await _context.Bookings
+            var bookings = await _context.Booking
                 .Where(x => x.BookedWithUserId == user.Id)
                 .Include(x => x.BookedWithUser)
                 .OrderByDescending(x => x.BookingCreated)
@@ -57,26 +57,57 @@ namespace ThoughtWall.API.Controllers {
             return Ok(mappedBookings);
         }
 
-        [HttpPost("request")]
-        public async Task<IActionResult> RequestBooking(int bookeeId, DateTime reqForDt)
-        {
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllBookings() {
             var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
             if (user == null) return Unauthorized("User not found");
 
-            var bookee = await _context.Users.Where(x => x.Id == bookeeId).FirstOrDefaultAsync();
+            var createdBookings = await _context.Booking
+                .Where(x => x.BookingOwnerId == user.Id)
+                .Include(x => x.BookingOwner)
+                .Include(x => x.BookedWithUser)
+                .OrderByDescending(x => x.BookingCreated)
+                .ToListAsync();
+
+            var receivedBookings = await _context.Booking
+                .Where(x => x.BookedWithUserId == user.Id)
+                .Include(x => x.BookingOwner)
+                .Include(x => x.BookedWithUser)
+                .OrderByDescending(x => x.BookingCreated)
+                .ToListAsync();
+
+            var mappedCreatedBookings = _mapper.Map<BookingDto[]>(createdBookings);
+            var mappedReceivedBookings = _mapper.Map<BookingDto[]>(receivedBookings);
+            var allBookings = new {
+                created = mappedCreatedBookings,
+                received = mappedReceivedBookings,
+            };
+
+            return Ok(allBookings);
+        }
+
+        [HttpPost("request")]
+        public async Task<IActionResult> RequestBooking(BookingCreateDto bookingForm)
+        {
+            Console.WriteLine(bookingForm.RequestedDT);
+            
+            var user = await _context.Users.Where(x => x.Username == User.FindFirst(ClaimTypes.Name).Value).FirstOrDefaultAsync();
+            if (user == null) return Unauthorized("User not found");
+
+            var bookee = await _context.Users.Where(x => x.Id == bookingForm.BookedWithUserId).FirstOrDefaultAsync();
             if (bookee.BookingsEnabled == false) return BadRequest("User does not currently take bookings");
 
             DateTime currentDT = DateTime.Now;
             Booking newBooking = new Booking() {
                 BookingOwnerId = user.Id,
-                BookedWithUserId = bookeeId,
+                BookedWithUserId = bookingForm.BookedWithUserId,
                 BookingCreated = currentDT,
                 BookingUpdated = currentDT,
-                RequestedDT =  reqForDt,
+                RequestedDT =  bookingForm.RequestedDT,
                 StatusId = 1, // pending
             };
 
-            await _context.Bookings.AddAsync(newBooking);
+            await _context.Booking.AddAsync(newBooking);
             await _context.SaveChangesAsync();
             return StatusCode (201);
         }
@@ -89,14 +120,14 @@ namespace ThoughtWall.API.Controllers {
             if (user == null) return Unauthorized("User not found");
 
             DateTime currentDT = DateTime.Now;
-            var booking = await _context.Bookings
+            var booking = await _context.Booking
                 .Where(x => x.Id == bookingId)
                 .FirstOrDefaultAsync();
 
             booking.StatusId = 2; // Approved
             booking.BookingUpdated = currentDT;
 
-            _context.Bookings.Update(booking);
+            _context.Booking.Update(booking);
             await _context.SaveChangesAsync();
 
             var mappedBooking = _mapper.Map<BookingDto>(booking);
@@ -111,14 +142,14 @@ namespace ThoughtWall.API.Controllers {
 
             DateTime currentDT = DateTime.Now;
 
-            var booking = await _context.Bookings
+            var booking = await _context.Booking
                 .Where(x => x.Id == bookingId)
                 .FirstOrDefaultAsync();
 
             booking.StatusId = 3; // Declined
             booking.BookingUpdated = currentDT;
 
-            _context.Bookings.Update(booking);
+            _context.Booking.Update(booking);
             await _context.SaveChangesAsync();
 
             var mappedBooking = _mapper.Map<BookingDto>(booking);
