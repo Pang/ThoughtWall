@@ -32,7 +32,7 @@ import { BookingRespondDialogComponent } from '../dialogs/booking-respond-dialog
                     <th mat-header-cell *matHeaderCellDef>Booking Status</th>
                     <td mat-cell *matCellDef="let element">
                         <mat-chip-list #chipList aria-label="Fruit selection">
-                            <mat-chip [color]="colorPending(element.statusId)" selected>{{ element?.status.status }}</mat-chip>
+                            <mat-chip [ngClass]="element?.statusId == 2 ? 'successPill' : null" [color]="colorPending(element.statusId)" selected>{{ element?.status.status }}</mat-chip>
                         </mat-chip-list>
                     </td>
                 </ng-container>
@@ -81,6 +81,9 @@ import { BookingRespondDialogComponent } from '../dialogs/booking-respond-dialog
                 display: flex;
                 padding: 10px 0;
                 justify-content: flex-end;
+            }
+            .successPill {
+                background-color: #388e3c !important;
             }
         `]
 })
