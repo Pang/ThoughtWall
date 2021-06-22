@@ -67,7 +67,6 @@ namespace ThoughtWall.API.Controllers {
                 .Include(x => x.BookingOwner)
                 .Include(x => x.BookedWithUser)
                 .Include(x => x.Status)
-                .OrderByDescending(x => x.BookingCreated)
                 .ToListAsync();
 
             var receivedBookings = await _context.Booking
@@ -75,14 +74,14 @@ namespace ThoughtWall.API.Controllers {
                 .Include(x => x.BookingOwner)
                 .Include(x => x.BookedWithUser)
                 .Include(x => x.Status)
-                .OrderByDescending(x => x.BookingCreated)
                 .ToListAsync();
 
             var mappedCreatedBookings = _mapper.Map<BookingDto[]>(createdBookings);
             var mappedReceivedBookings = _mapper.Map<BookingDto[]>(receivedBookings);
             var allBookings = mappedCreatedBookings.Concat(mappedReceivedBookings);
 
-            return Ok(allBookings);
+            var reorderedBookings = allBookings.OrderByDescending(x => x.BookingCreated).ToList();
+            return Ok(reorderedBookings);
         }
 
         [HttpPost("request")]
