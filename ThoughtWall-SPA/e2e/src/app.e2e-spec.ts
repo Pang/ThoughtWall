@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser, by, element, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Check threads match their summaries', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -13,11 +13,11 @@ describe('workspace-project App', () => {
     browser.get('http://localhost:4200/')
     
     var summaryTitleEl = element.all(by.className('summaryTitle')).first();
-    var summaryTitle;
-
+    var summaryTitle: string;
     summaryTitleEl.getText().then((text) => summaryTitle = text);
-    element.all(by.className('threadSummary')).first().click(); 
 
+    element.all(by.className('threadSummary')).first().click(); 
+    browser.waitForAngularEnabled(false);
 
     var threadTitle = element(by.className('threadTitle'));
     expect(threadTitle.getText()).toMatch(summaryTitle);

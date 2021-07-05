@@ -1,6 +1,6 @@
 import * as ThreadPageActions from './store/thread.actions';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { AccountService } from '../../account/_services/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { ModelComment } from '../_models/ModelComment';
 import { Store } from '@ngrx/store';
 import { ThreadService } from '../_services/thread.service';
 import { ModelThread } from '../_models/ModelThread';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-thread-page',
@@ -41,7 +42,8 @@ import { ModelThread } from '../_models/ModelThread';
   `,
   styleUrls: ['./thread-page.component.css']
 })
-export class ThreadPageComponent implements OnInit {
+export class ThreadPageComponent implements OnInit, OnDestroy {
+  storeSub$: Subscription;
   helper = new JwtHelperService();
   comments: ModelComment[];
   threadForm: FormGroup;
@@ -59,9 +61,9 @@ export class ThreadPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new ThreadPageActions.ChangeThread({ threadId: this.route.snapshot.paramMap.get('id') }));
     this.threadForm = this.threadService.createForm();
-    this.store.select('currentThread').subscribe((data: { threadId: string }) => {
+    this.store.dispatch(new ThreadPageActions.ChangeThread({ threadId: this.route.snapshot.paramMap.get('id') }));
+    this.storeSub$ = this.store.select('currentThread').subscribe((data: { threadId: string }) => {
       this.threadForm.get('id').patchValue(data.threadId);
       this.getData();
     });
@@ -100,5 +102,9 @@ export class ThreadPageComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  ngOnDestroy() {
+    this.storeSub$.unsubscribe();
   }
 }

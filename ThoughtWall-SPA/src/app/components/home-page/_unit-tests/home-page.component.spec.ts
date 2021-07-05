@@ -6,7 +6,7 @@ import { HomePageComponent } from '../home-page.component';
 import { ModelThread } from '../_models/ModelThread';
 import { ThreadService } from '../_services/thread.service';
 
-describe('Component: ProfilePage', () => {
+describe('Component: HomePage', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [HomePageComponent],
@@ -17,12 +17,12 @@ describe('Component: ProfilePage', () => {
     it('should show at least 1 thread on homepage', fakeAsync(() => {
         const fixture = TestBed.createComponent(HomePageComponent);
         const app = fixture.debugElement.componentInstance;
-        const profileService = fixture.debugElement.injector.get(ThreadService);
+        const threadService = fixture.debugElement.injector.get(ThreadService);
 
         const testThreads: Observable<ModelThread[]> =
             of([{ id: 1, username: 'pang', title: 'Qwerty', body: 'lorem ipsum', timestamp: new Date() }]);
 
-        spyOn(profileService, 'getThreads').and.returnValue(testThreads);
+        spyOn(threadService, 'getThreads').and.returnValue(testThreads);
         fixture.detectChanges();
         tick();
         expect(app.threads.length > 0).toBeTruthy();
