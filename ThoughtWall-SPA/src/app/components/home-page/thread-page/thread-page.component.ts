@@ -15,7 +15,7 @@ import { ModelThread } from '../_models/ModelThread';
   selector: 'app-thread-page',
   template: `
     <mat-card *ngIf="thread; else loadingSpinner" class="shadow">
-      <h1>{{ thread.title }}</h1>
+      <h1 class="threadTitle">{{ thread.title }}</h1>
       <span style="color:#4DD0E1">{{ thread.username | titlecase }}</span>
       <span class="timeStamp">
         ~ {{ thread.timeStamp | date:'longDate' }}.

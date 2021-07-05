@@ -20,7 +20,7 @@ describe('Component: ProfilePage', () => {
         const fixture = TestBed.createComponent(ProfilePageComponent);
         const app = fixture.debugElement.componentInstance;
         const profileService = fixture.debugElement.injector.get(ProfileService);
-        const testProfile: Observable<ModelProfile> = of({ id: 2, username: 'pang' });
+        const testProfile: Observable<ModelProfile> = of({ id: 2, username: 'pang', bookingsEnabled: true });
         spyOn(profileService, 'getProfileData').and.returnValue(testProfile);
         fixture.detectChanges();
         tick();

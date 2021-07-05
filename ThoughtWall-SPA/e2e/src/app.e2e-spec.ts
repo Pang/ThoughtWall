@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, by, element, logging } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,10 +8,20 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to ThoughtWall-SPA!');
-  });
+  
+  it('should match summary & thread page titles', () => {
+    browser.get('http://localhost:4200/')
+    
+    var summaryTitleEl = element.all(by.className('summaryTitle')).first();
+    var summaryTitle;
+
+    summaryTitleEl.getText().then((text) => summaryTitle = text);
+    element.all(by.className('threadSummary')).first().click(); 
+
+
+    var threadTitle = element(by.className('threadTitle'));
+    expect(threadTitle.getText()).toMatch(summaryTitle);
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
