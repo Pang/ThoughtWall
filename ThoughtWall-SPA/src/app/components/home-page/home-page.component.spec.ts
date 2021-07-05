@@ -1,10 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { browser, by, element } from 'protractor';
 import { Observable, of } from 'rxjs';
-import { HomePageComponent } from '../home-page.component';
-import { ModelThread } from '../_models/ModelThread';
-import { ThreadService } from '../_services/thread.service';
+import { HomePageComponent } from './home-page.component';
+import { ModelThread } from './_models/ModelThread';
+import { ThreadService } from './_services/thread.service';
 
 describe('Component: HomePage', () => {
     beforeEach(() => {
