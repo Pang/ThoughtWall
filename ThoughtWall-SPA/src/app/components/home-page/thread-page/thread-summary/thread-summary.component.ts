@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
       <mat-card class="threadSummary" [routerLink]="['/thread', thread.id]">
         <mat-card-header>
           <div mat-card-avatar class="centre">{{ thread.username.slice(0,1) | uppercase}}</div>
-          <mat-card-title>{{ thread.title }}</mat-card-title>
-          <mat-card-subtitle><span class="summaryTitle" style="color:#4DD0E1">{{ thread.username | titlecase }}</span> |
+          <mat-card-title class="summaryTitle">{{ thread.title }}</mat-card-title>
+          <mat-card-subtitle><span style="color:#4DD0E1">{{ thread.username | titlecase }}</span> |
           {{ thread.comments.length }} comment{{ thread.comments.length == 1 ? '' : 's' }}
           </mat-card-subtitle>
         </mat-card-header>

@@ -9,12 +9,12 @@ describe('Check threads match their summaries', () => {
   });
 
   
-  it('should match summary & thread page titles', () => {
+  it('should match summary & thread page titles', async () => {
     browser.get('http://localhost:4200/')
     
     var summaryTitleEl = element.all(by.className('summaryTitle')).first();
     var summaryTitle: string;
-    summaryTitleEl.getText().then((text) => summaryTitle = text);
+    await summaryTitleEl.getText().then((text) => summaryTitle = text);
 
     element.all(by.className('threadSummary')).first().click(); 
     browser.waitForAngularEnabled(false);
