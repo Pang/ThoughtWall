@@ -86,7 +86,9 @@ export class NavBarComponent {
   }
 
   onSearchSubmit() {
-    this.router.navigate(['/search', this.keyword]);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/search', this.keyword])
+    );
   }
 
   logout() {
