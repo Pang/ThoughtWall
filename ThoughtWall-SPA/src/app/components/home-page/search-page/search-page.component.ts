@@ -7,7 +7,7 @@ import { ThreadService } from '../_services/thread.service';
   template: `
     <div class="container">
       <h2>Search results:</h2><br/>
-      <app-thread-summary *ngFor="let thread of threads" [thread]="thread"></app-thread-summary>
+      <app-thread-summary class="threads" *ngFor="let thread of threads" [thread]="thread"></app-thread-summary>
     </div>
   `,
     styles: [`
