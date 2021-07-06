@@ -29,8 +29,8 @@ describe('Homepage: Threads', () => {
     await searchBar.sendKeys('test');
     await searchBar.sendKeys(protractor.Key.chord(protractor.Key.ENTER));
     // waits for a .thread class to exist before continuing
-    browser.wait(EC.presenceOf(await element(by.css('.threads'))));
-    let threads = await element.all(by.css('.threads'));
+    browser.wait(EC.presenceOf(await element(by.css('.ngThreads'))));
+    let threads = await element.all(by.css('.ngThreads'));
     expect(threads.length > 0).toBeTruthy();
 
   })
