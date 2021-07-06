@@ -5,8 +5,17 @@ import { ThreadService } from '../_services/thread.service';
 @Component({
   selector: 'app-search-page',
   template: `
-    <app-thread-summary [threads]="threads"></app-thread-summary>
+    <div class="container">
+      <h2>Search results:</h2><br/>
+      <app-thread-summary *ngFor="let thread of threads" [thread]="thread"></app-thread-summary>
+    </div>
   `,
+    styles: [`
+      .container {
+        width: 100%;
+        text-align: center;
+      }
+    `]
 })
 
 export class SearchPageComponent implements OnInit {

@@ -12,7 +12,7 @@ import { AccountService } from '../../account/_services/account.service';
 
       <div class="links">
         <form (ngSubmit)="onSearchSubmit()" id="searchBar">
-          <input [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
+          <input class="ngSearch" [(ngModel)]="keyword" name="keyword" type="text" placeholder="Search" />
         </form>
 
         <button mat-icon-button color="accent" [matMenuTriggerFor]="accountMenu">
