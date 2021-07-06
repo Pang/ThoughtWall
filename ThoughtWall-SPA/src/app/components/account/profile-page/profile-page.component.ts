@@ -5,17 +5,13 @@ import { ProfileService } from '../_services/profile.service';
 import { ModelProfile } from 'app/components/account/_models/ModelProfile';
 import { MatDialog } from '@angular/material/dialog';
 import { BookingStatusDialogComponent } from './dialogs/booking-status-dialog.component';
-import { FormGroup } from '@angular/forms';
-import { BookingService } from '../_services/booking.service';
-import { ModelBooking, ModelBookingCreate } from '../_models/ModelBooking';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-page',
   template: `
     <div *ngIf="userProfileData; else loadingSpinner">
       <mat-card>
-        <h1>{{ userProfileData?.username | titlecase }}'s Profile</h1>
+        <h1 class="ngUserHeader">{{ userProfileData?.username | titlecase }}'s Profile</h1>
         <button mat-flat-button *ngIf="canEdit" color="{{bookingsEnabled ? 'accent' : 'warn'}}" (click)="openBookingStatusDialog()">Bookings {{ bookingsEnabled ? 'Open' : 'Closed'}}</button>
         </mat-card>
 

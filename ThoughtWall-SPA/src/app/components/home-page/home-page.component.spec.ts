@@ -12,6 +12,7 @@ describe('Component: HomePage', () => {
     const testThreads: Observable<ModelThread[]> =
         of([{ id: 1, username: 'pang', title: 'Qwerty', body: 'lorem ipsum', timestamp: new Date() }]);
 
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [HomePageComponent],

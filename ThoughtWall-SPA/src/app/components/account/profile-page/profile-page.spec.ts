@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ProfilePageComponent } from 'app/components/account/profile-page/profile-page.component';
 import { ModelProfile } from 'app/components/account/_models/ModelProfile';
@@ -17,7 +18,7 @@ describe('Component: ProfilePage', () => {
         TestBed.configureTestingModule({
             declarations: [ProfilePageComponent],
             imports: [RouterModule.forRoot([]), HttpClientTestingModule, MatDialogModule],
-            providers: [{ MatDialog, useValue: {} }],
+            providers: [{ provide: MatDialog, useValue: {} }],
         });
         fixture = TestBed.createComponent(ProfilePageComponent);
         app = fixture.debugElement.componentInstance;
@@ -29,5 +30,8 @@ describe('Component: ProfilePage', () => {
         fixture.detectChanges();
         tick();
         expect(app.userProfileData).toBeTruthy();
+
+        const header = fixture.debugElement.queryAll(By.css('.ngUserHeader'));
+        expect(header[0].nativeElement.textContent).toEqual(`Pang's Profile`);
     }));
 });
