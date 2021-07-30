@@ -48,7 +48,6 @@ const appRoutes: Routes = [
   { path: 'account', component: AccountPageComponent },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
-
 ];
 
 @NgModule({
