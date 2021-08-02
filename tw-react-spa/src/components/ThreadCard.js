@@ -1,9 +1,12 @@
+import BgImg from '../images/logo512.png';
+
 const ThreadCard = () => {
     return(
-        <div style={{ maxWidth: '600px' }} className="card min-vw-50 mx-auto bg-secondary">
-            <div className="card-body">
-                <h4>This is a threadCard</h4>
-                <span>Some info about the thread...</span>
+        <div className="cardContainer">
+            <div style={{ backgroundImage: `url("${BgImg}")` }} className="card mx-auto bg-light threadCard">
+                <h5 className="text-primary mb-0">New portfolio blog</h5>
+                <h6 className="text-secondary threadDt">Mon 12th Aug, 2021 - 16:00</h6>
+                <p className="text-light threadDesc">This will hold some description of the thread.</p>
             </div>
         </div>
     )

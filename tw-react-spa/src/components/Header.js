@@ -13,7 +13,7 @@ const Header = () => {
                     </span>
                     <form className="d-flex">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-primary" type="submit"><FaSearch style={{ fontSize: '16px'}} /></button>
+                        <button className="btn btn-outline-secondary" type="submit"><FaSearch className="searchBtnIcon" /></button>
                     </form>
                 </div>
                 

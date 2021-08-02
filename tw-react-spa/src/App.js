@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="mt-5 justify-content-center">
+      <div className="mt-5 d-flex justify-content-center">
         <ThreadCard />
       </div>
     </div>
