@@ -1,4 +1,5 @@
-import { FaSearch } from 'react-icons/fa';
+import { CgProfile } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -7,16 +8,16 @@ const NavBar = () => {
             <nav className="navbar navbar-light">
                 <div className="container-fluid">
                     <span className="navbar-brand mb-0">
-                        <span className="h2 text-light">Thoughtwall &nbsp;
-                            <span className="h6 text-secondary"><i>Hello, user!</i></span>
-                        </span>
+                        <Link to="/" style={{ textDecoration: 'none'}}>
+                            <span className="appTitleBtn h2 text-light">Thoughtwall</span>
+                        </Link> &nbsp; 
+                        <span className="h6 text-secondary"><i>Hello, user!</i></span>
                     </span>
                     <form className="d-flex">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-secondary" type="submit"><FaSearch className="searchBtnIcon" /></button>
+                        <Link to="/Account"><span className="accountIcon"><CgProfile /></span></Link>
                     </form>
                 </div>
-                
             </nav>
         </header>
     );
