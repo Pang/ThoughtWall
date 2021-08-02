@@ -8,7 +8,7 @@ const NavBar = () => {
             <nav className="navbar navbar-light">
                 <div className="container-fluid">
                     <span className="navbar-brand mb-0">
-                        <Link to="/" style={{ textDecoration: 'none'}}>
+                        <Link to="/">
                             <span className="appTitleBtn h2 text-light">Thoughtwall</span>
                         </Link> &nbsp; 
                         <span className="h6 text-secondary"><i>Hello, user!</i></span>
