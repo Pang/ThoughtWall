@@ -1,14 +1,14 @@
 import { FaSearch } from 'react-icons/fa';
 
-const Header = () => {
+const NavBar = () => {
 
     return (
         <header className="App-header">
-            <nav className="navbar navbar-light bg-dark">
+            <nav className="navbar navbar-light">
                 <div className="container-fluid">
                     <span className="navbar-brand mb-0">
                         <span className="h2 text-light">Thoughtwall &nbsp;
-                            <span className="h6 text-secondary"><i>Share your thoughts</i></span>
+                            <span className="h6 text-secondary"><i>Hello, user!</i></span>
                         </span>
                     </span>
                     <form className="d-flex">
@@ -22,4 +22,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default NavBar;

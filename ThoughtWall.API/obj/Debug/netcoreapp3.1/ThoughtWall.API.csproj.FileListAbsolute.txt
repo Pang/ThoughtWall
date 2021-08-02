@@ -218,4 +218,3 @@ C:\Developments\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp3.1\ThoughtWall.
 C:\Developments\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp3.1\ThoughtWall.API.genruntimeconfig.cache
 D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp3.1\ThoughtWall.API.csproj.CoreCompileInputs.cache
 D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp3.1\ThoughtWall.API.genruntimeconfig.cache
-D:\CodeProjects\ThoughtWall\ThoughtWall.API\obj\Debug\netcoreapp3.1\scopedcss\bundle\ThoughtWall.API.styles.css

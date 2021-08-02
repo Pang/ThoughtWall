@@ -1,12 +1,39 @@
 @import "./index.scss";
 
+$sideNavWidth: 220px;
+$navColors: #1f1f1f;
+
+.navbar {
+    border-bottom: #969696 1px solid;
+    background: $navColors;
+    z-index: 100;
+}
+.sideNav {
+    position: fixed;
+    top: 0px;
+    width: $sideNavWidth;
+    height: 100%;
+    z-index: 99;
+    background-color: $navColors !important;
+    color: white !important;
+    .active {
+        color: black !important;
+        background-color: $orange !important; // #fff1c8 !important;
+    }
+}
+
+.content {
+    padding-left: $sideNavWidth;
+}
+
 .cardContainer {
     position: relative;
-    transition: all 400ms cubic-bezier(0.46, 0.46, 0.71, 0.90);
-
+    // box-shadow: 0px 0px 10px $navColors; // #E0B766;
+    transition: all 400ms cubic-bezier(0.46, 0.46, 0.71, 0.95);
+    
     // 512x512 is standard icon size
     .card {
-        border: 0px;
+        border: 1px solid black;
         padding: 0.5rem;
         width: 256px;
         height: 256px;
@@ -18,13 +45,12 @@
     }
 
     &:hover {
-        box-shadow: 0px 0px 10px #E0B766;
         position: relative;
     }
 }
 
 .threadCard {
-    box-shadow: inset 0px 70px 40px rgb(22, 22, 22);
+    box-shadow: inset 0px 80px 30px -30px rgb(0 0 0 / 85%);
     background-repeat: no-repeat !important;
     background-size: 100% !important;
     width: 100%;
@@ -32,7 +58,7 @@
     transition: all 400ms cubic-bezier(0.46, 0.46, 0.71, 0.71);
     
     &:hover {
-        box-shadow: inset 0px 280px 40px rgba(0,0,0,0.9);
+        box-shadow: inset 0px 280px 30px rgb(0 0 0 / 80%);
         cursor: pointer;
         
         .threadDesc {
@@ -40,15 +66,23 @@
             margin-top: 25px;
         }
     }
-
     .threadDt {
+        font-size: 14px;
         position: relative;
         top: -5px;
     }
-    
     .threadDesc {
         opacity: 0%;
         transition: all 500ms cubic-bezier(0.46, 0.46, 0.71, 0.90);
+    }
+    .userTag {
+        transition: all 500ms cubic-bezier(0.46, 0.46, 0.71, 0.90);
+        background-color: rgb(22, 22, 22, 0.85);
+        color: $cyan;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        padding: 0px 4px 4px 4px;
     }
 }
 
