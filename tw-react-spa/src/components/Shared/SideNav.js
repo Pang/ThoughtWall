@@ -12,27 +12,26 @@ const SideNav = () => {
                             </span>
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/account">
+                    <li className="nav-item">
+                        <Link to="/">
                             <span className="nav-link">
-                                Dashboard
+                                Create Post
+                            </span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/">
+                            <span className="nav-link">
+                                Appointments
                             </span>
                         </Link>
                     </li>
                     <li>
-                        <span className="nav-link">
-                            Orders
-                        </span>
-                    </li>
-                    <li>
-                        <span className="nav-link">
-                            Products
-                        </span>
-                    </li>
-                    <li>
-                        <span className="nav-link">
-                            Customers
-                        </span>
+                        <Link to="/account">
+                            <span className="nav-link">
+                                Account
+                            </span>
+                        </Link>
                     </li>
                 </ul>
             </div>

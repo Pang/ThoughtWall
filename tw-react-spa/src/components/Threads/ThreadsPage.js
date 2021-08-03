@@ -1,6 +1,6 @@
 import ThreadCard from './ThreadCard';
 
-const Threads = ({ threads }) => {
+const ThreadsPage = ({ threads }) => {
 
     return(
         <div className="d-flex flex-wrap justify-content-start">
@@ -11,4 +11,4 @@ const Threads = ({ threads }) => {
     )
 }
 
-export default Threads;
+export default ThreadsPage;
