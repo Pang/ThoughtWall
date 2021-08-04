@@ -7,7 +7,7 @@ import AccountPage from "./components/Account/AccountPage";
 import NavBar from './components/Shared/NavBar';
 import SideNav from './components/Shared/SideNav'
 import ThreadsPage from './components/Threads/ThreadsPage'
-
+import FullThread from './components/Threads/Thread/FullThread'
 import './App.scss';
 
 function App() {
@@ -44,8 +44,8 @@ function App() {
 
   const getData = async () => {
     await axios.get(`http://localhost:5000/api/thread`).then((res) => {
-      setThreads(res.data)
-      console.info('threads', res.data)
+      setThreads(res.data);
+      console.info('threads', res.data);
     }); 
   }
 
@@ -77,8 +77,11 @@ function App() {
                 : 'No Threads to show'
               }
             </div>
-          )} 
-        />
+          )} />
+
+        <Route
+          path='/thread/:id'
+          component={FullThread} />
 
         <Route
           path='/account'
@@ -87,8 +90,7 @@ function App() {
                 onLogin={decodeToken} 
                 loggedIn={getters.isLoggedIn}
                 account={account} />
-          )}
-        />
+          )} />
       </div>
       <SideNav />
     </Router>

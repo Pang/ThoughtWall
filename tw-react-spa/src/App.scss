@@ -44,7 +44,7 @@ $navColors: #2b2b2b;
 }
 
 .threadCard {
-    box-shadow: inset 0px 60px 30px -30px rgb(0 0 0 / 85%);
+    box-shadow: inset 0px 55px 25px -30px rgb(0 0 0 / 85%);
     background-repeat: no-repeat !important;
     background-size: 100% !important;
     width: 100%;
@@ -73,7 +73,7 @@ $navColors: #2b2b2b;
     }
 
     &:hover {
-        box-shadow: inset 0px 280px 30px -30px rgb(0 0 0 / 80%);
+        box-shadow: inset 0px 300px 30px -30px rgb(0 0 0 / 80%);
         cursor: pointer;
         
         .threadDesc {
