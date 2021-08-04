@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 const CreateThreadForm = ({ onThreadPost, loggedIn }) => {
     const titleInputRef = useRef();
     const bodyInputRef = useRef();
+    const imgInputRef = useRef();
     let history = useHistory();
 
     const onSubmit = async (e) => {
@@ -15,8 +16,10 @@ const CreateThreadForm = ({ onThreadPost, loggedIn }) => {
         }
         const postObj = {
             title: titleInputRef.current.value,
-            body: bodyInputRef.current.value
-        }
+            body: bodyInputRef.current.value,
+            image: imgInputRef.current.value
+        };
+        // console.log(postObj);
         await axios.post(
             `http://localhost:5000/api/thread/submit`, postObj,
             { 
@@ -28,7 +31,7 @@ const CreateThreadForm = ({ onThreadPost, loggedIn }) => {
                 onThreadPost();
             });
     }
-    // TODO: if loggedIn show form, else hide
+
     const renderThread = () => {
         if(loggedIn) {
             return (
@@ -43,6 +46,14 @@ const CreateThreadForm = ({ onThreadPost, loggedIn }) => {
                         rows="7"
                         placeholder='Body'
                         ref={bodyInputRef}></textarea>
+                    <input
+                        id='thumbnailFile'
+                        className='form-control my-1'
+                        type='file' 
+                        ref={imgInputRef} />
+                    <label htmlFor="thumbnailFile" className="form-label">
+                        <i>Thumbnail pixel size: 512x512</i>
+                    </label>
                     <button 
                         type="submit" 
                         className='btn btn-success mt-2 float-end'>

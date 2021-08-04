@@ -2,7 +2,7 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const FullThread = ({ thread }) => {
+const FullThread = () => {
     const { id } = useParams();
     const [threadData, setThreadData] = useState('');
 
