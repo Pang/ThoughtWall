@@ -29,25 +29,34 @@ const CreateThreadForm = ({ onThreadPost, loggedIn }) => {
             });
     }
     // TODO: if loggedIn show form, else hide
+    const renderThread = () => {
+        if(loggedIn) {
+            return (
+                <form onSubmit={onSubmit}>
+                    <input
+                        className='form-control my-1'
+                        type='text'
+                        placeholder='Title'
+                        ref={titleInputRef} />
+                    <textarea 
+                        className='form-control my-1'
+                        rows="7"
+                        placeholder='Body'
+                        ref={bodyInputRef}></textarea>
+                    <button 
+                        type="submit" 
+                        className='btn btn-success mt-2 float-end'>
+                            Create Thread
+                    </button>
+                </form>
+            );
+        } else {
+            return <h3 className="text-center">Login to create threads</h3>;
+        }
+    }
     return (
         <div className="card p-4 mx-auto my-5" style={{width: '600px'}}>
-            <form onSubmit={onSubmit}>
-                <input
-                    className='form-control my-1'
-                    type='text'
-                    placeholder='Title'
-                    ref={titleInputRef} />
-                <textarea 
-                    className='form-control my-1'
-                    rows="7"
-                    placeholder='Body'
-                    ref={bodyInputRef}></textarea>
-                <button 
-                    type="submit" 
-                    className='btn btn-success mt-2 float-end'>
-                        Create Thread
-                </button>
-            </form>
+            {renderThread()}
         </div>
     )
 }
