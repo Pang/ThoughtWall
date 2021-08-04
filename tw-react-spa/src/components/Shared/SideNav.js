@@ -13,7 +13,7 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/">
+                        <Link to="/post">
                             <span className="nav-link">
                                 Create Post
                             </span>

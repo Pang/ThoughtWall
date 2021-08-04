@@ -22,7 +22,7 @@ const LoginForm = ({ onLogin, showRegister }) => {
             localStorage.setItem('token', res.data[`token`]);
             onLogin(res.data[`token`]);
             history.push('/');
-        })
+        });
     }
 
     return (
@@ -33,15 +33,13 @@ const LoginForm = ({ onLogin, showRegister }) => {
                     type='text' 
                     placeholder='Username'
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+                    onChange={(e) => setUsername(e.target.value)} />
                 <input 
                     className='form-control my-1' 
                     type='password' 
                     placeholder='Password'
                     value={password}
-                    onChange={(e => setPassword(e.target.value))}
-                />
+                    onChange={(e => setPassword(e.target.value))} />
                 <button
                     className="btn btn-success w-100"
                     type='submit'

@@ -9,6 +9,7 @@ import SideNav from './components/Shared/SideNav'
 import ThreadsPage from './components/Threads/ThreadsPage'
 import FullThread from './components/Threads/Thread/FullThread'
 import './App.scss';
+import CreateThreadForm from "./components/Threads/CreateThreadForm";
 
 function App() {
   const [threads, setThreads] = useState([]);
@@ -82,6 +83,14 @@ function App() {
         <Route
           path='/thread/:id'
           component={FullThread} />
+
+        <Route
+          path='/post'
+          render={() => (
+            <CreateThreadForm 
+              loggedIn={getters.isLoggedIn} 
+              onThreadPost={getData}/>
+          )} />
 
         <Route
           path='/account'

@@ -97,7 +97,7 @@ namespace ThoughtWall.API.Controllers {
 
             await _context.Threads.AddAsync (mappedThread);
             await _context.SaveChangesAsync ();
-            return StatusCode (201);
+            return Ok(mappedThread);
         }
 
         // Is called after posting a new thread
@@ -109,7 +109,7 @@ namespace ThoughtWall.API.Controllers {
                 .Where (x => x.Title == title)
                 .FirstAsync ();
 
-            return Ok (id.Id);
+            return Ok(id.Id);
         }
 
         [HttpPut ("edit")]
