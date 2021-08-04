@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
-const AccountPage = () => {
+const AccountPage = ({ onLogin }) => {
+    const [showRegisterForm, setShowRegister] = useState(false);
+
     return(
         <div>
-            <LoginForm />
+            {!showRegisterForm 
+                ? <LoginForm onLogin={onLogin} showRegister={() => setShowRegister(true)} /> 
+                : <RegisterForm onLogin={onLogin} showRegister={() => setShowRegister(false)} />
+            }
         </div>
     )
 }

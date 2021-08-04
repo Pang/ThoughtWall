@@ -3,12 +3,12 @@ import jwt_decode from 'jwt-decode';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 
+import AccountPage from "./components/Account/AccountPage";
 import NavBar from './components/Shared/NavBar';
 import SideNav from './components/Shared/SideNav'
 import ThreadsPage from './components/Threads/ThreadsPage'
 
 import './App.scss';
-import LoginForm from "./components/Account/LoginForm";
 
 function App() {
   const [threads, setThreads] = useState([]);
@@ -54,7 +54,7 @@ function App() {
         <Route
           path='/account'
           render={() => (
-            <LoginForm onLogin={decodeToken}/>
+              <AccountPage onLogin={decodeToken} />
           )}
         />
       </div>

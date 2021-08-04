@@ -2,14 +2,15 @@ import { useState } from 'react';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 
-const LoginForm = ({ onLogin, showRegister }) => {
+const RegisterForm = ({ onLogin, showRegister }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [rePassword, setRePassword] = useState('');
     let history = useHistory();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const loginForm = {
+        const registerForm = {
             username: username,
             password: password
         }
@@ -17,11 +18,16 @@ const LoginForm = ({ onLogin, showRegister }) => {
             alert('Please fill in username and password');
             return;
         }
-        await axios.post(`http://localhost:5000/api/auth/login`, loginForm).then((res) => {
-            console.info('tokenReceived', res.data);
-            localStorage.setItem('token', res.data[`token`]);
-            onLogin(res.data[`token`]);
-            history.push('/');
+        if(rePassword != password) {
+            alert(`Passwords don't match`);
+            return;
+        }
+        await axios.post(`http://localhost:5000/api/auth/register`, registerForm).then(() => {
+            axios.post(`http://localhost:5000/api/auth/login`, registerForm).then((res) => {
+                localStorage.setItem('token', res.data[`token`]);
+                onLogin(res.data[`token`]);
+                history.push('/');
+            });
         })
     }
 
@@ -42,20 +48,27 @@ const LoginForm = ({ onLogin, showRegister }) => {
                     value={password}
                     onChange={(e => setPassword(e.target.value))}
                 />
+                <input 
+                    className='form-control my-1' 
+                    type='password' 
+                    placeholder='Reenter Password'
+                    value={password}
+                    onChange={(e => setRePassword(e.target.value))}
+                />
                 <button
                     className="btn btn-success w-100"
                     type='submit'
-                >Login</button>
+                >Register</button>
             </form>
-            <span>Not a member?&nbsp;
+            <span>Already a member?&nbsp;
                 <span 
                     onClick={showRegister}
                     style={{color:'blue', cursor: 'pointer'}}>
-                        Register
+                        Login
                 </span>
             </span>
         </div>
     )
 }
 
-export default LoginForm;
+export default RegisterForm;
