@@ -18,7 +18,7 @@ const RegisterForm = ({ onLogin, showRegister }) => {
             alert('Please fill in username and password');
             return;
         }
-        if(rePassword != password) {
+        if(rePassword !== password) {
             alert(`Passwords don't match`);
             return;
         }

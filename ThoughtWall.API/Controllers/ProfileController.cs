@@ -50,6 +50,18 @@ namespace ThoughtWall.API.Controllers
             return Ok(mappedProfile);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAccountWithId(int id)
+        {
+            var profileData = await _context.Users
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            var mappedProfile = _mapper.Map<ProfileDto>(profileData);
+
+            return Ok(mappedProfile);
+        }
+
         [HttpPut ("update")]
         public async Task<IActionResult> UpdateProfileDetails(ProfileDto profileDto)
         {
@@ -72,7 +84,8 @@ namespace ThoughtWall.API.Controllers
 
         [HttpPut ("bookingsEnabled")]
         public async Task<IActionResult> SetBookingsEnabled(ProfileDto profileDto) {
-            if (profileDto.Username != User.FindFirst(ClaimTypes.Name).Value) return Unauthorized("User not found");
+            if (profileDto.Username != User.FindFirst(ClaimTypes.Name).Value) 
+                return Unauthorized("User not found");
 
             var user = await _context.Users.Where(x => x.Id == profileDto.Id).FirstOrDefaultAsync();
             user.BookingsEnabled = !user.BookingsEnabled;

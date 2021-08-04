@@ -13,14 +13,31 @@ import './App.scss';
 function App() {
   const [threads, setThreads] = useState([]);
   const [decodedToken, setDecodedToken] = useState('');
+  const [account, setAccount] = useState('');
+
+  const getters = {
+    get isLoggedIn() {
+      return localStorage.getItem('token');
+    },
+    get validToken() {
+      return decodedToken?.exp && decodedToken?.exp < new Date().getTime();
+    }
+  }
 
   useEffect(() => {
-    getData();
     decodeToken();
+    getData();
   }, []);
 
+  useEffect(() => {
+    console.info('token', decodedToken);
+    if (decodedToken) {
+      getters.validToken ? getAccount() : localStorage.removeItem('token');
+    }
+  }, [decodedToken]);
+
   const decodeToken = () => {
-    if (localStorage.getItem('token')) {
+    if (getters.isLoggedIn) {
       setDecodedToken(jwt_decode(localStorage.getItem('token')));
     }
   }
@@ -30,13 +47,25 @@ function App() {
       setThreads(res.data)
       console.info('threads', res.data)
     }); 
-    console.info('token', decodedToken)
   }
 
+  const getAccount = async () => {
+      document.cookie = `token=${localStorage.getItem('token')}`
+      await axios.get(
+        `http://localhost:5000/api/profile/${decodedToken['nameid']}`, 
+        { 
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem('token'),
+          } 
+        }).then((res) => {
+          setAccount(res.data);
+          console.info('Account', res.data)
+      });
+  }
 
   return (
     <Router>
-      <NavBar username={decodedToken['unique_name']}/>
+      <NavBar username={account.username}/>
       <div className="content">
         <Route
           path='/'
@@ -54,7 +83,10 @@ function App() {
         <Route
           path='/account'
           render={() => (
-              <AccountPage onLogin={decodeToken} />
+              <AccountPage 
+                onLogin={decodeToken} 
+                loggedIn={getters.isLoggedIn}
+                account={account} />
           )}
         />
       </div>
