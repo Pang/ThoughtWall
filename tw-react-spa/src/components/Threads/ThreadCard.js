@@ -4,11 +4,13 @@ import { useEffect, useRef } from 'react';
 const ThreadCard = ({ thread }) => {
     const timeStamp = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'short' }).format(new Date(thread.timeStamp));
     const cardRef = useRef();
+    let hasImg = false;
 
     useEffect(() => {
         axios.get(`https://picsum.photos/512`).then((res) => {
             console.log(res.request.responseURL);
             cardRef.current.style.backgroundImage = `url(${res.request.responseURL})`;
+            hasImg = true; // will reset on rerender
         })
     }, [])
 
